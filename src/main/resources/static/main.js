@@ -584,33 +584,33 @@ __webpack_require__.r(__webpack_exports__);
 class ApiService {
   constructor(http) {
     this.http = http;
-    this.baseUrl = 'https://tmpro-5265168c0988.herokuapp.com/'; // Cambia la URL base si es necesario
+    this.baseUrl = 'https://tmpro-5265168c0988.herokuapp.com'; // Cambia la URL base si es necesario
   }
   // ** Equipos **
   getTeams() {
-    return this.http.get(`${this.baseUrl}teams`);
+    return this.http.get(`${this.baseUrl}/teams`);
   }
   createTeam(team) {
-    return this.http.post(`${this.baseUrl}teams`, team);
+    return this.http.post(`${this.baseUrl}/teams`, team);
   }
   updateTeam(id, team) {
-    return this.http.put(`${this.baseUrl}teams/${id}`, team);
+    return this.http.put(`${this.baseUrl}/teams/${id}`, team);
   }
   deleteTeam(id) {
-    return this.http.delete(`${this.baseUrl}teams/${id}`);
+    return this.http.delete(`${this.baseUrl}/teams/${id}`);
   }
   // ** Jugadores **
   getPlayers() {
-    return this.http.get(`${this.baseUrl}players`);
+    return this.http.get(`${this.baseUrl}/players`);
   }
   createPlayer(player) {
-    return this.http.post(`${this.baseUrl}players`, player);
+    return this.http.post(`${this.baseUrl}/players`, player);
   }
   updatePlayer(id, player) {
-    return this.http.put(`${this.baseUrl}players/${id}`, player);
+    return this.http.put(`${this.baseUrl}/players/${id}`, player);
   }
   deletePlayer(id) {
-    return this.http.delete(`${this.baseUrl}players/${id}`);
+    return this.http.delete(`${this.baseUrl}/players/${id}`);
   }
   static {
     this.ɵfac = function ApiService_Factory(t) {
