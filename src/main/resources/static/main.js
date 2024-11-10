@@ -589,7 +589,7 @@ __webpack_require__.r(__webpack_exports__);
 class ApiService {
   constructor(http) {
     this.http = http;
-    this.baseUrl = 'https://tmpro-5265168c0988.herokuapp.com';
+    this.baseUrl = 'https://tmpro-5265168c0988.herokuapp.com/api';
   }
   // ** Equipos **
   getTeams() {
