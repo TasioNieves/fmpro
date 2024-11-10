@@ -714,7 +714,7 @@ class TeamComponent {
     });
   }
   onSubmit() {
-    if (this.selectedTeam) {
+    if (this.selectedTeam && this.selectedTeam.id !== undefined) {
       this.apiService.updateTeam(this.selectedTeam.id, this.newTeam).subscribe(() => {
         this.loadTeams();
         this.clearForm();
@@ -727,15 +727,21 @@ class TeamComponent {
     }
   }
   editTeam(team) {
-    this.selectedTeam = team;
-    this.newTeam = {
-      ...team
-    };
+    if (team.id !== undefined) {
+      // Verificación de que el id existe
+      this.selectedTeam = team;
+      this.newTeam = {
+        ...team
+      };
+    }
   }
   deleteTeam(id) {
-    this.apiService.deleteTeam(id).subscribe(() => {
-      this.loadTeams();
-    });
+    if (id !== undefined) {
+      // Verificación de que el id existe
+      this.apiService.deleteTeam(id).subscribe(() => {
+        this.loadTeams();
+      });
+    }
   }
   clearForm() {
     this.newTeam = {};
