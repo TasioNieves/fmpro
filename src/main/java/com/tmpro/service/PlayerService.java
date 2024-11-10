@@ -43,8 +43,9 @@ public class PlayerService {
     }
 
     // Actualizar un jugador existente
-    public Optional<Player> updatePlayer(String name, Player updatedPlayer) {
-        return playerRepository.findByName(name).map(existingPlayer -> {
+    public Optional<Player> updatePlayer(Long id, Player updatedPlayer) {
+        return playerRepository.findById(id).map(existingPlayer -> {
+            existingPlayer.setName(updatedPlayer.getName());
             existingPlayer.setPosition(updatedPlayer.getPosition());
             existingPlayer.setDorsal(updatedPlayer.getDorsal());
             existingPlayer.setTeam(updatedPlayer.getTeam());
@@ -53,16 +54,16 @@ public class PlayerService {
     }
 
     // Eliminar un jugador
-    public boolean deletePlayer(String name) {
-        return playerRepository.findByName(name).map(player -> {
+    public boolean deletePlayer(Long id) {
+        return playerRepository.findById(id).map(player -> {
             playerRepository.delete(player);
             return true;
         }).orElse(false);
     }
 
     // Obtener estadísticas de un jugador específico
-    public List<Statistic> getPlayerStatistics(String name) {
-        return playerRepository.findByName(name)
+    public List<Statistic> getPlayerStatistics(Long id) {
+        return playerRepository.findById(id)
                 .map(player -> statisticRepository.findByPlayerId(player.getId()))
                 .orElseThrow(() -> new IllegalArgumentException("Jugador no encontrado"));
     }

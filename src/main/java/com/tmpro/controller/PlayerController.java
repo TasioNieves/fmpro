@@ -39,8 +39,8 @@ public class PlayerController {
 
     // Eliminar un jugador por su ID (opcional)
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePlayer(@PathVariable String name) {
-        if (playerService.deletePlayer(name)) {
+    public ResponseEntity<Void> deletePlayer(@PathVariable Long id) {
+        if (playerService.deletePlayer(id)) {
             return ResponseEntity.noContent().build();  // El jugador se eliminó correctamente
         }
         return ResponseEntity.notFound().build();  // El jugador no se encontró
