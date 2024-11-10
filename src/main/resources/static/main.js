@@ -752,7 +752,7 @@ class TeamComponent {
       selectors: [["app-team"]],
       decls: 22,
       vars: 5,
-      consts: [[1, "container"], [1, "text-center", "my-4"], [1, "card", "mb-4"], [1, "card-header"], [1, "card-body"], [3, "ngSubmit"], ["teamForm", "ngForm"], [1, "mb-3"], ["for", "teamName", 1, "form-label"], ["type", "text", "id", "teamName", "name", "name", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "coach", 1, "form-label"], ["type", "text", "id", "coach", "name", "coach", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "submit", 1, "btn", "btn-primary", 3, "disabled"], [4, "ngIf"], ["class", "alert alert-info mt-4", 4, "ngIf"], [1, "list-group"], ["class", "list-group-item d-flex justify-content-between align-items-center", 4, "ngFor", "ngForOf"], [1, "list-group-item", "d-flex", "justify-content-between", "align-items-center"], [1, "btn", "btn-warning", "btn-sm", 3, "click"], [1, "btn", "btn-danger", "btn-sm", 3, "click"], [1, "alert", "alert-info", "mt-4"]],
+      consts: [[1, "container"], [1, "text-center", "my-4"], [1, "card", "mb-4"], [1, "card-header"], [1, "card-body"], [3, "ngSubmit"], ["teamForm", "ngForm"], [1, "mb-3"], ["for", "coach", 1, "form-label"], ["type", "text", "id", "coach", "name", "coach", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "teamName", 1, "form-label"], ["type", "text", "id", "teamName", "name", "name", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "submit", 1, "btn", "btn-primary", 3, "disabled"], [4, "ngIf"], ["class", "alert alert-info mt-4", 4, "ngIf"], [1, "list-group"], ["class", "list-group-item d-flex justify-content-between align-items-center", 4, "ngFor", "ngForOf"], [1, "list-group-item", "d-flex", "justify-content-between", "align-items-center"], [1, "btn", "btn-warning", "btn-sm", 3, "click"], [1, "btn", "btn-danger", "btn-sm", 3, "click"], [1, "alert", "alert-info", "mt-4"]],
       template: function TeamComponent_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 0)(1, "h2", 1);
@@ -766,19 +766,19 @@ class TeamComponent {
             return ctx.onSubmit();
           });
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](10, "div", 7)(11, "label", 8);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](12, "Nombre del Equipo");
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](12, "Entrenador");
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](13, "input", 9);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("ngModelChange", function TeamComponent_Template_input_ngModelChange_13_listener($event) {
-            return ctx.newTeam.name = $event;
+            return ctx.newTeam.coach = $event;
           });
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](14, "div", 7)(15, "label", 10);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](16, "Entrenador");
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](16, "Nombre del Equipo");
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](17, "input", 11);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("ngModelChange", function TeamComponent_Template_input_ngModelChange_17_listener($event) {
-            return ctx.newTeam.coach = $event;
+            return ctx.newTeam.name = $event;
           });
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](18, "button", 12);
@@ -791,9 +791,9 @@ class TeamComponent {
         if (rf & 2) {
           const _r0 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵreference"](9);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](13);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngModel", ctx.newTeam.name);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](4);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngModel", ctx.newTeam.coach);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](4);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngModel", ctx.newTeam.name);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("disabled", !_r0.form.valid);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](2);
