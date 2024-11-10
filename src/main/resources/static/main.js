@@ -577,19 +577,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   ApiService: () => (/* binding */ ApiService)
 /* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 7580);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ 6443);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ 9452);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rxjs/operators */ 271);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs/operators */ 1318);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 7580);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ 6443);
+
+
 
 
 class ApiService {
   constructor(http) {
     this.http = http;
-    this.baseUrl = 'https://tmpro-5265168c0988.herokuapp.com'; // Cambia la URL base si es necesario
+    this.baseUrl = 'https://tmpro-5265168c0988.herokuapp.com';
   }
   // ** Equipos **
   getTeams() {
-    return this.http.get(`${this.baseUrl}/teams`);
+    return this.http.get(`${this.baseUrl}/teams`).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_0__.map)(response => Array.isArray(response) ? response : []), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(error => {
+      console.error('Error al obtener equipos:', error);
+      return (0,rxjs__WEBPACK_IMPORTED_MODULE_2__.of)([]); // Retorna un array vacío en caso de error
+    }));
   }
+
   createTeam(team) {
     return this.http.post(`${this.baseUrl}/teams`, team);
   }
@@ -601,8 +610,12 @@ class ApiService {
   }
   // ** Jugadores **
   getPlayers() {
-    return this.http.get(`${this.baseUrl}/players`);
+    return this.http.get(`${this.baseUrl}/players`).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_0__.map)(response => Array.isArray(response) ? response : []), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(error => {
+      console.error('Error al obtener jugadores:', error);
+      return (0,rxjs__WEBPACK_IMPORTED_MODULE_2__.of)([]); // Retorna un array vacío en caso de error
+    }));
   }
+
   createPlayer(player) {
     return this.http.post(`${this.baseUrl}/players`, player);
   }
@@ -614,11 +627,11 @@ class ApiService {
   }
   static {
     this.ɵfac = function ApiService_Factory(t) {
-      return new (t || ApiService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpClient));
+      return new (t || ApiService)(_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_4__.HttpClient));
     };
   }
   static {
-    this.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({
+    this.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineInjectable"]({
       token: ApiService,
       factory: ApiService.ɵfac,
       providedIn: 'root'
