@@ -19,6 +19,17 @@ public class User {
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
+    // Constructor por defecto (sin parámetros)
+    public User() {
+    }
+
+    // Constructor con parámetros
+    public User(String username, String password, Role role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
     // Getters y Setters
     public Long getId() {
         return id;
