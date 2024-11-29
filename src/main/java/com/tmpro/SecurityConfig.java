@@ -18,7 +18,7 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable()) // Configuración explícita para deshabilitar CSRF
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**", "/login").permitAll() // Permitir acceso público a rutas específicas
+                        .requestMatchers("/api/auth/login", "/api/auth/register").permitAll() // Permitir acceso público a rutas específicas
 
                         .requestMatchers("/", "/index.html", "/static/**", "/favicon.ico", "/css/**", "/js/**", "/images/**").permitAll() // Permitir recursos estáticos
                         .anyRequest().authenticated() // Requerir autenticación para el resto

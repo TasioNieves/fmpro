@@ -21,10 +21,7 @@ public class AuthController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    @GetMapping("/login")
-    public String login() {
-        return "redirect:/#/login"; // Redirigir al componente de Angular para el login
-    }
+
 
     /**
      * Endpoint para registrar un nuevo usuario.
@@ -37,23 +34,40 @@ public class AuthController {
         return ResponseEntity.ok(user);
     }
 
-    // Endpoint para iniciar sesión (login)
     @PostMapping("/login")
-    public ResponseEntity<String> loginUser(@RequestBody LoginRequest request) {
-        // Autenticación del usuario con el AuthenticationManager
+    public ResponseEntity<LoginResponse> loginUser(@RequestBody LoginRequest request) {
+        // Autenticar usuario
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
         );
 
-        // Si la autenticación es exitosa, configurar el contexto de seguridad
+        // Establecer el contexto de seguridad
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         // Generar el token JWT
-        String token = userService.generateJwtToken(request.getUsername());  // Método para generar el token JWT
+        String token = userService.generateJwtToken(request.getUsername());
 
-        // Devolver el token JWT como un 'Bearer token' en la respuesta
-        return ResponseEntity.ok("Bearer " + token);
+        // Crear respuesta con el token
+        return ResponseEntity.ok(new LoginResponse(token));
     }
+
+    // Clase para la respuesta del login
+    public static class LoginResponse {
+        private String token;
+
+        public LoginResponse(String token) {
+            this.token = token;
+        }
+
+        public String getToken() {
+            return token;
+        }
+
+        public void setToken(String token) {
+            this.token = token;
+        }
+    }
+
 
     /**
      * Clase interna para representar los datos del registro.
