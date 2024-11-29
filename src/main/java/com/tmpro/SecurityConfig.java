@@ -18,12 +18,14 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable()) // Configuración explícita para deshabilitar CSRF
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll() // Permitir acceso público a rutas específicas
+                        .requestMatchers("/api/auth/**", "/login").permitAll() // Permitir acceso público a rutas específicas
+
                         .requestMatchers("/", "/index.html", "/static/**", "/favicon.ico", "/css/**", "/js/**", "/images/**").permitAll() // Permitir recursos estáticos
                         .anyRequest().authenticated() // Requerir autenticación para el resto
                 )
                 .formLogin(form -> form
                         .loginPage("/login") // Página personalizada de inicio de sesión
+                        .defaultSuccessUrl("/dashboard", true)
                         .permitAll() // Permitir acceso sin autenticación
                 )
                 .logout(logout -> logout

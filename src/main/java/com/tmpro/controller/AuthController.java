@@ -21,6 +21,11 @@ public class AuthController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @GetMapping("/login")
+    public String login() {
+        return "redirect:/#/login"; // Redirigir al componente de Angular para el login
+    }
+
     /**
      * Endpoint para registrar un nuevo usuario.
      * @param request Objeto con los datos del usuario: username, password y role.
