@@ -14,8 +14,7 @@ import java.util.Date;
 @Service
 public class UserService {
 
-    // Clave secreta para firmar el token JWT (debe ser segura y secreta)
-    private static final String SECRET_KEY = "mi-clave-secreta";
+
 
     public User registerUser(String username, String password, Role role) {
         // Lógica para registrar al usuario
