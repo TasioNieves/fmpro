@@ -7,7 +7,6 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 
@@ -20,21 +19,28 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable()) // Configuración explícita para deshabilitar CSRF
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll() // Permitir acceso público a rutas específicas
-                        .requestMatchers("/", "/index.html", "/static/**", "/favicon.ico").permitAll() // Permitir acceso a recursos estáticos y página principal
-                        .anyRequest().authenticated() // Requerir autenticación para otras rutas
+                        .requestMatchers("/", "/index.html", "/static/**", "/favicon.ico", "/css/**", "/js/**", "/images/**").permitAll() // Permitir recursos estáticos
+                        .anyRequest().authenticated() // Requerir autenticación para el resto
+                )
+                .formLogin(form -> form
+                        .loginPage("/login") // Página personalizada de inicio de sesión
+                        .permitAll() // Permitir acceso sin autenticación
+                )
+                .logout(logout -> logout
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout")) // Configuración de logout
+                        .permitAll() // Permitir logout sin autenticación
                 );
+
         return http.build();
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        // Usamos BCrypt para codificar contraseñas
-        return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder(); // Usamos BCrypt para codificar contraseñas
     }
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        // Declara el AuthenticationManager como un bean
         return authenticationConfiguration.getAuthenticationManager();
     }
 }
