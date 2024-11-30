@@ -17,26 +17,17 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private Set<Role> roles;
+    @Column(nullable = false)
+    private String role;
 
-    // Constructor vacío requerido por JPA
+    public User(String username, String encodedPassword, Set<Role> roles) {
+    }
+
     public User() {
+
     }
 
-    // Constructor para la creación de usuarios
-    public User(String username, String password, Set<Role> roles) {
-        this.username = username;
-        this.password = password;
-        this.roles = roles;
-    }
-
-    // Getters y setters
+    // Getters y Setters
     public Long getId() {
         return id;
     }
@@ -61,11 +52,11 @@ public class User {
         this.password = password;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public String getRole() {
+        return role;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRole(String role) {
+        this.role = role;
     }
 }
