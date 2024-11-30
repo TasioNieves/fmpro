@@ -10,9 +10,10 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name; // Ejemplo: "ENTRENADOR", "JUGADOR", "ADMINISTRADOR"
+    @Column(nullable = false, unique = true)
+    private String name;
 
-    // Getters y Setters
+    // Getters y setters
     public Long getId() {
         return id;
     }

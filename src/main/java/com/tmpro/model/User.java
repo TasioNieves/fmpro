@@ -1,8 +1,10 @@
 package com.tmpro.model;
 
 import jakarta.persistence.*;
+import java.util.Set;
 
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id
@@ -15,22 +17,26 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "role_id", nullable = false)
-    private Role role;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles;
 
-    // Constructor por defecto (sin parámetros)
+    // Constructor vacío requerido por JPA
     public User() {
     }
 
-    // Constructor con parámetros
-    public User(String username, String password, Role role) {
+    // Constructor para la creación de usuarios
+    public User(String username, String password, Set<Role> roles) {
         this.username = username;
         this.password = password;
-        this.role = role;
+        this.roles = roles;
     }
 
-    // Getters y Setters
+    // Getters y setters
     public Long getId() {
         return id;
     }
@@ -55,11 +61,11 @@ public class User {
         this.password = password;
     }
 
-    public Role getRole() {
-        return role;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

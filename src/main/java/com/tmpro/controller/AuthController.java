@@ -30,7 +30,8 @@ public class AuthController {
      */
     @PostMapping("/register")
     public ResponseEntity<User> registerUser(@RequestBody RegisterRequest request) {
-        User user = userService.registerUser(request.getUsername(), request.getPassword(), request.getRole());
+        // Registrar el usuario con el nombre del rol
+        User user = userService.registerUser(request.getUsername(), request.getPassword(), request.getRole().toString());
         return ResponseEntity.ok(user);
     }
 
