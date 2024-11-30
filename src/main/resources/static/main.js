@@ -407,8 +407,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   LoginComponent: () => (/* binding */ LoginComponent)
 /* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 7580);
-/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../services/api.service */ 3366);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 7580);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ 6443);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ 5072);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ 4456);
 
@@ -416,77 +416,81 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class LoginComponent {
-  constructor(apiService, router) {
-    this.apiService = apiService;
+  constructor(http, router) {
+    this.http = http;
     this.router = router;
     this.username = '';
     this.password = '';
   }
-  login() {
-    this.apiService.login(this.username, this.password).subscribe({
-      next: response => {
-        localStorage.setItem('token', response.token); // Guarda el token
-        this.router.navigate(['/dashboard']); // Redirige al dashboard
-      },
-
-      error: err => {
-        console.error('Error de login:', err);
-      }
+  onSubmit() {
+    const payload = {
+      username: this.username,
+      password: this.password
+    };
+    this.http.post('https://tmpro-5265168c0988.herokuapp.com/api/auth/login', payload).subscribe(response => {
+      // Almacena el token en el almacenamiento local
+      localStorage.setItem('token', response.token);
+      this.router.navigate(['/dashboard']); // Navega al dashboard
+    }, error => {
+      console.error('Error al iniciar sesión:', error);
     });
   }
   static {
     this.ɵfac = function LoginComponent_Factory(t) {
-      return new (t || LoginComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_services_api_service__WEBPACK_IMPORTED_MODULE_0__.ApiService), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__.Router));
+      return new (t || LoginComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpClient), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__.Router));
     };
   }
   static {
-    this.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({
+    this.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
       type: LoginComponent,
       selectors: [["app-login"]],
-      decls: 20,
-      vars: 2,
-      consts: [[1, "container", "d-flex", "justify-content-center", "align-items-center", "vh-100"], [1, "card", "shadow", "p-4", 2, "width", "24rem"], [1, "card-body"], [1, "card-title", "text-center", "mb-4"], [3, "submit"], [1, "mb-3"], ["for", "username", 1, "form-label"], ["type", "text", "id", "username", "name", "username", "placeholder", "Enter your username", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "password", 1, "form-label"], ["type", "password", "id", "password", "name", "password", "placeholder", "Enter your password", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], [1, "d-grid"], ["type", "submit", 1, "btn", "btn-primary"], [1, "mt-3", "text-center"], [1, "text-muted"]],
+      decls: 23,
+      vars: 3,
+      consts: [[1, "container", "mt-5"], [1, "row", "justify-content-center"], [1, "col-md-6"], [1, "card"], [1, "card-header", "text-center"], [1, "card-body"], [3, "ngSubmit"], ["loginForm", "ngForm"], [1, "mb-3"], ["for", "username", 1, "form-label"], ["type", "text", "id", "username", "name", "username", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "password", 1, "form-label"], ["type", "password", "id", "password", "name", "password", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "submit", 1, "btn", "btn-primary", "w-100", 3, "disabled"], [1, "mt-3", "text-center"], ["routerLink", "/register", 1, "btn", "btn-link"]],
       template: function LoginComponent_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 0)(1, "div", 1)(2, "div", 2)(3, "h3", 3);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](4, "TMpro - Login");
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](5, "form", 4);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("submit", function LoginComponent_Template_form_submit_5_listener() {
-            return ctx.login();
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0)(1, "div", 1)(2, "div", 2)(3, "div", 3)(4, "div", 4)(5, "h4");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, "Iniciar Sesi\u00F3n");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "div", 5)(8, "form", 6, 7);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngSubmit", function LoginComponent_Template_form_ngSubmit_8_listener() {
+            return ctx.onSubmit();
           });
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](6, "div", 5)(7, "label", 6);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](8, "Username");
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](9, "input", 7);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("ngModelChange", function LoginComponent_Template_input_ngModelChange_9_listener($event) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "div", 8)(11, "label", 9);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](12, "Usuario");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](13, "input", 10);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function LoginComponent_Template_input_ngModelChange_13_listener($event) {
             return ctx.username = $event;
           });
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](10, "div", 5)(11, "label", 8);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](12, "Password");
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](13, "input", 9);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("ngModelChange", function LoginComponent_Template_input_ngModelChange_13_listener($event) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](14, "div", 8)(15, "label", 11);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](16, "Contrase\u00F1a");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](17, "input", 12);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function LoginComponent_Template_input_ngModelChange_17_listener($event) {
             return ctx.password = $event;
           });
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](14, "div", 10)(15, "button", 11);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](16, "Login");
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](17, "div", 12)(18, "small", 13);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](19, "\u00A9 2024 TMpro");
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()()()()();
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](18, "button", 13);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](19, " Iniciar Sesi\u00F3n ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](20, "div", 14)(21, "a", 15);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](22, "\u00BFNo tienes cuenta? Reg\u00EDstrate");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()()()()()()();
         }
         if (rf & 2) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](9);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngModel", ctx.username);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](4);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngModel", ctx.password);
+          const _r0 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](9);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](13);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx.username);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx.password);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", !_r0.form.valid);
         }
       },
-      dependencies: [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["ɵNgNoValidate"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_3__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_3__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_3__.RequiredValidator, _angular_forms__WEBPACK_IMPORTED_MODULE_3__.NgModel, _angular_forms__WEBPACK_IMPORTED_MODULE_3__.NgForm],
-      encapsulation: 2
+      dependencies: [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["ɵNgNoValidate"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_3__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_3__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_3__.RequiredValidator, _angular_forms__WEBPACK_IMPORTED_MODULE_3__.NgModel, _angular_forms__WEBPACK_IMPORTED_MODULE_3__.NgForm, _angular_router__WEBPACK_IMPORTED_MODULE_2__.RouterLink],
+      styles: ["\n\n.login-container[_ngcontent-%COMP%] {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    height: 100vh; \n\n    background-color: #f8f9fa; \n\n  }\n  \n  .login-card[_ngcontent-%COMP%] {\n    width: 100%;\n    max-width: 400px; \n\n    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); \n\n    border: none; \n\n  }\n  \n  .login-card-header[_ngcontent-%COMP%] {\n    background-color: #007bff; \n\n    color: white;\n    text-align: center;\n  }\n  \n  .login-btn[_ngcontent-%COMP%] {\n    width: 100%; \n\n  }\n  \n  .login-footer[_ngcontent-%COMP%] {\n    text-align: center;\n    margin-top: 15px;\n  }\n  \n  .login-footer[_ngcontent-%COMP%]   a[_ngcontent-%COMP%] {\n    color: #007bff; \n\n    text-decoration: none;\n  }\n  body[_ngcontent-%COMP%] {\n    background-color: #f8f9fa; \n\n  }\n  \n  .card[_ngcontent-%COMP%] {\n    border-radius: 10px; \n\n  }\n  \n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3NyYy9hcHAvbG9naW4vbG9naW4uY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxtQ0FBbUM7QUFDbkM7SUFDSSxhQUFhO0lBQ2IsdUJBQXVCO0lBQ3ZCLG1CQUFtQjtJQUNuQixhQUFhLEVBQUUsdUNBQXVDO0lBQ3RELHlCQUF5QixFQUFFLHlCQUF5QjtFQUN0RDs7RUFFQTtJQUNFLFdBQVc7SUFDWCxnQkFBZ0IsRUFBRSxnQ0FBZ0M7SUFDbEQsd0NBQXdDLEVBQUUsb0NBQW9DO0lBQzlFLFlBQVksRUFBRSw0QkFBNEI7RUFDNUM7O0VBRUE7SUFDRSx5QkFBeUIsRUFBRSxvQkFBb0I7SUFDL0MsWUFBWTtJQUNaLGtCQUFrQjtFQUNwQjs7RUFFQTtJQUNFLFdBQVcsRUFBRSw4QkFBOEI7RUFDN0M7O0VBRUE7SUFDRSxrQkFBa0I7SUFDbEIsZ0JBQWdCO0VBQ2xCOztFQUVBO0lBQ0UsY0FBYyxFQUFFLHlCQUF5QjtJQUN6QyxxQkFBcUI7RUFDdkI7RUFDQTtJQUNFLHlCQUF5QixFQUFFLGdCQUFnQjtFQUM3Qzs7RUFFQTtJQUNFLG1CQUFtQixFQUFFLHVCQUF1QjtFQUM5QyIsInNvdXJjZXNDb250ZW50IjpbIi8qIENlbnRyYXIgZWwgZm9ybXVsYXJpbyBkZSBsb2dpbiAqL1xyXG4ubG9naW4tY29udGFpbmVyIHtcclxuICAgIGRpc3BsYXk6IGZsZXg7XHJcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcclxuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XHJcbiAgICBoZWlnaHQ6IDEwMHZoOyAvKiBPY3VwYSB0b2RhIGxhIGFsdHVyYSBkZSBsYSB2ZW50YW5hICovXHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjZjhmOWZhOyAvKiBDb2xvciBkZSBmb25kbyBjbGFybyAqL1xyXG4gIH1cclxuICBcclxuICAubG9naW4tY2FyZCB7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIG1heC13aWR0aDogNDAwcHg7IC8qIEFuY2hvIG3Dg8KheGltbyBkZWwgZm9ybXVsYXJpbyAqL1xyXG4gICAgYm94LXNoYWRvdzogMCA0cHggNnB4IHJnYmEoMCwgMCwgMCwgMC4xKTsgLyogU29tYnJhIHN1dGlsIHBhcmEgZWwgZm9ybXVsYXJpbyAqL1xyXG4gICAgYm9yZGVyOiBub25lOyAvKiBTaW4gYm9yZGVzIHBhcmEgZWwgY2FyZCAqL1xyXG4gIH1cclxuICBcclxuICAubG9naW4tY2FyZC1oZWFkZXIge1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzAwN2JmZjsgLyogQ29sb3IgcHJpbmNpcGFsICovXHJcbiAgICBjb2xvcjogd2hpdGU7XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgfVxyXG4gIFxyXG4gIC5sb2dpbi1idG4ge1xyXG4gICAgd2lkdGg6IDEwMCU7IC8qIEJvdMODwrNuIG9jdXBhIHRvZG8gZWwgYW5jaG8gKi9cclxuICB9XHJcbiAgXHJcbiAgLmxvZ2luLWZvb3RlciB7XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgICBtYXJnaW4tdG9wOiAxNXB4O1xyXG4gIH1cclxuICBcclxuICAubG9naW4tZm9vdGVyIGEge1xyXG4gICAgY29sb3I6ICMwMDdiZmY7IC8qIENvbG9yIGRlIGxvcyBlbmxhY2VzICovXHJcbiAgICB0ZXh0LWRlY29yYXRpb246IG5vbmU7XHJcbiAgfVxyXG4gIGJvZHkge1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogI2Y4ZjlmYTsgLyogRm9uZG8gY2xhcm8gKi9cclxuICB9XHJcbiAgXHJcbiAgLmNhcmQge1xyXG4gICAgYm9yZGVyLXJhZGl1czogMTBweDsgLyogQm9yZGVzIHJlZG9uZGVhZG9zICovXHJcbiAgfVxyXG4gICJdLCJzb3VyY2VSb290IjoiIn0= */"]
     });
   }
 }
