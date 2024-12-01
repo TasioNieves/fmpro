@@ -759,6 +759,7 @@ class RegisterComponent {
   // Obtener los roles del servidor
   getRoles() {
     this.apiService.getRoles().subscribe(data => {
+      console.log('Roles obtenidos:', data); // Verifica qué datos devuelve la API
       this.roles = data; // Asigna los roles obtenidos a la propiedad 'roles'
     }, error => {
       console.error('Error al obtener roles:', error);
@@ -914,7 +915,10 @@ class ApiService {
   }
 
   getRoles() {
-    return this.http.get('/api/roles');
+    return this.http.get('/api/roles').pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(error => {
+      console.error('Error al obtener roles:', error);
+      return (0,rxjs__WEBPACK_IMPORTED_MODULE_2__.of)([]); // Retorna un array vacío en caso de error
+    }));
   }
   // ** Login (sin JWT) ** 
   login(username, password) {
