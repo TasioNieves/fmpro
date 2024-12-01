@@ -33,7 +33,7 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody User userDTO) {
         // Obtener el rol por nombre
-        Optional<Role> role = roleRepository.findByName(String.valueOf(userDTO.getRole()));
+        Optional<Role> role = roleRepository.findByName(userDTO.getRole());
         if (role == null) {
             return ResponseEntity.badRequest().body("El rol no existe");
         }

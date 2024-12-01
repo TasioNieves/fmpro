@@ -3,7 +3,6 @@ package com.tmpro.model;
 import jakarta.persistence.*;
 
 import java.util.Optional;
-import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -18,7 +17,7 @@ public class User {
     private String password;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "role_id")
+    @JoinColumn(name = "name")
     private Role role; // Relación con la entidad Role
 
     public User(String username, String password, Optional<Role> role) {
@@ -54,7 +53,7 @@ public class User {
         this.password = password;
     }
 
-    public Role getRole() {
+    public String getRole() {
         return role;
     }
 
