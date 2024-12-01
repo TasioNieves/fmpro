@@ -745,11 +745,11 @@ class RegisterComponent {
   }
   ngOnInit() {
     this.registerForm = this.fb.group({
-      username: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required]],
       password: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required]],
-      role: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required]] // Asegúrate de que el campo 'role' sea obligatorio
+      username: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required]],
+      role: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required]],
+      name: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required]]
     });
-
     this.getRoles(); // Obtén los roles cuando se inicialice el componente
   }
 
@@ -767,9 +767,9 @@ class RegisterComponent {
       const user = {
         username: formValues.username,
         password: formValues.password,
-        role: formValues.role // El nombre del rol se obtiene aquí
+        role: formValues.role,
+        name: formValues.role
       };
-
       this.apiService.registerUser(user).subscribe(response => {
         console.log('Usuario registrado:', response);
         // Aquí puedes manejar la respuesta después de registrar al usuario
