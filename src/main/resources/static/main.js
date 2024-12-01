@@ -732,7 +732,7 @@ function RegisterComponent_option_15_Template(rf, ctx) {
   }
   if (rf & 2) {
     const role_r1 = ctx.$implicit;
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("value", role_r1.id);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("value", role_r1.name);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](role_r1.name);
   }
@@ -904,7 +904,7 @@ class ApiService {
   registerUser(user) {
     return this.http.post(`${this.baseUrl}/auth/register`, user).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(error => {
       console.error('Error al registrar usuario:', error);
-      return (0,rxjs__WEBPACK_IMPORTED_MODULE_2__.of)(error.error); // Devolver el error para manejarlo en el frontend
+      return (0,rxjs__WEBPACK_IMPORTED_MODULE_2__.of)(error.error); // Devuelve el error para manejarlo en el frontend
     }));
   }
   // ** Roles **
