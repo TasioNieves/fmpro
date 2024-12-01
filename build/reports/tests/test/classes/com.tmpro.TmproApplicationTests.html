@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.365s</div>
+<div class="counter">0.410s</div>
 <p>duration</p>
 </div>
 </td>
@@ -82,7 +82,7 @@
 </thead>
 <tr>
 <td class="success">contextLoads()</td>
-<td class="success">0.365s</td>
+<td class="success">0.410s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -90,8 +90,8 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>20:00:22.375 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.tmpro.TmproApplicationTests]: TmproApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-20:00:22.456 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.tmpro.TmproApplication for test class com.tmpro.TmproApplicationTests
+<pre>13:22:33.347 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.tmpro.TmproApplicationTests]: TmproApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+13:22:33.430 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.tmpro.TmproApplication for test class com.tmpro.TmproApplicationTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -101,32 +101,31 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.5)
 
-2024-11-30T20:00:22.759+01:00  INFO 6872 --- [fmpro] [    Test worker] com.tmpro.TmproApplicationTests          : Starting TmproApplicationTests using Java 21.0.3 with PID 6872 (started by tasio in C:\Users\tasio\fmpro)
-2024-11-30T20:00:22.760+01:00  INFO 6872 --- [fmpro] [    Test worker] com.tmpro.TmproApplicationTests          : No active profile set, falling back to 1 default profile: &quot;default&quot;
-2024-11-30T20:00:23.487+01:00  INFO 6872 --- [fmpro] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2024-11-30T20:00:23.538+01:00  INFO 6872 --- [fmpro] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 45 ms. Found 6 JPA repository interfaces.
-2024-11-30T20:00:24.196+01:00  INFO 6872 --- [fmpro] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2024-11-30T20:00:24.243+01:00  INFO 6872 --- [fmpro] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
-2024-11-30T20:00:24.272+01:00  INFO 6872 --- [fmpro] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2024-11-30T20:00:24.450+01:00  INFO 6872 --- [fmpro] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2024-11-30T20:00:24.469+01:00  INFO 6872 --- [fmpro] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2024-11-30T20:00:25.235+01:00  INFO 6872 --- [fmpro] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@c6bf8d9
-2024-11-30T20:00:25.236+01:00  INFO 6872 --- [fmpro] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2024-11-30T20:00:25.309+01:00  WARN 6872 --- [fmpro] [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2024-11-30T20:00:26.206+01:00  INFO 6872 --- [fmpro] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-Hibernate: alter table if exists users add column role varchar(255) not null
-2024-11-30T20:00:27.303+01:00  INFO 6872 --- [fmpro] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2024-11-30T20:00:27.951+01:00  WARN 6872 --- [fmpro] [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2024-11-30T20:00:28.227+01:00  INFO 6872 --- [fmpro] [    Test worker] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
-2024-11-30T20:00:28.977+01:00  WARN 6872 --- [fmpro] [    Test worker] .s.s.UserDetailsServiceAutoConfiguration : 
+2024-12-01T13:22:33.733+01:00  INFO 9040 --- [fmpro] [    Test worker] com.tmpro.TmproApplicationTests          : Starting TmproApplicationTests using Java 21.0.3 with PID 9040 (started by tasio in C:\Users\tasio\fmpro)
+2024-12-01T13:22:33.735+01:00  INFO 9040 --- [fmpro] [    Test worker] com.tmpro.TmproApplicationTests          : No active profile set, falling back to 1 default profile: &quot;default&quot;
+2024-12-01T13:22:34.654+01:00  INFO 9040 --- [fmpro] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-01T13:22:34.717+01:00  INFO 9040 --- [fmpro] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 56 ms. Found 6 JPA repository interfaces.
+2024-12-01T13:22:35.576+01:00  INFO 9040 --- [fmpro] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-01T13:22:35.635+01:00  INFO 9040 --- [fmpro] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2024-12-01T13:22:35.673+01:00  INFO 9040 --- [fmpro] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-12-01T13:22:35.866+01:00  INFO 9040 --- [fmpro] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-01T13:22:35.887+01:00  INFO 9040 --- [fmpro] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-12-01T13:22:36.647+01:00  INFO 9040 --- [fmpro] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5f9ebd5a
+2024-12-01T13:22:36.649+01:00  INFO 9040 --- [fmpro] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-12-01T13:22:36.727+01:00  WARN 9040 --- [fmpro] [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-12-01T13:22:37.684+01:00  INFO 9040 --- [fmpro] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-01T13:22:38.753+01:00  INFO 9040 --- [fmpro] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-01T13:22:39.462+01:00  WARN 9040 --- [fmpro] [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-01T13:22:39.701+01:00  WARN 9040 --- [fmpro] [    Test worker] .s.s.UserDetailsServiceAutoConfiguration : 
 
-Using generated security password: 37c9a56c-bb7e-4e7c-8e7c-a11942b51184
+Using generated security password: 2caa9855-4777-4d95-ade9-033289019497
 
 This generated password is for development use only. Your security configuration must be updated before running your application in production.
 
-2024-11-30T20:00:29.106+01:00  INFO 6872 --- [fmpro] [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
-2024-11-30T20:00:29.125+01:00  INFO 6872 --- [fmpro] [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@188ccb6c, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7061a5e7, org.springframework.security.web.context.SecurityContextHolderFilter@11c95035, org.springframework.security.web.header.HeaderWriterFilter@5c74025e, org.springframework.web.filter.CorsFilter@4a0934a8, org.springframework.security.web.csrf.CsrfFilter@29922188, org.springframework.security.web.authentication.logout.LogoutFilter@1c9fa12, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@5d796665, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@10e7ade5, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@4cf66f73, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@69aecbba, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@17cea679, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3e8cf854, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@32df1a2a, org.springframework.security.web.access.ExceptionTranslationFilter@143abb21, org.springframework.security.web.access.intercept.AuthorizationFilter@22109f72]
-2024-11-30T20:00:29.277+01:00  INFO 6872 --- [fmpro] [    Test worker] com.tmpro.TmproApplicationTests          : Started TmproApplicationTests in 6.7 seconds (process running for 7.589)
+2024-12-01T13:22:40.169+01:00  INFO 9040 --- [fmpro] [    Test worker] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2024-12-01T13:22:40.635+01:00  INFO 9040 --- [fmpro] [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-12-01T13:22:40.662+01:00  INFO 9040 --- [fmpro] [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@490dc900, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@18e4bbec, org.springframework.security.web.context.SecurityContextHolderFilter@511ba9c9, org.springframework.security.web.header.HeaderWriterFilter@363751f2, org.springframework.web.filter.CorsFilter@ab5af13, org.springframework.security.web.authentication.logout.LogoutFilter@2c3a2935, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7315264e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6018a6a2, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2f2e75ae, org.springframework.security.web.access.ExceptionTranslationFilter@117bfeb8, org.springframework.security.web.access.intercept.AuthorizationFilter@4602fa2f]
+2024-12-01T13:22:41.258+01:00  INFO 9040 --- [fmpro] [    Test worker] com.tmpro.TmproApplicationTests          : Started TmproApplicationTests in 7.703 seconds (process running for 8.615)
 </pre>
 </span>
 </div>
@@ -148,7 +147,7 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 8.7</a> at 30 nov 2024, 20:00:30</p>
+<a href="http://www.gradle.org">Gradle 8.7</a> at 1 dic 2024, 13:22:42</p>
 </div>
 </div>
 </body>
