@@ -760,28 +760,34 @@ class RegisterComponent {
       console.error('Error al obtener roles:', error);
     });
   }
+  onRoleChange(event) {
+    const selectedRoleId = event.target.value;
+    const selectedRole = this.roles.find(role => role.id == selectedRoleId);
+    // Asegúrate de que se ha encontrado un rol válido
+    if (selectedRole) {
+      this.registerForm.patchValue({
+        role_id: selectedRole.id,
+        role_name: selectedRole.name // Setear el name si es necesario
+      });
+    }
+  }
+
   onSubmit() {
     if (this.registerForm.valid) {
-      const {
-        username,
-        password,
-        role
-      } = this.registerForm.value; // Desestructuramos los valores del formulario
+      const selectedRole = this.roles.find(role => role.id === this.registerForm.value.role);
+      // Construir el objeto del usuario con los campos role_id y role_name separados
       const user = {
-        username,
-        password,
-        role: role // Aquí se está pasando el role.id que es lo que necesitamos
+        username: this.registerForm.value.username,
+        password: this.registerForm.value.password,
+        role: selectedRole?.name,
+        role_id: selectedRole?.id // Enviar solo el id
       };
 
       this.apiService.registerUser(user).subscribe(response => {
-        console.log('Usuario registrado correctamente:', response);
-        // Redirige o muestra mensaje de éxito
+        console.log('Usuario registrado:', response);
       }, error => {
         console.error('Error al registrar usuario:', error);
-        // Maneja errores aquí
       });
-    } else {
-      console.log('Formulario no válido');
     }
   }
   static {
