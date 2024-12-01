@@ -762,19 +762,26 @@ class RegisterComponent {
   }
   onSubmit() {
     if (this.registerForm.valid) {
-      const formValues = this.registerForm.value;
+      const {
+        username,
+        password,
+        role
+      } = this.registerForm.value; // Desestructuramos los valores del formulario
       const user = {
-        username: formValues.username,
-        password: formValues.password,
-        role: formValues.role // El nombre del rol se obtiene aquí
+        username,
+        password,
+        role: role // Aquí se está pasando el role.id que es lo que necesitamos
       };
 
       this.apiService.registerUser(user).subscribe(response => {
-        console.log('Usuario registrado:', response);
-        // Aquí puedes manejar la respuesta después de registrar al usuario
+        console.log('Usuario registrado correctamente:', response);
+        // Redirige o muestra mensaje de éxito
       }, error => {
         console.error('Error al registrar usuario:', error);
+        // Maneja errores aquí
       });
+    } else {
+      console.log('Formulario no válido');
     }
   }
   static {
