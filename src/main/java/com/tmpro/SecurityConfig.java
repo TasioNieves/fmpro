@@ -15,7 +15,7 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable()) // Desactiva CSRF si no usas tokens
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/index.html", "/api/auth/**").permitAll() // Permite acceso público a estas rutas
+                        .requestMatchers("/", "/index.html", "/api/auth/**", "/static/**").permitAll() // Permite acceso público a estas rutas
                         .anyRequest().authenticated() // Requiere autenticación para otras rutas
                 )
                 .formLogin(form -> form.disable()); // Desactiva el formulario de login predeterminado
