@@ -20,7 +20,7 @@ import java.util.List;
             this.roleService = roleService;
         }
 
-        @GetMapping("/api/roles")
+        @GetMapping
         public List<Role> getAllRoles() {
             return roleService.findAll();
         }
