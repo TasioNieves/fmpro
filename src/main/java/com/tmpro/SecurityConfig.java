@@ -17,7 +17,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable) // Desactiva CSRF si no usas tokens
 
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/index.html", "/api/**", "/static/**", "/styles.css", "/runtime.js", "/polyfills.js", "/vendor.js", "/main.js", "/favicon.ico").permitAll() // Permite acceso público a estas rutas
+                        .requestMatchers("/","/roles/", "/index.html", "/api/**", "/static/**", "/styles.css", "/runtime.js", "/polyfills.js", "/vendor.js", "/main.js", "/favicon.ico").permitAll() // Permite acceso público a estas rutas
 
 
                 )
