@@ -886,11 +886,11 @@ class ApiService {
       withCredentials: true
     });
   }
-  // ** Registro de Usuario ** (Registrarse)
   registerUser(user) {
-    return this.http.post(`${this.baseUrl}/auth/register`, user, {
-      withCredentials: true
-    });
+    return this.http.post(`${this.baseUrl}/auth/register`, user).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(error => {
+      console.error('Error al registrar usuario:', error);
+      return (0,rxjs__WEBPACK_IMPORTED_MODULE_2__.of)(error.error); // Devolver el error para manejarlo en el frontend
+    }));
   }
   // ** Login (sin JWT) ** 
   login(username, password) {

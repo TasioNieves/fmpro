@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class UserService {
@@ -25,14 +23,14 @@ public class UserService {
     private PasswordEncoder passwordEncoder; // Usa el PasswordEncoder configurado
 
     /**
-     * Registra un nuevo usuario con un rol (por su nombre de rol).
+     * Registra un nuevo usuario con un rol (por su id de rol).
      *
      * @param username El nombre de usuario.
      * @param password La contraseña del usuario.
-     * @param roleName El nombre del rol del usuario (por ejemplo "ROLE_USER").
+     * @param roleId El id del rol del usuario (por ejemplo, 1 para "Admin").
      * @return El usuario registrado.
      */
-    public User registerUser(String username, String password, String roleName) {
+    public User registerUser(String username, String password, Long roleId) {
         // Verifica si el usuario ya existe
         if (userRepository.findByUsername(username).isPresent()) {
             throw new IllegalArgumentException("El nombre de usuario ya está en uso.");
@@ -41,15 +39,15 @@ public class UserService {
         // Codifica la contraseña
         String encodedPassword = passwordEncoder.encode(password);
 
-        // Busca el rol por nombre
-        Role role = roleRepository.findByName(roleName)
-                .orElseThrow(() -> new IllegalArgumentException("No se encontró el rol: " + roleName));
-
-        // Crea un Set con el rol
-        Set<Role> roles = Collections.singleton(role);
+        // Busca el rol por su id
+        Role role = roleRepository.findById(roleId)
+                .orElseThrow(() -> new IllegalArgumentException("No se encontró el rol con ID: " + roleId));
 
         // Crea un nuevo usuario con el rol
-        User user = new User(username, encodedPassword, roles);
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(encodedPassword);
+        user.setRole(role);
 
         // Guarda el usuario en la base de datos
         return userRepository.save(user);

@@ -3,6 +3,7 @@ package com.tmpro.controller;
 import com.tmpro.model.User;
 import com.tmpro.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,12 +15,13 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody User user) {
+    public ResponseEntity<?> register(@RequestBody User userDto) {
         try {
-            User registeredUser = authService.register(user.getUsername(), user.getPassword(), user.getRole());
-            return ResponseEntity.ok(registeredUser);
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            // Intentar registrar el usuario
+            User newUser = authService.register(userDto.getUsername(), userDto.getPassword(), userDto.getRole());
+            return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
         }
     }
 

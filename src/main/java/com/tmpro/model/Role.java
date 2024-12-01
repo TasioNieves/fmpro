@@ -3,17 +3,16 @@ package com.tmpro.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "roles")
 public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String name;
+    private String name; // Puede ser "Admin", "User" o "Trainer"
 
-    // Getters y setters
+    // Getters y Setters
+
     public Long getId() {
         return id;
     }
