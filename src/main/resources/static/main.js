@@ -860,6 +860,13 @@ class ApiService {
       return (0,rxjs__WEBPACK_IMPORTED_MODULE_2__.of)([]); // Retorna un array vacío en caso de error
     }));
   }
+  // ** Roles **
+  getRoles() {
+    return this.http.get(`${this.baseUrl}/roles`).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_0__.map)(response => Array.isArray(response) ? response : []), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(error => {
+      console.error('Error al obtener roles:', error);
+      return (0,rxjs__WEBPACK_IMPORTED_MODULE_2__.of)([]); // Retorna un array vacío en caso de error
+    }));
+  }
 
   createTeam(team) {
     return this.http.post(`${this.baseUrl}/teams`, team, {
@@ -905,13 +912,6 @@ class ApiService {
     return this.http.post(`${this.baseUrl}/auth/register`, user).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(error => {
       console.error('Error al registrar usuario:', error);
       return (0,rxjs__WEBPACK_IMPORTED_MODULE_2__.of)(error.error); // Devuelve el error para manejarlo en el frontend
-    }));
-  }
-  // ** Roles **
-  getRoles() {
-    return this.http.get(`${this.baseUrl}/roles`).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(error => {
-      console.error('Error al obtener roles:', error);
-      return (0,rxjs__WEBPACK_IMPORTED_MODULE_2__.of)([]); // Retorna un array vacío en caso de error
     }));
   }
   // ** Login (sin JWT) ** 
