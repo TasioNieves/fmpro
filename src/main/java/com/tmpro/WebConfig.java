@@ -12,7 +12,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         // Permitir solicitudes desde tu dominio frontend
         registry.addMapping("/**")
-                .allowedOrigins("https://tmpro-5265168c0988.herokuapp.com/")  // Reemplaza con la URL de tu frontend
+                .allowedOrigins("*")  // Reemplaza con la URL de tu frontend
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(true);
