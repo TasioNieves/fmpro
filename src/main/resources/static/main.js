@@ -759,8 +759,8 @@ class RegisterComponent {
 
   getRoles() {
     this.apiService.getRoles().subscribe(data => {
-      console.log('Roles obtenidos:', data);
-      this.roles = data; // Asignamos los roles a la propiedad 'roles'
+      console.log('Roles obtenidos:', data); // Verifica qué datos devuelve la API
+      this.roles = data; // Asigna los roles obtenidos a la propiedad 'roles'
     }, error => {
       console.error('Error al obtener roles:', error);
     });
