@@ -717,7 +717,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ 4456);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 7580);
-/* harmony import */ var src_app_services_api_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/app/services/api.service */ 3366);
+/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../services/api.service */ 3366);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ 316);
 
 
@@ -741,45 +741,41 @@ class RegisterComponent {
   constructor(fb, apiService) {
     this.fb = fb;
     this.apiService = apiService;
-    this.roles = []; // Array para almacenar los roles
+    this.roles = []; // Para almacenar los roles
   }
 
   ngOnInit() {
-    this.initializeForm();
-    this.getRoles(); // Cargar los roles al inicio
+    this.initForm();
+    this.getRoles(); // Llamamos a la función para obtener los roles
   }
-  // Inicializar el formulario
-  initializeForm() {
+
+  initForm() {
     this.registerForm = this.fb.group({
-      username: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.minLength(3)]],
-      password: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.minLength(6)]],
-      role: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required]
+      username: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
+      password: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
+      role: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required] // El campo role es requerido
     });
   }
-  // Obtener los roles del servidor
+
   getRoles() {
     this.apiService.getRoles().subscribe(data => {
-      console.log('Roles obtenidos:', data); // Verifica qué datos devuelve la API
-      this.roles = data; // Asigna los roles obtenidos a la propiedad 'roles'
+      console.log('Roles obtenidos:', data);
+      this.roles = data; // Asignamos los roles a la propiedad 'roles'
     }, error => {
       console.error('Error al obtener roles:', error);
     });
   }
-  // Llamada al submit
   onSubmit() {
     if (this.registerForm.valid) {
-      const user = this.registerForm.value;
-      this.apiService.registerUser(user).subscribe(response => {
-        console.log('Usuario registrado:', response);
-        // Maneja la respuesta de registro aquí (por ejemplo, redirigir a otra página)
-      }, error => {
-        console.error('Error al registrar usuario:', error);
-      });
+      console.log('Formulario enviado:', this.registerForm.value);
+      // Aquí iría la lógica para registrar el usuario
+    } else {
+      console.error('Formulario no válido');
     }
   }
   static {
     this.ɵfac = function RegisterComponent_Factory(t) {
-      return new (t || RegisterComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormBuilder), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](src_app_services_api_service__WEBPACK_IMPORTED_MODULE_0__.ApiService));
+      return new (t || RegisterComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormBuilder), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_services_api_service__WEBPACK_IMPORTED_MODULE_0__.ApiService));
     };
   }
   static {
@@ -911,9 +907,9 @@ class ApiService {
       return (0,rxjs__WEBPACK_IMPORTED_MODULE_2__.of)(error.error); // Devolver el error para manejarlo en el frontend
     }));
   }
-
+  // ** Roles **
   getRoles() {
-    return this.http.get('/roles').pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(error => {
+    return this.http.get('/api/roles').pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(error => {
       console.error('Error al obtener roles:', error);
       return (0,rxjs__WEBPACK_IMPORTED_MODULE_2__.of)([]); // Retorna un array vacío en caso de error
     }));
