@@ -144,6 +144,9 @@ class AppModule {
         path: 'login',
         component: _login_login_component__WEBPACK_IMPORTED_MODULE_5__.LoginComponent
       }, {
+        path: 'register',
+        component: _register_register_component__WEBPACK_IMPORTED_MODULE_4__.RegisterComponent
+      }, {
         path: '',
         redirectTo: '/login',
         pathMatch: 'full'
