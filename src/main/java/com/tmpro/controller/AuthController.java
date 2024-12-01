@@ -1,9 +1,9 @@
 package com.tmpro.controller;
 
+import com.tmpro.model.UserDto;
 import com.tmpro.model.User;
 import com.tmpro.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,23 +14,33 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
+    /**
+     * Endpoint para registrar un nuevo usuario.
+     *
+     * @param userDto Contiene el nombre de usuario, la contraseña y el rol.
+     * @return El usuario registrado.
+     */
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody User userDto) {
+    public ResponseEntity<?> register(@RequestBody UserDto userDto) {
         try {
-            // Intentar registrar el usuario
             User newUser = authService.register(userDto.getUsername(), userDto.getPassword(), userDto.getRole());
-            return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
+            return ResponseEntity.ok(newUser);
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
+    /**
+     * Endpoint para autenticar a un usuario.
+     *
+     * @param user Contiene el nombre de usuario y la contraseña.
+     * @return El usuario autenticado.
+     */
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User user) {
         try {
-            // Ya no autenticamos con JWT, solo devolvemos el usuario autenticado
             User authenticatedUser = authService.login(user.getUsername(), user.getPassword());
-            return ResponseEntity.ok(authenticatedUser); // Solo retornamos el usuario
+            return ResponseEntity.ok(authenticatedUser);
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

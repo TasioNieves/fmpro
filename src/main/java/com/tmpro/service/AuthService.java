@@ -1,12 +1,12 @@
 package com.tmpro.service;
 
+import com.tmpro.model.Role;
 import com.tmpro.model.User;
+import com.tmpro.repository.RoleRepository;
 import com.tmpro.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class AuthService {
@@ -14,49 +14,58 @@ public class AuthService {
     @Autowired
     private UserRepository userRepository;
 
-    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    @Autowired
+    private RoleRepository roleRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     /**
-     * Registra un nuevo usuario.
+     * Registra un nuevo usuario con el rol especificado por nombre.
+     *
      * @param username Nombre de usuario.
-     * @param password Contraseña del usuario.
-     * @param role Rol del usuario.
+     * @param password Contraseña.
+     * @param roleName Nombre del rol (por ejemplo, "Admin", "User").
      * @return Usuario registrado.
-     * @throws RuntimeException Si el usuario ya existe.
      */
-    public User register(String username, String password, String role) {
+    public User register(String username, String password, String roleName) {
         // Verificar si el usuario ya existe
         if (userRepository.findByUsername(username).isPresent()) {
-            throw new RuntimeException("El usuario ya existe.");
+            throw new IllegalArgumentException("El nombre de usuario ya está en uso.");
         }
 
-        // Crear y guardar el nuevo usuario
+        // Buscar el rol por nombre
+        Role role = roleRepository.findByName(roleName)
+                .orElseThrow(() -> new IllegalArgumentException("No se encontró el rol: " + roleName));
+
+        // Codificar la contraseña
+        String encodedPassword = passwordEncoder.encode(password);
+
+        // Crear el usuario con el rol encontrado
         User user = new User();
         user.setUsername(username);
-        user.setPassword(passwordEncoder.encode(password));
+        user.setPassword(encodedPassword);
         user.setRole(role);
 
+        // Guardar el usuario en la base de datos
         return userRepository.save(user);
     }
 
     /**
-     * Autentica un usuario con su nombre de usuario y contraseña.
+     * Inicia sesión con el usuario.
+     *
      * @param username Nombre de usuario.
      * @param password Contraseña.
      * @return Usuario autenticado.
-     * @throws RuntimeException Si las credenciales son inválidas.
      */
     public User login(String username, String password) {
-        // Buscar el usuario en la base de datos
-        Optional<User> optionalUser = userRepository.findByUsername(username);
-        if (optionalUser.isEmpty()) {
-            throw new RuntimeException("Usuario no encontrado.");
-        }
+        // Buscar el usuario
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado: " + username));
 
         // Verificar la contraseña
-        User user = optionalUser.get();
         if (!passwordEncoder.matches(password, user.getPassword())) {
-            throw new RuntimeException("Contraseña incorrecta.");
+            throw new IllegalArgumentException("Contraseña incorrecta.");
         }
 
         return user;

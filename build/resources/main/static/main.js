@@ -144,6 +144,9 @@ class AppModule {
         path: 'login',
         component: _login_login_component__WEBPACK_IMPORTED_MODULE_5__.LoginComponent
       }, {
+        path: 'register',
+        component: _register_register_component__WEBPACK_IMPORTED_MODULE_4__.RegisterComponent
+      }, {
         path: '',
         redirectTo: '/login',
         pathMatch: 'full'
@@ -359,99 +362,116 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   LoginComponent: () => (/* binding */ LoginComponent)
 /* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 7580);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ 6443);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 7580);
+/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../services/api.service */ 3366);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ 5072);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ 4456);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ 316);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ 4456);
 
 
 
 
+
+function LoginComponent_div_22_Template(rf, ctx) {
+  if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 16);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+  }
+  if (rf & 2) {
+    const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"](" ", ctx_r1.errorMessage, " ");
+  }
+}
 class LoginComponent {
-  constructor(http, router) {
-    this.http = http;
+  constructor(apiService, router) {
+    this.apiService = apiService;
     this.router = router;
     this.username = '';
     this.password = '';
+    this.errorMessage = '';
   }
-  onSubmit() {
-    const payload = {
-      username: this.username,
-      password: this.password
-    };
-    this.http.post('https://tmpro-5265168c0988.herokuapp.com/api/auth/login', payload).subscribe(response => {
-      // Almacena el token en el almacenamiento local
-      localStorage.setItem('token', response.token);
-      // Redirige al usuario al dashboard tras el inicio de sesión exitoso
-      this.router.navigate(['/dashboard']);
+  onLogin() {
+    this.apiService.login(this.username, this.password).subscribe(response => {
+      if (response && response.success) {
+        // Redirigir al dashboard o a la página deseada después del login
+        this.router.navigate(['/dashboard']); // Ajusta la ruta si es necesario
+      } else {
+        this.errorMessage = 'Credenciales incorrectas o error en la autenticación';
+      }
     }, error => {
-      // Maneja errores de inicio de sesión
-      console.error('Error al iniciar sesión:', error);
-      alert('Error al iniciar sesión. Por favor, verifica tus credenciales.');
+      console.error('Error al intentar iniciar sesión:', error);
+      this.errorMessage = 'Ocurrió un error al intentar iniciar sesión. Intenta nuevamente más tarde.';
     });
   }
+  // Método para navegar a la página de registro
   navigateToRegister() {
-    // Método para redirigir al formulario de registro
-    this.router.navigate(['/register']);
+    this.router.navigate(['/register']); // Ajusta la ruta según tu configuración
   }
+
   static {
     this.ɵfac = function LoginComponent_Factory(t) {
-      return new (t || LoginComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpClient), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__.Router));
+      return new (t || LoginComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_services_api_service__WEBPACK_IMPORTED_MODULE_0__.ApiService), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__.Router));
     };
   }
   static {
-    this.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
+    this.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({
       type: LoginComponent,
       selectors: [["app-login"]],
-      decls: 22,
-      vars: 3,
-      consts: [[1, "container", "mt-5"], [1, "row", "justify-content-center"], [1, "col-md-6"], [1, "card"], [1, "card-header", "text-center"], [1, "card-body"], [3, "ngSubmit"], ["loginForm", "ngForm"], [1, "mb-3"], ["for", "username", 1, "form-label"], ["type", "text", "id", "username", "name", "username", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "password", 1, "form-label"], ["type", "password", "id", "password", "name", "password", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "submit", 1, "btn", "btn-primary", "w-100", 3, "disabled"], ["type", "button", 1, "btn", "btn-secondary", "w-100", "mt-3", 3, "click"]],
+      decls: 23,
+      vars: 4,
+      consts: [[1, "container", "mt-5"], [1, "row", "justify-content-center"], [1, "col-md-6"], [1, "card"], [1, "card-header", "text-center"], [1, "card-body"], [3, "ngSubmit"], ["loginForm", "ngForm"], [1, "mb-3"], ["for", "username", 1, "form-label"], ["type", "text", "id", "username", "name", "username", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "password", 1, "form-label"], ["type", "password", "id", "password", "name", "password", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "submit", 1, "btn", "btn-primary", "w-100", 3, "disabled"], ["type", "button", 1, "btn", "btn-secondary", "w-100", "mt-3", 3, "click"], ["class", "alert alert-danger mt-3", 4, "ngIf"], [1, "alert", "alert-danger", "mt-3"]],
       template: function LoginComponent_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0)(1, "div", 1)(2, "div", 2)(3, "div", 3)(4, "div", 4)(5, "h4");
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, "Iniciar Sesi\u00F3n");
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "div", 5)(8, "form", 6, 7);
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngSubmit", function LoginComponent_Template_form_ngSubmit_8_listener() {
-            return ctx.onSubmit();
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 0)(1, "div", 1)(2, "div", 2)(3, "div", 3)(4, "div", 4)(5, "h4");
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](6, "Iniciar Sesi\u00F3n");
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](7, "div", 5)(8, "form", 6, 7);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("ngSubmit", function LoginComponent_Template_form_ngSubmit_8_listener() {
+            return ctx.onLogin();
           });
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "div", 8)(11, "label", 9);
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](12, "Usuario");
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](13, "input", 10);
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function LoginComponent_Template_input_ngModelChange_13_listener($event) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](10, "div", 8)(11, "label", 9);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](12, "Usuario");
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](13, "input", 10);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("ngModelChange", function LoginComponent_Template_input_ngModelChange_13_listener($event) {
             return ctx.username = $event;
           });
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](14, "div", 8)(15, "label", 11);
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](16, "Contrase\u00F1a");
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](17, "input", 12);
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function LoginComponent_Template_input_ngModelChange_17_listener($event) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](14, "div", 8)(15, "label", 11);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](16, "Contrase\u00F1a");
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](17, "input", 12);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("ngModelChange", function LoginComponent_Template_input_ngModelChange_17_listener($event) {
             return ctx.password = $event;
           });
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](18, "button", 13);
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](19, " Iniciar Sesi\u00F3n ");
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](20, "button", 14);
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function LoginComponent_Template_button_click_20_listener() {
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](18, "button", 13);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](19, " Iniciar Sesi\u00F3n ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](20, "button", 14);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function LoginComponent_Template_button_click_20_listener() {
             return ctx.navigateToRegister();
           });
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](21, " Registrarse ");
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()()()()()()();
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](21, " Registrarse ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](22, LoginComponent_div_22_Template, 2, 1, "div", 15);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()()()();
         }
         if (rf & 2) {
-          const _r0 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵreference"](9);
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](13);
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx.username);
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx.password);
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", !_r0.form.valid);
+          const _r0 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵreference"](9);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](13);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngModel", ctx.username);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](4);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngModel", ctx.password);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("disabled", !_r0.form.valid);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](4);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ctx.errorMessage);
         }
       },
-      dependencies: [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["ɵNgNoValidate"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_3__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_3__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_3__.RequiredValidator, _angular_forms__WEBPACK_IMPORTED_MODULE_3__.NgModel, _angular_forms__WEBPACK_IMPORTED_MODULE_3__.NgForm],
+      dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_3__.NgIf, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["ɵNgNoValidate"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_4__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_4__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_4__.RequiredValidator, _angular_forms__WEBPACK_IMPORTED_MODULE_4__.NgModel, _angular_forms__WEBPACK_IMPORTED_MODULE_4__.NgForm],
       styles: ["\n\n.login-container[_ngcontent-%COMP%] {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    height: 100vh; \n\n    background-color: #f8f9fa; \n\n  }\n  \n  .login-card[_ngcontent-%COMP%] {\n    width: 100%;\n    max-width: 400px; \n\n    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); \n\n    border: none; \n\n  }\n  \n  .login-card-header[_ngcontent-%COMP%] {\n    background-color: #007bff; \n\n    color: white;\n    text-align: center;\n  }\n  \n  .login-btn[_ngcontent-%COMP%] {\n    width: 100%; \n\n  }\n  \n  .login-footer[_ngcontent-%COMP%] {\n    text-align: center;\n    margin-top: 15px;\n  }\n  \n  .login-footer[_ngcontent-%COMP%]   a[_ngcontent-%COMP%] {\n    color: #007bff; \n\n    text-decoration: none;\n  }\n  body[_ngcontent-%COMP%] {\n    background-color: #f8f9fa; \n\n  }\n  \n  .card[_ngcontent-%COMP%] {\n    border-radius: 10px; \n\n  }\n  \n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3NyYy9hcHAvbG9naW4vbG9naW4uY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxtQ0FBbUM7QUFDbkM7SUFDSSxhQUFhO0lBQ2IsdUJBQXVCO0lBQ3ZCLG1CQUFtQjtJQUNuQixhQUFhLEVBQUUsdUNBQXVDO0lBQ3RELHlCQUF5QixFQUFFLHlCQUF5QjtFQUN0RDs7RUFFQTtJQUNFLFdBQVc7SUFDWCxnQkFBZ0IsRUFBRSxnQ0FBZ0M7SUFDbEQsd0NBQXdDLEVBQUUsb0NBQW9DO0lBQzlFLFlBQVksRUFBRSw0QkFBNEI7RUFDNUM7O0VBRUE7SUFDRSx5QkFBeUIsRUFBRSxvQkFBb0I7SUFDL0MsWUFBWTtJQUNaLGtCQUFrQjtFQUNwQjs7RUFFQTtJQUNFLFdBQVcsRUFBRSw4QkFBOEI7RUFDN0M7O0VBRUE7SUFDRSxrQkFBa0I7SUFDbEIsZ0JBQWdCO0VBQ2xCOztFQUVBO0lBQ0UsY0FBYyxFQUFFLHlCQUF5QjtJQUN6QyxxQkFBcUI7RUFDdkI7RUFDQTtJQUNFLHlCQUF5QixFQUFFLGdCQUFnQjtFQUM3Qzs7RUFFQTtJQUNFLG1CQUFtQixFQUFFLHVCQUF1QjtFQUM5QyIsInNvdXJjZXNDb250ZW50IjpbIi8qIENlbnRyYXIgZWwgZm9ybXVsYXJpbyBkZSBsb2dpbiAqL1xyXG4ubG9naW4tY29udGFpbmVyIHtcclxuICAgIGRpc3BsYXk6IGZsZXg7XHJcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcclxuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XHJcbiAgICBoZWlnaHQ6IDEwMHZoOyAvKiBPY3VwYSB0b2RhIGxhIGFsdHVyYSBkZSBsYSB2ZW50YW5hICovXHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjZjhmOWZhOyAvKiBDb2xvciBkZSBmb25kbyBjbGFybyAqL1xyXG4gIH1cclxuICBcclxuICAubG9naW4tY2FyZCB7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIG1heC13aWR0aDogNDAwcHg7IC8qIEFuY2hvIG3Dg8KheGltbyBkZWwgZm9ybXVsYXJpbyAqL1xyXG4gICAgYm94LXNoYWRvdzogMCA0cHggNnB4IHJnYmEoMCwgMCwgMCwgMC4xKTsgLyogU29tYnJhIHN1dGlsIHBhcmEgZWwgZm9ybXVsYXJpbyAqL1xyXG4gICAgYm9yZGVyOiBub25lOyAvKiBTaW4gYm9yZGVzIHBhcmEgZWwgY2FyZCAqL1xyXG4gIH1cclxuICBcclxuICAubG9naW4tY2FyZC1oZWFkZXIge1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzAwN2JmZjsgLyogQ29sb3IgcHJpbmNpcGFsICovXHJcbiAgICBjb2xvcjogd2hpdGU7XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgfVxyXG4gIFxyXG4gIC5sb2dpbi1idG4ge1xyXG4gICAgd2lkdGg6IDEwMCU7IC8qIEJvdMODwrNuIG9jdXBhIHRvZG8gZWwgYW5jaG8gKi9cclxuICB9XHJcbiAgXHJcbiAgLmxvZ2luLWZvb3RlciB7XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgICBtYXJnaW4tdG9wOiAxNXB4O1xyXG4gIH1cclxuICBcclxuICAubG9naW4tZm9vdGVyIGEge1xyXG4gICAgY29sb3I6ICMwMDdiZmY7IC8qIENvbG9yIGRlIGxvcyBlbmxhY2VzICovXHJcbiAgICB0ZXh0LWRlY29yYXRpb246IG5vbmU7XHJcbiAgfVxyXG4gIGJvZHkge1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogI2Y4ZjlmYTsgLyogRm9uZG8gY2xhcm8gKi9cclxuICB9XHJcbiAgXHJcbiAgLmNhcmQge1xyXG4gICAgYm9yZGVyLXJhZGl1czogMTBweDsgLyogQm9yZGVzIHJlZG9uZGVhZG9zICovXHJcbiAgfVxyXG4gICJdLCJzb3VyY2VSb290IjoiIn0= */"]
     });
   }
@@ -818,47 +838,75 @@ class ApiService {
   }
   // ** Equipos **
   getTeams() {
-    return this.http.get(`${this.baseUrl}/teams`).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_0__.map)(response => Array.isArray(response) ? response : []), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(error => {
+    return this.http.get(`${this.baseUrl}/teams`, {
+      withCredentials: true
+    }).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_0__.map)(response => Array.isArray(response) ? response : []), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(error => {
       console.error('Error al obtener equipos:', error);
       return (0,rxjs__WEBPACK_IMPORTED_MODULE_2__.of)([]); // Retorna un array vacío en caso de error
     }));
   }
 
   createTeam(team) {
-    return this.http.post(`${this.baseUrl}/teams`, team);
+    return this.http.post(`${this.baseUrl}/teams`, team, {
+      withCredentials: true
+    });
   }
   updateTeam(id, team) {
-    return this.http.put(`${this.baseUrl}/teams/${id}`, team);
+    return this.http.put(`${this.baseUrl}/teams/${id}`, team, {
+      withCredentials: true
+    });
   }
   deleteTeam(id) {
-    return this.http.delete(`${this.baseUrl}/teams/${id}`);
+    return this.http.delete(`${this.baseUrl}/teams/${id}`, {
+      withCredentials: true
+    });
   }
   // ** Jugadores **
   getPlayers() {
-    return this.http.get(`${this.baseUrl}/players`).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_0__.map)(response => Array.isArray(response) ? response : []), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(error => {
+    return this.http.get(`${this.baseUrl}/players`, {
+      withCredentials: true
+    }).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_0__.map)(response => Array.isArray(response) ? response : []), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(error => {
       console.error('Error al obtener jugadores:', error);
       return (0,rxjs__WEBPACK_IMPORTED_MODULE_2__.of)([]); // Retorna un array vacío en caso de error
     }));
   }
 
   createPlayer(player) {
-    return this.http.post(`${this.baseUrl}/players`, player);
+    return this.http.post(`${this.baseUrl}/players`, player, {
+      withCredentials: true
+    });
   }
   updatePlayer(id, player) {
-    return this.http.put(`${this.baseUrl}/players/${id}`, player);
+    return this.http.put(`${this.baseUrl}/players/${id}`, player, {
+      withCredentials: true
+    });
   }
   deletePlayer(id) {
-    return this.http.delete(`${this.baseUrl}/players/${id}`);
+    return this.http.delete(`${this.baseUrl}/players/${id}`, {
+      withCredentials: true
+    });
   }
   registerUser(user) {
-    return this.http.post(`${this.baseUrl}/auth/register`, user);
+    return this.http.post(`${this.baseUrl}/auth/register`, user).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(error => {
+      console.error('Error al registrar usuario:', error);
+      return (0,rxjs__WEBPACK_IMPORTED_MODULE_2__.of)(error.error); // Devolver el error para manejarlo en el frontend
+    }));
   }
+  // ** Login (sin JWT) ** 
   login(username, password) {
     const body = {
       username,
       password
     };
-    return this.http.post(`${this.baseUrl}/api/auth/login`, body);
+    return this.http.post(`${this.baseUrl}/auth/login`, body, {
+      withCredentials: true
+    });
+  }
+  // ** Logout **
+  logout() {
+    return this.http.post(`${this.baseUrl}/auth/logout`, {}, {
+      withCredentials: true
+    });
   }
   static {
     this.ɵfac = function ApiService_Factory(t) {
