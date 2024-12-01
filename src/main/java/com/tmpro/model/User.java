@@ -17,7 +17,6 @@ public class User {
     private String password;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "name")
     private Role role; // Relación con la entidad Role
 
     public User(String username, String password, Optional<Role> role) {
