@@ -26,8 +26,9 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User user) {
         try {
+            // Ya no autenticamos con JWT, solo devolvemos el usuario autenticado
             User authenticatedUser = authService.login(user.getUsername(), user.getPassword());
-            return ResponseEntity.ok(authenticatedUser);
+            return ResponseEntity.ok(authenticatedUser); // Solo retornamos el usuario
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
