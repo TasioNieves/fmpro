@@ -19,6 +19,7 @@ import java.util.List;
         public List<Role> findAll() {
             return roleRepository.findAll();
         }
+
     }
 
 
