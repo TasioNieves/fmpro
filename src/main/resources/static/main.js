@@ -408,9 +408,8 @@ class LoginComponent {
   }
   // Método para navegar a la página de registro
   navigateToRegister() {
-    this.router.navigate(['/register']); // Ajusta la ruta según tu configuración
+    this.router.navigate(['/register']);
   }
-
   static {
     this.ɵfac = function LoginComponent_Factory(t) {
       return new (t || LoginComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_services_api_service__WEBPACK_IMPORTED_MODULE_0__.ApiService), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__.Router));
@@ -726,7 +725,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function RegisterComponent_option_15_Template(rf, ctx) {
   if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "option", 13);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "option", 11);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
   }
@@ -787,9 +786,9 @@ class RegisterComponent {
     this.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({
       type: RegisterComponent,
       selectors: [["app-register"]],
-      decls: 22,
+      decls: 18,
       vars: 2,
-      consts: [[3, "formGroup", "ngSubmit"], [1, "form-group"], ["for", "username"], ["id", "username", "formControlName", "username", 1, "form-control"], ["for", "password"], ["id", "password", "type", "password", "formControlName", "password", 1, "form-control"], ["for", "role"], ["id", "role", "formControlName", "role", 1, "form-control"], ["value", ""], [3, "value", 4, "ngFor", "ngForOf"], ["for", "name"], ["id", "name", "formControlName", "name", 1, "form-control"], ["type", "submit", 1, "btn", "btn-primary"], [3, "value"]],
+      consts: [[3, "formGroup", "ngSubmit"], [1, "form-group"], ["for", "username"], ["id", "username", "formControlName", "username", 1, "form-control"], ["for", "password"], ["id", "password", "type", "password", "formControlName", "password", 1, "form-control"], ["for", "role"], ["id", "role", "formControlName", "role", 1, "form-control"], ["value", ""], [3, "value", 4, "ngFor", "ngForOf"], ["type", "submit", 1, "btn", "btn-primary"], [3, "value"]],
       template: function RegisterComponent_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "form", 0);
@@ -814,13 +813,8 @@ class RegisterComponent {
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](15, RegisterComponent_option_15_Template, 2, 2, "option", 9);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](16, "div", 1)(17, "label", 10);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](18, "Name:");
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](19, "input", 11);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](20, "button", 12);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](21, "Register");
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](16, "button", 10);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](17, "Register");
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
         }
         if (rf & 2) {
