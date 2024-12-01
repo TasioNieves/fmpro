@@ -54,7 +54,7 @@ public class User {
     }
 
     public String getRole() {
-        return role;
+        return role.getName();
     }
 
     public void setRole(Role role) {
