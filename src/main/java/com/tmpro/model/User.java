@@ -1,6 +1,8 @@
 package com.tmpro.model;
 
 import jakarta.persistence.*;
+
+import java.util.Optional;
 import java.util.Set;
 
 @Entity
@@ -18,6 +20,13 @@ public class User {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id")
     private Role role; // Relación con la entidad Role
+
+    public User(String username, String password, Optional<Role> role) {
+    }
+
+    public User() {
+
+    }
 
     // Getters y Setters
 

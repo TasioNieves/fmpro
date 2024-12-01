@@ -718,9 +718,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ 4456);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 7580);
 /* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../services/api.service */ 3366);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 5072);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ 316);
-
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ 316);
 
 
 
@@ -740,56 +738,49 @@ function RegisterComponent_option_15_Template(rf, ctx) {
   }
 }
 class RegisterComponent {
-  constructor(fb, apiService, router) {
+  constructor(fb, apiService) {
     this.fb = fb;
     this.apiService = apiService;
-    this.router = router;
-    this.roles = []; // Para almacenar los roles
+    this.roles = [];
   }
-
   ngOnInit() {
-    this.initForm();
-    this.getRoles(); // Llamamos a la función para obtener los roles
-  }
-
-  initForm() {
     this.registerForm = this.fb.group({
-      username: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
-      password: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
-      role: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required] // El campo role es requerido
+      username: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required]],
+      password: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required]],
+      role: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required]] // Asegúrate de que el campo 'role' sea obligatorio
     });
+
+    this.getRoles(); // Obtén los roles cuando se inicialice el componente
   }
 
   getRoles() {
     this.apiService.getRoles().subscribe(data => {
-      console.log('Roles obtenidos:', data); // Verifica qué datos devuelve la API
-      this.roles = data; // Asigna los roles obtenidos a la propiedad 'roles'
+      console.log('Roles obtenidos:', data);
+      this.roles = data; // Asigna los roles a la propiedad 'roles'
     }, error => {
       console.error('Error al obtener roles:', error);
     });
   }
   onSubmit() {
     if (this.registerForm.valid) {
-      const formData = this.registerForm.value;
-      console.log('Datos enviados:', formData);
-      // Realizamos la petición al servicio para registrar el usuario
-      this.apiService.registerUser({
-        username: formData.username,
-        password: formData.password,
-        role: formData.role // Aquí se enviará el nombre del rol (Admin, User, Trainer)
-      }).subscribe(response => {
-        console.log('Usuario registrado con éxito:', response);
-        this.router.navigate(['/login']); // Redirige a la página de login
+      const formValues = this.registerForm.value;
+      const user = {
+        username: formValues.username,
+        password: formValues.password,
+        role: formValues.role // El nombre del rol se obtiene aquí
+      };
+
+      this.apiService.registerUser(user).subscribe(response => {
+        console.log('Usuario registrado:', response);
+        // Aquí puedes manejar la respuesta después de registrar al usuario
       }, error => {
         console.error('Error al registrar usuario:', error);
       });
-    } else {
-      console.error('Formulario inválido');
     }
   }
   static {
     this.ɵfac = function RegisterComponent_Factory(t) {
-      return new (t || RegisterComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormBuilder), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_services_api_service__WEBPACK_IMPORTED_MODULE_0__.ApiService), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_3__.Router));
+      return new (t || RegisterComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormBuilder), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_services_api_service__WEBPACK_IMPORTED_MODULE_0__.ApiService));
     };
   }
   static {
@@ -833,7 +824,7 @@ class RegisterComponent {
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngForOf", ctx.roles);
         }
       },
-      dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_4__.NgForOf, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ɵNgNoValidate"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgSelectOption, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ɵNgSelectMultipleOption"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.SelectControlValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormGroupDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControlName],
+      dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_3__.NgForOf, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ɵNgNoValidate"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgSelectOption, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ɵNgSelectMultipleOption"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.SelectControlValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormGroupDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControlName],
       styles: ["\n\n.login-container[_ngcontent-%COMP%] {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    height: 100vh; \n\n    background-color: #f8f9fa; \n\n  }\n  \n  .login-card[_ngcontent-%COMP%] {\n    width: 100%;\n    max-width: 400px; \n\n    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); \n\n    border: none; \n\n  }\n  \n  .login-card-header[_ngcontent-%COMP%] {\n    background-color: #007bff; \n\n    color: white;\n    text-align: center;\n  }\n  \n  .login-btn[_ngcontent-%COMP%] {\n    width: 100%; \n\n  }\n  \n  .login-footer[_ngcontent-%COMP%] {\n    text-align: center;\n    margin-top: 15px;\n  }\n  \n  .login-footer[_ngcontent-%COMP%]   a[_ngcontent-%COMP%] {\n    color: #007bff; \n\n    text-decoration: none;\n  }\n  \n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3NyYy9hcHAvcmVnaXN0ZXIvcmVnaXN0ZXIuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxtQ0FBbUM7QUFDbkM7SUFDSSxhQUFhO0lBQ2IsdUJBQXVCO0lBQ3ZCLG1CQUFtQjtJQUNuQixhQUFhLEVBQUUsdUNBQXVDO0lBQ3RELHlCQUF5QixFQUFFLHlCQUF5QjtFQUN0RDs7RUFFQTtJQUNFLFdBQVc7SUFDWCxnQkFBZ0IsRUFBRSxnQ0FBZ0M7SUFDbEQsd0NBQXdDLEVBQUUsb0NBQW9DO0lBQzlFLFlBQVksRUFBRSw0QkFBNEI7RUFDNUM7O0VBRUE7SUFDRSx5QkFBeUIsRUFBRSxvQkFBb0I7SUFDL0MsWUFBWTtJQUNaLGtCQUFrQjtFQUNwQjs7RUFFQTtJQUNFLFdBQVcsRUFBRSw4QkFBOEI7RUFDN0M7O0VBRUE7SUFDRSxrQkFBa0I7SUFDbEIsZ0JBQWdCO0VBQ2xCOztFQUVBO0lBQ0UsY0FBYyxFQUFFLHlCQUF5QjtJQUN6QyxxQkFBcUI7RUFDdkIiLCJzb3VyY2VzQ29udGVudCI6WyIvKiBDZW50cmFyIGVsIGZvcm11bGFyaW8gZGUgbG9naW4gKi9cclxuLmxvZ2luLWNvbnRhaW5lciB7XHJcbiAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XHJcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xyXG4gICAgaGVpZ2h0OiAxMDB2aDsgLyogT2N1cGEgdG9kYSBsYSBhbHR1cmEgZGUgbGEgdmVudGFuYSAqL1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogI2Y4ZjlmYTsgLyogQ29sb3IgZGUgZm9uZG8gY2xhcm8gKi9cclxuICB9XHJcbiAgXHJcbiAgLmxvZ2luLWNhcmQge1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbiAgICBtYXgtd2lkdGg6IDQwMHB4OyAvKiBBbmNobyBtw4PCoXhpbW8gZGVsIGZvcm11bGFyaW8gKi9cclxuICAgIGJveC1zaGFkb3c6IDAgNHB4IDZweCByZ2JhKDAsIDAsIDAsIDAuMSk7IC8qIFNvbWJyYSBzdXRpbCBwYXJhIGVsIGZvcm11bGFyaW8gKi9cclxuICAgIGJvcmRlcjogbm9uZTsgLyogU2luIGJvcmRlcyBwYXJhIGVsIGNhcmQgKi9cclxuICB9XHJcbiAgXHJcbiAgLmxvZ2luLWNhcmQtaGVhZGVyIHtcclxuICAgIGJhY2tncm91bmQtY29sb3I6ICMwMDdiZmY7IC8qIENvbG9yIHByaW5jaXBhbCAqL1xyXG4gICAgY29sb3I6IHdoaXRlO1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gIH1cclxuICBcclxuICAubG9naW4tYnRuIHtcclxuICAgIHdpZHRoOiAxMDAlOyAvKiBCb3TDg8KzbiBvY3VwYSB0b2RvIGVsIGFuY2hvICovXHJcbiAgfVxyXG4gIFxyXG4gIC5sb2dpbi1mb290ZXIge1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gICAgbWFyZ2luLXRvcDogMTVweDtcclxuICB9XHJcbiAgXHJcbiAgLmxvZ2luLWZvb3RlciBhIHtcclxuICAgIGNvbG9yOiAjMDA3YmZmOyAvKiBDb2xvciBkZSBsb3MgZW5sYWNlcyAqL1xyXG4gICAgdGV4dC1kZWNvcmF0aW9uOiBub25lO1xyXG4gIH1cclxuICAiXSwic291cmNlUm9vdCI6IiJ9 */"]
     });
   }
