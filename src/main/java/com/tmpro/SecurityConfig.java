@@ -24,8 +24,7 @@ public class SecurityConfig {
         http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Configurar CORS
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/","/index.html", "/static/**").permitAll()
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 )
                 .csrf(AbstractHttpConfigurer::disable); // Deshabilitar CSRF si es necesario
 
