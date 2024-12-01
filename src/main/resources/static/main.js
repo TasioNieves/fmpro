@@ -909,7 +909,7 @@ class ApiService {
   }
   // ** Roles **
   getRoles() {
-    return this.http.get('/api/roles').pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(error => {
+    return this.http.get(`${this.baseUrl}/roles`).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(error => {
       console.error('Error al obtener roles:', error);
       return (0,rxjs__WEBPACK_IMPORTED_MODULE_2__.of)([]); // Retorna un array vacío en caso de error
     }));
