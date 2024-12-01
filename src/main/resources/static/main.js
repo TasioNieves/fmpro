@@ -787,8 +787,8 @@ class RegisterComponent {
       type: RegisterComponent,
       selectors: [["app-register"]],
       decls: 18,
-      vars: 3,
-      consts: [[3, "formGroup", "ngSubmit"], [1, "mb-3"], ["for", "username", 1, "form-label"], ["id", "username", "formControlName", "username", "placeholder", "Enter your username", 1, "form-control"], ["for", "password", 1, "form-label"], ["id", "password", "type", "password", "formControlName", "password", "placeholder", "Enter your password", 1, "form-control"], ["for", "role", 1, "form-label"], ["id", "role", "formControlName", "role", 1, "form-select"], ["value", "", "disabled", "", "selected", ""], [3, "value", 4, "ngFor", "ngForOf"], ["type", "submit", 1, "btn", "btn-primary", 3, "disabled"], [3, "value"]],
+      vars: 2,
+      consts: [[3, "formGroup", "ngSubmit"], [1, "form-group"], ["for", "username"], ["id", "username", "formControlName", "username", 1, "form-control"], ["for", "password"], ["id", "password", "type", "password", "formControlName", "password", 1, "form-control"], ["for", "role"], ["id", "role", "formControlName", "role", 1, "form-control"], ["value", ""], [3, "value", 4, "ngFor", "ngForOf"], ["type", "submit", 1, "btn", "btn-primary"], [3, "value"]],
       template: function RegisterComponent_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "form", 0);
@@ -809,20 +809,18 @@ class RegisterComponent {
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](11, "Role:");
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](12, "select", 7)(13, "option", 8);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](14, "Select a role");
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](14, "Seleccione un rol");
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](15, RegisterComponent_option_15_Template, 2, 2, "option", 9);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](16, "button", 10);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](17, " Register ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](17, "Register");
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
         }
         if (rf & 2) {
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("formGroup", ctx.registerForm);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](15);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngForOf", ctx.roles);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("disabled", ctx.registerForm.invalid);
         }
       },
       dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_3__.NgForOf, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ɵNgNoValidate"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgSelectOption, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ɵNgSelectMultipleOption"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.SelectControlValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormGroupDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControlName],
