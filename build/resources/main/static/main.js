@@ -145,7 +145,7 @@ class AppModule {
         component: _login_login_component__WEBPACK_IMPORTED_MODULE_5__.LoginComponent
       }, {
         path: '',
-        redirectTo: '/dashboard',
+        redirectTo: '/login',
         pathMatch: 'full'
       }])]
     });
