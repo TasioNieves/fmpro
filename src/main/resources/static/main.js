@@ -1046,9 +1046,7 @@ class ApiService {
       username,
       password
     }; // Asegúrate de que la API reciba estos campos correctamente
-    return this.http.post(`${this.baseUrl}/auth/login`, body, {
-      withCredentials: true
-    });
+    return this.http.post(`${this.baseUrl}/auth/login`, body);
   }
   // ** Logout **
   logout() {
