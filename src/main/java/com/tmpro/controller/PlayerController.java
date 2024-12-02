@@ -10,10 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping("api/players")
@@ -60,12 +57,41 @@ public class PlayerController {
         return player;
     };
 
+    private PlayerDTO disconverter(Player player){
+
+        PlayerDTO playerDTO = new PlayerDTO();
+
+        playerDTO.setName(player.getName());
+        playerDTO.setDorsal(player.getDorsal());
+        playerDTO.setPosition(player.getPosition());
+        playerDTO.setTeam_id(player.getTeam().getId()+"");
+
+        return playerDTO;
+    };
+
+    private List<PlayerDTO> ConvertirLista (List<Player> players){
+
+        List<PlayerDTO> listPlayer = new ArrayList<>();
+
+        players.forEach(player -> {
+
+            PlayerDTO playerDTO = disconverter(player);
+            listPlayer.add(playerDTO);
+
+
+        });
+
+        return listPlayer;
+
+    }
 
     // Obtener todos los jugadores (opcional)
     @GetMapping
-    public ResponseEntity<List<Player>> getAllPlayers() {
+    public ResponseEntity<List<PlayerDTO>> getAllPlayers() {
+
         List<Player> players = playerService.getAllPlayers();
-        return ResponseEntity.ok(players);  // Devuelve la lista de jugadores
+
+        return ResponseEntity.ok(ConvertirLista(players));  // Devuelve la lista de jugadores
     }
 
     // Obtener un jugador por su ID (opcional)
