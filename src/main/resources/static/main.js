@@ -774,20 +774,16 @@ class RegisterComponent {
 
   onSubmit() {
     if (this.registerForm.valid) {
-      const selectedRole = this.roles.find(role => role.id === this.registerForm.value.role);
-      // Construir el objeto del usuario con los campos role_id y role_name separados
-      const user = {
-        username: this.registerForm.value.username,
-        password: this.registerForm.value.password,
-        role: selectedRole?.name,
-        role_id: selectedRole?.id // Enviar solo el id
-      };
-
+      const user = this.registerForm.value;
+      console.log('Formulario válido. Registrando usuario:', user);
       this.apiService.registerUser(user).subscribe(response => {
-        console.log('Usuario registrado:', response);
+        console.log('Usuario registrado con éxito:', response);
+        // Redirigir o manejar la respuesta del backend
       }, error => {
         console.error('Error al registrar usuario:', error);
       });
+    } else {
+      console.error('Formulario no válido');
     }
   }
   static {
