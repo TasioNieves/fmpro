@@ -7,28 +7,21 @@ import java.util.List;
 public class PlayerDTO {
 
 
-    private Long id;
+
     private String name;  // Clave primaria
 
     private String position;
     private String dorsal;
 
 
-    private int team_id;
+    private String team_id;
 
 
-    private List<Statistic> statistics; // Relación con Statistic
 
     // Getters y Setters
 
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -54,7 +47,7 @@ public class PlayerDTO {
         this.dorsal = dorsal;
     }
 
-    public int getTeam() {
+    public String getTeam() {
         return team_id;
     }
 
@@ -62,11 +55,4 @@ public class PlayerDTO {
         this.team_id = team_id;
     }
 
-    public List<Statistic> getStatistics() {
-        return statistics;
-    }
-
-    public void setStatistics(List<Statistic> statistics) {
-        this.statistics = statistics;
-    }
 }

@@ -34,7 +34,7 @@ public class PlayerController {
         player.setDorsal(playerDTO.getDorsal());
         player.setPosition(playerDTO.getPosition());
         Team team = new Team();
-        team.setId((long)playerDTO.getTeam());
+        team.setId(Long.parseLong(playerDTO.getTeam()));
         player.setTeam(team);
 
         return player;
