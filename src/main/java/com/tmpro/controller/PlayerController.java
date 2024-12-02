@@ -5,6 +5,7 @@ import com.tmpro.model.PlayerDTO;
 import com.tmpro.model.Team;
 import com.tmpro.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,10 +22,15 @@ public class PlayerController {
     // Crear un nuevo jugador
     @PostMapping
     public ResponseEntity<Player> createPlayer(@RequestBody PlayerDTO playerDTO) {
-
-        Player newPlayer = playerService.createPlayer(converter(playerDTO));
-        return ResponseEntity.ok(newPlayer);  // Devuelve el jugador creado
+        try {
+            Player newPlayer = playerService.createPlayer(converter(playerDTO));
+            return ResponseEntity.ok(newPlayer);  // Devuelve el jugador creado
+        } catch (Exception e) {
+            e.printStackTrace();  // Imprime la pila de la excepción
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); // Devuelve un error 500
+        }
     }
+
 
     private Player converter(PlayerDTO playerDTO){
 
