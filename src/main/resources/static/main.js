@@ -557,7 +557,7 @@ function PlayerComponent_div_29_li_4_Template(rf, ctx) {
   if (rf & 2) {
     const player_r6 = ctx.$implicit;
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate4"](" ", player_r6.name, " - ", player_r6.position, " - ", player_r6.dorsal, " - ", player_r6.team.name, " ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate4"](" ", player_r6.name, " - ", player_r6.position, " - ", player_r6.dorsal, " - ", player_r6.team_id, " ");
   }
 }
 function PlayerComponent_div_29_Template(rf, ctx) {
@@ -597,6 +597,7 @@ class PlayerComponent {
   loadPlayers() {
     this.apiService.getPlayers().subscribe(players => {
       this.players = players;
+      console.log(players);
     });
   }
   loadTeams() {
