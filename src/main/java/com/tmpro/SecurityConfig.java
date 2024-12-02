@@ -34,7 +34,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("https://tmpro-5265168c0988.herokuapp.com/")); // Cambia según tus necesidades
+        configuration.setAllowedOrigins(List.of("https://tmpro-5265168c0988.herokuapp.com/api")); // Cambia según tus necesidades
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
