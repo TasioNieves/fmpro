@@ -30,7 +30,7 @@ const _c2 = function () {
   return ["/player"];
 };
 const _c3 = function () {
-  return ["/statistics"];
+  return ["/statistic"];
 };
 function AppComponent_nav_1_Template(rf, ctx) {
   if (rf & 1) {
