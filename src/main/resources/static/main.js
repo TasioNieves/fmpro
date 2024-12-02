@@ -423,10 +423,10 @@ class LoginComponent {
   }
   onSubmit() {
     const {
-      username,
-      password
+      password,
+      username
     } = this.loginForm.value;
-    this.apiService.login(username, password).subscribe(response => {
+    this.apiService.login(password, username).subscribe(response => {
       if (response) {
         console.log('Inicio de sesión exitoso:', response);
         this.router.navigate(['/dashboard']); // Redirigir a Dashboard
