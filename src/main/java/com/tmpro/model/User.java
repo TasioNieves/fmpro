@@ -4,30 +4,29 @@ import jakarta.persistence.*;
 
 import java.util.Optional;
 
+
+
 @Entity
-@Table(name = "users")
+@Table(name = "users") // Asegúrate de que coincide con tu tabla en la base de datos
 public class User {
+
+
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, unique = true)
     private String username;
 
+    @Column(nullable = false)
     private String password;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Role role; // Relación con la entidad Role
-
-    public User(String username, String password, Optional<Role> role) {
-    }
-
-    public User() {
-
-    }
+    @Column(name = "role_id", nullable = false)
+    private Long roleId;
 
     // Getters y Setters
-
     public Long getId() {
         return id;
     }
@@ -52,11 +51,11 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
-        return role.getName();
+    public Long getRole() {
+        return roleId;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRole(Long roleId) {
+        this.roleId = roleId;
     }
 }

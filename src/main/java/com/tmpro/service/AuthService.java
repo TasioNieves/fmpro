@@ -25,18 +25,17 @@ public class AuthService {
      *
      * @param username Nombre de usuario.
      * @param password Contraseña.
-     * @param roleName Nombre del rol (por ejemplo, "Admin", "User").
      * @return Usuario registrado.
      */
-    public User register(String username, String password, String roleName) {
+    public User register(String username, String password, Long roleId) {
         // Verificar si el usuario ya existe
         if (userRepository.findByUsername(username).isPresent()) {
             throw new IllegalArgumentException("El nombre de usuario ya está en uso.");
         }
 
         // Buscar el rol por nombre
-        Role role = roleRepository.findByName(roleName)
-                .orElseThrow(() -> new IllegalArgumentException("No se encontró el rol: " + roleName));
+        Role role = roleRepository.findById(roleId)
+                .orElseThrow(() -> new IllegalArgumentException("No se encontró el rol: " + roleId));
 
         // Codificar la contraseña
         String encodedPassword = passwordEncoder.encode(password);
@@ -45,7 +44,7 @@ public class AuthService {
         User user = new User();
         user.setUsername(username);
         user.setPassword(encodedPassword);
-        user.setRole(role);
+        user.setRole(role.getId());
 
         // Guardar el usuario en la base de datos
         return userRepository.save(user);

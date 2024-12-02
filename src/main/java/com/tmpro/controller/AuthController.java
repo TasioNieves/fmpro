@@ -1,12 +1,16 @@
 package com.tmpro.controller;
 
 import com.tmpro.model.Role;
-import com.tmpro.model.UserDto;
+
 import com.tmpro.model.User;
+import com.tmpro.model.UserRequest;
+import com.tmpro.model.UserResponse;
 import com.tmpro.repository.RoleRepository;
 import com.tmpro.repository.UserRepository;
 import com.tmpro.service.AuthService;
+import com.tmpro.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,25 +28,15 @@ public class AuthController {
 
     @Autowired
     private UserRepository userRepository;
-    /**
-     * Endpoint para registrar un nuevo usuario.
-     *
-     * @param userDto Contiene el nombre de usuario, la contraseña y el rol.
-     * @return El usuario registrado.
-     */
+
+    @Autowired
+    private UserService userService;
+
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody User userDTO) {
-        // Obtener el rol por nombre
-        Optional<Role> role = roleRepository.findByName(userDTO.getRole());
-        if (role == null) {
-            return ResponseEntity.badRequest().body("El rol no existe");
-        }
+    public ResponseEntity<UserResponse> register(@RequestBody UserRequest userRequest) {
 
-        // Crear el nuevo usuario con el rol encontrado
-        User user = new User(userDTO.getUsername(), userDTO.getPassword(), role);
-        userRepository.save(user);
-
-        return ResponseEntity.ok("Usuario registrado con éxito");
+        UserResponse userResponse = userService.registerUser(userRequest);
+        return new ResponseEntity<>(userResponse, HttpStatus.CREATED);
     }
 
 

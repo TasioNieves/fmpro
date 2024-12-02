@@ -408,9 +408,8 @@ class LoginComponent {
   }
   // Método para navegar a la página de registro
   navigateToRegister() {
-    this.router.navigate(['/register']); // Ajusta la ruta según tu configuración
+    this.router.navigate(['/register']);
   }
-
   static {
     this.ɵfac = function LoginComponent_Factory(t) {
       return new (t || LoginComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_services_api_service__WEBPACK_IMPORTED_MODULE_0__.ApiService), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__.Router));
@@ -724,17 +723,38 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function RegisterComponent_option_15_Template(rf, ctx) {
+function RegisterComponent_div_5_Template(rf, ctx) {
   if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "option", 11);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 12);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](1, " El nombre de usuario es obligatorio. ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+  }
+}
+function RegisterComponent_div_10_Template(rf, ctx) {
+  if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 12);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](1, " La contrase\u00F1a es obligatoria. ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+  }
+}
+function RegisterComponent_option_17_Template(rf, ctx) {
+  if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "option", 13);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
   }
   if (rf & 2) {
-    const role_r1 = ctx.$implicit;
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("value", role_r1.name);
+    const role_r4 = ctx.$implicit;
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("value", role_r4.id);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](role_r1.name);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](role_r4.name);
+  }
+}
+function RegisterComponent_div_18_Template(rf, ctx) {
+  if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 12);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](1, " Debes seleccionar un rol. ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
   }
 }
 class RegisterComponent {
@@ -745,8 +765,8 @@ class RegisterComponent {
   }
   ngOnInit() {
     this.registerForm = this.fb.group({
-      username: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required]],
       password: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required]],
+      username: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required]],
       role: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required]] // Asegúrate de que el campo 'role' sea obligatorio
     });
 
@@ -761,21 +781,32 @@ class RegisterComponent {
       console.error('Error al obtener roles:', error);
     });
   }
+  onRoleChange(event) {
+    const selectedRoleId = event.target.value;
+    const selectedRole = this.roles.find(role => role.id == selectedRoleId);
+    // Asegúrate de que se ha encontrado un rol válido
+    if (selectedRole) {
+      this.registerForm.patchValue({
+        role_id: selectedRole.id,
+        role_name: selectedRole.name // Setear el name si es necesario
+      });
+    }
+  }
+
   onSubmit() {
     if (this.registerForm.valid) {
-      const formValues = this.registerForm.value;
-      const user = {
-        username: formValues.username,
-        password: formValues.password,
-        role: formValues.role // El nombre del rol se obtiene aquí
-      };
-
+      const user = this.registerForm.value;
+      console.log('Formulario válido. Registrando usuario:', user);
+      // Si el backend espera el nombre del rol y no el ID, modifica esto:
+      user.role = this.roles.find(r => r.id === user.role)?.name; // Cambiar a nombre del rol
       this.apiService.registerUser(user).subscribe(response => {
-        console.log('Usuario registrado:', response);
-        // Aquí puedes manejar la respuesta después de registrar al usuario
+        console.log('Registro exitoso:', response);
+        // Realiza alguna acción después de un registro exitoso, como redirigir a otro lugar
       }, error => {
         console.error('Error al registrar usuario:', error);
       });
+    } else {
+      console.error('Formulario inválido');
     }
   }
   static {
@@ -787,9 +818,9 @@ class RegisterComponent {
     this.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({
       type: RegisterComponent,
       selectors: [["app-register"]],
-      decls: 18,
-      vars: 2,
-      consts: [[3, "formGroup", "ngSubmit"], [1, "form-group"], ["for", "username"], ["id", "username", "formControlName", "username", 1, "form-control"], ["for", "password"], ["id", "password", "type", "password", "formControlName", "password", 1, "form-control"], ["for", "role"], ["id", "role", "formControlName", "role", 1, "form-control"], ["value", ""], [3, "value", 4, "ngFor", "ngForOf"], ["type", "submit", 1, "btn", "btn-primary"], [3, "value"]],
+      decls: 21,
+      vars: 12,
+      consts: [[3, "formGroup", "ngSubmit"], [1, "form-group"], ["for", "username"], ["id", "username", "formControlName", "username", 1, "form-control"], ["class", "invalid-feedback", 4, "ngIf"], ["for", "password"], ["id", "password", "type", "password", "formControlName", "password", 1, "form-control"], ["for", "role"], ["id", "role", "formControlName", "role", 1, "form-control"], ["value", ""], [3, "value", 4, "ngFor", "ngForOf"], ["type", "submit", 1, "btn", "btn-primary", 3, "disabled"], [1, "invalid-feedback"], [3, "value"]],
       template: function RegisterComponent_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "form", 0);
@@ -800,31 +831,55 @@ class RegisterComponent {
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](3, "Username:");
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](4, "input", 3);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](5, RegisterComponent_div_5_Template, 2, 0, "div", 4);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](5, "div", 1)(6, "label", 4);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](7, "Password:");
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](6, "div", 1)(7, "label", 5);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](8, "Password:");
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](8, "input", 5);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](9, "input", 6);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](10, RegisterComponent_div_10_Template, 2, 0, "div", 4);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](9, "div", 1)(10, "label", 6);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](11, "Role:");
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](11, "div", 1)(12, "label", 7);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](13, "Role:");
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](12, "select", 7)(13, "option", 8);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](14, "Seleccione un rol");
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](14, "select", 8)(15, "option", 9);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](16, "Seleccione un rol");
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](15, RegisterComponent_option_15_Template, 2, 2, "option", 9);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](16, "button", 10);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](17, "Register");
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](17, RegisterComponent_option_17_Template, 2, 2, "option", 10);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](18, RegisterComponent_div_18_Template, 2, 0, "div", 4);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](19, "button", 11);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](20, "Register");
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
         }
         if (rf & 2) {
+          let tmp_1_0;
+          let tmp_2_0;
+          let tmp_3_0;
+          let tmp_4_0;
+          let tmp_5_0;
+          let tmp_7_0;
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("formGroup", ctx.registerForm);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](15);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](4);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵclassProp"]("is-invalid", ((tmp_1_0 = ctx.registerForm.get("username")) == null ? null : tmp_1_0.invalid) && ((tmp_1_0 = ctx.registerForm.get("username")) == null ? null : tmp_1_0.touched));
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ((tmp_2_0 = ctx.registerForm.get("username")) == null ? null : tmp_2_0.invalid) && ((tmp_2_0 = ctx.registerForm.get("username")) == null ? null : tmp_2_0.touched));
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](4);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵclassProp"]("is-invalid", ((tmp_3_0 = ctx.registerForm.get("password")) == null ? null : tmp_3_0.invalid) && ((tmp_3_0 = ctx.registerForm.get("password")) == null ? null : tmp_3_0.touched));
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ((tmp_4_0 = ctx.registerForm.get("password")) == null ? null : tmp_4_0.invalid) && ((tmp_4_0 = ctx.registerForm.get("password")) == null ? null : tmp_4_0.touched));
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](4);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵclassProp"]("is-invalid", ((tmp_5_0 = ctx.registerForm.get("role")) == null ? null : tmp_5_0.invalid) && ((tmp_5_0 = ctx.registerForm.get("role")) == null ? null : tmp_5_0.touched));
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](3);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngForOf", ctx.roles);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ((tmp_7_0 = ctx.registerForm.get("role")) == null ? null : tmp_7_0.invalid) && ((tmp_7_0 = ctx.registerForm.get("role")) == null ? null : tmp_7_0.touched));
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("disabled", ctx.registerForm.invalid);
         }
       },
-      dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_3__.NgForOf, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ɵNgNoValidate"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgSelectOption, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ɵNgSelectMultipleOption"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.SelectControlValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormGroupDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControlName],
+      dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_3__.NgForOf, _angular_common__WEBPACK_IMPORTED_MODULE_3__.NgIf, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ɵNgNoValidate"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgSelectOption, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ɵNgSelectMultipleOption"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.SelectControlValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormGroupDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControlName],
       styles: ["\n\n.login-container[_ngcontent-%COMP%] {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    height: 100vh; \n\n    background-color: #f8f9fa; \n\n  }\n  \n  .login-card[_ngcontent-%COMP%] {\n    width: 100%;\n    max-width: 400px; \n\n    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); \n\n    border: none; \n\n  }\n  \n  .login-card-header[_ngcontent-%COMP%] {\n    background-color: #007bff; \n\n    color: white;\n    text-align: center;\n  }\n  \n  .login-btn[_ngcontent-%COMP%] {\n    width: 100%; \n\n  }\n  \n  .login-footer[_ngcontent-%COMP%] {\n    text-align: center;\n    margin-top: 15px;\n  }\n  \n  .login-footer[_ngcontent-%COMP%]   a[_ngcontent-%COMP%] {\n    color: #007bff; \n\n    text-decoration: none;\n  }\n  \n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3NyYy9hcHAvcmVnaXN0ZXIvcmVnaXN0ZXIuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxtQ0FBbUM7QUFDbkM7SUFDSSxhQUFhO0lBQ2IsdUJBQXVCO0lBQ3ZCLG1CQUFtQjtJQUNuQixhQUFhLEVBQUUsdUNBQXVDO0lBQ3RELHlCQUF5QixFQUFFLHlCQUF5QjtFQUN0RDs7RUFFQTtJQUNFLFdBQVc7SUFDWCxnQkFBZ0IsRUFBRSxnQ0FBZ0M7SUFDbEQsd0NBQXdDLEVBQUUsb0NBQW9DO0lBQzlFLFlBQVksRUFBRSw0QkFBNEI7RUFDNUM7O0VBRUE7SUFDRSx5QkFBeUIsRUFBRSxvQkFBb0I7SUFDL0MsWUFBWTtJQUNaLGtCQUFrQjtFQUNwQjs7RUFFQTtJQUNFLFdBQVcsRUFBRSw4QkFBOEI7RUFDN0M7O0VBRUE7SUFDRSxrQkFBa0I7SUFDbEIsZ0JBQWdCO0VBQ2xCOztFQUVBO0lBQ0UsY0FBYyxFQUFFLHlCQUF5QjtJQUN6QyxxQkFBcUI7RUFDdkIiLCJzb3VyY2VzQ29udGVudCI6WyIvKiBDZW50cmFyIGVsIGZvcm11bGFyaW8gZGUgbG9naW4gKi9cclxuLmxvZ2luLWNvbnRhaW5lciB7XHJcbiAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XHJcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xyXG4gICAgaGVpZ2h0OiAxMDB2aDsgLyogT2N1cGEgdG9kYSBsYSBhbHR1cmEgZGUgbGEgdmVudGFuYSAqL1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogI2Y4ZjlmYTsgLyogQ29sb3IgZGUgZm9uZG8gY2xhcm8gKi9cclxuICB9XHJcbiAgXHJcbiAgLmxvZ2luLWNhcmQge1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbiAgICBtYXgtd2lkdGg6IDQwMHB4OyAvKiBBbmNobyBtw4PCoXhpbW8gZGVsIGZvcm11bGFyaW8gKi9cclxuICAgIGJveC1zaGFkb3c6IDAgNHB4IDZweCByZ2JhKDAsIDAsIDAsIDAuMSk7IC8qIFNvbWJyYSBzdXRpbCBwYXJhIGVsIGZvcm11bGFyaW8gKi9cclxuICAgIGJvcmRlcjogbm9uZTsgLyogU2luIGJvcmRlcyBwYXJhIGVsIGNhcmQgKi9cclxuICB9XHJcbiAgXHJcbiAgLmxvZ2luLWNhcmQtaGVhZGVyIHtcclxuICAgIGJhY2tncm91bmQtY29sb3I6ICMwMDdiZmY7IC8qIENvbG9yIHByaW5jaXBhbCAqL1xyXG4gICAgY29sb3I6IHdoaXRlO1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gIH1cclxuICBcclxuICAubG9naW4tYnRuIHtcclxuICAgIHdpZHRoOiAxMDAlOyAvKiBCb3TDg8KzbiBvY3VwYSB0b2RvIGVsIGFuY2hvICovXHJcbiAgfVxyXG4gIFxyXG4gIC5sb2dpbi1mb290ZXIge1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gICAgbWFyZ2luLXRvcDogMTVweDtcclxuICB9XHJcbiAgXHJcbiAgLmxvZ2luLWZvb3RlciBhIHtcclxuICAgIGNvbG9yOiAjMDA3YmZmOyAvKiBDb2xvciBkZSBsb3MgZW5sYWNlcyAqL1xyXG4gICAgdGV4dC1kZWNvcmF0aW9uOiBub25lO1xyXG4gIH1cclxuICAiXSwic291cmNlUm9vdCI6IiJ9 */"]
     });
   }
