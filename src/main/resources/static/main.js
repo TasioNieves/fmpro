@@ -767,7 +767,7 @@ class RegisterComponent {
     this.registerForm = this.fb.group({
       password: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required]],
       username: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required]],
-      roleId: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required]] // Asegúrate de que el campo 'role' sea obligatorio
+      role: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required]] // Asegúrate de que el campo 'role' sea obligatorio
     });
 
     this.getRoles(); // Obtén los roles cuando se inicialice el componente
@@ -795,17 +795,18 @@ class RegisterComponent {
 
   onSubmit() {
     if (this.registerForm.valid) {
-      const user = {
-        username: this.registerForm.value.username,
-        password: this.registerForm.value.password,
-        roleId: this.registerForm.value.role // Enviar el ID del rol
-      };
-
+      const user = this.registerForm.value;
+      console.log('Formulario válido. Registrando usuario:', user);
+      // Si el backend espera el nombre del rol y no el ID, modifica esto:
+      user.role = this.roles.find(r => r.id === user.role)?.name; // Cambiar a nombre del rol
       this.apiService.registerUser(user).subscribe(response => {
-        console.log('Usuario registrado:', response);
+        console.log('Registro exitoso:', response);
+        // Realiza alguna acción después de un registro exitoso, como redirigir a otro lugar
       }, error => {
         console.error('Error al registrar usuario:', error);
       });
+    } else {
+      console.error('Formulario inválido');
     }
   }
   static {
