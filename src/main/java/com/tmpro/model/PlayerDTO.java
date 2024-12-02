@@ -3,8 +3,7 @@ package com.tmpro.model;
 import jakarta.persistence.*;
 import java.util.List;
 
-@Entity
-@Table(name = "players")
+
 public class PlayerDTO {
 
 
