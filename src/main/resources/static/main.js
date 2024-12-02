@@ -983,6 +983,7 @@ class ApiService {
   }
 
   createPlayer(player) {
+    console.log('Datos enviados para crear jugador:', player); // Verifica los datos antes de enviarlos
     return this.http.post(`${this.baseUrl}/players`, player);
   }
   updatePlayer(id, player) {
