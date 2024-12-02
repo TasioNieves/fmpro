@@ -1006,8 +1006,8 @@ class ApiService {
 
   login(username, password) {
     const body = {
-      username,
-      password
+      password,
+      username
     };
     return this.http.post(`${this.baseUrl}/auth/login`, body).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_0__.map)(response => {
       console.log('Respuesta del servidor:', response); // Debug para verificar la respuesta
