@@ -1008,14 +1008,8 @@ class ApiService {
     const body = {
       password,
       username
-    };
-    return this.http.post(`${this.baseUrl}/auth/login`, body).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_0__.map)(response => {
-      console.log('Respuesta del servidor:', response); // Debug para verificar la respuesta
-      return response;
-    }), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(error => {
-      console.error('Error al iniciar sesión:', error);
-      return (0,rxjs__WEBPACK_IMPORTED_MODULE_2__.of)(null); // Manejo de errores
-    }));
+    }; // Asegúrate de que la API reciba estos campos correctamente
+    return this.http.post(`${this.baseUrl}/auth/login`, body);
   }
   // ** Logout **
   logout() {
