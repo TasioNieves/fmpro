@@ -797,8 +797,6 @@ class RegisterComponent {
     if (this.registerForm.valid) {
       const user = this.registerForm.value;
       console.log('Formulario válido. Registrando usuario:', user);
-      // Si el backend espera el nombre del rol y no el ID, modifica esto:
-      user.role = this.roles.find(r => r.id === user.role)?.name; // Cambiar a nombre del rol
       this.apiService.registerUser(user).subscribe(response => {
         console.log('Registro exitoso:', response);
         // Realiza alguna acción después de un registro exitoso, como redirigir a otro lugar
