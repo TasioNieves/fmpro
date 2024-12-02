@@ -53,7 +53,7 @@ public class PlayerController {
         player.setDorsal(playerDTO.getDorsal());
         player.setPosition(playerDTO.getPosition());
         Team team = new Team();
-        team.setId(Long.parseLong(playerDTO.getTeam()));
+        team.setId(Long.parseLong(playerDTO.getTeam_id()));
         player.setTeam(team);
 
         return player;

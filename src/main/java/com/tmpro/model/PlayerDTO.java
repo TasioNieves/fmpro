@@ -14,6 +14,8 @@ public class PlayerDTO {
     private String dorsal;
 
 
+
+
     private String team_id;
 
 
@@ -47,12 +49,13 @@ public class PlayerDTO {
         this.dorsal = dorsal;
     }
 
-    public String getTeam() {
+    public String getTeam_id() {
         return team_id;
     }
 
-    public void setTeam(int team) {
+    public void setTeam_id(String team_id) {
         this.team_id = team_id;
     }
+
 
 }
