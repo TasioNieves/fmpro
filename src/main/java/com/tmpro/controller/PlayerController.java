@@ -9,7 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -21,15 +24,25 @@ public class PlayerController {
 
     // Crear un nuevo jugador
     @PostMapping
-    public ResponseEntity<Player> createPlayer(@RequestBody PlayerDTO playerDTO) {
+    public ResponseEntity<Object> createPlayer(@RequestBody PlayerDTO playerDTO) {
         try {
+            // Intenta crear el jugador y devolverlo
             Player newPlayer = playerService.createPlayer(converter(playerDTO));
             return ResponseEntity.ok(newPlayer);  // Devuelve el jugador creado
         } catch (Exception e) {
-            e.printStackTrace();  // Imprime la pila de la excepción
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); // Devuelve un error 500
+            // Loguea la excepción para depuración
+            e.printStackTrace();
+
+            // Construye una respuesta personalizada con el error
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("message", "Error al crear el jugador");  // Mensaje claro para el usuario
+            errorResponse.put("error", e.getMessage());  // Detalles técnicos para el desarrollador
+            errorResponse.put("timestamp", LocalDateTime.now());  // Marca temporal del error
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
+
 
 
     private Player converter(PlayerDTO playerDTO){
