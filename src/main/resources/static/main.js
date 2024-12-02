@@ -434,7 +434,7 @@ class LoginComponent {
     this.errorMessage = '';
   }
   onLogin() {
-    this.apiService.login(this.username, this.password).subscribe(response => {
+    this.apiService.login(this.password, this.username).subscribe(response => {
       if (response && response.success) {
         // Redirigir al dashboard o a la página deseada después del login
         this.router.navigate(['/dashboard']); // Ajusta la ruta si es necesario
@@ -1040,10 +1040,10 @@ class ApiService {
     }));
   }
   // ** Login (sin JWT) ** 
-  login(username, password) {
+  login(password, username) {
     const body = {
-      username,
-      password
+      password,
+      username
     };
     return this.http.post(`${this.baseUrl}/auth/login`, body, {
       withCredentials: true
