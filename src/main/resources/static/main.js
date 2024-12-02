@@ -434,7 +434,8 @@ class LoginComponent {
     this.errorMessage = '';
   }
   onLogin() {
-    this.apiService.login(this.password, this.username).subscribe(response => {
+    // Cambié el orden de los parámetros en el servicio login (username, password)
+    this.apiService.login(this.username, this.password).subscribe(response => {
       if (response && response.success) {
         // Redirigir al dashboard o a la página deseada después del login
         this.router.navigate(['/dashboard']); // Ajusta la ruta si es necesario
@@ -1039,12 +1040,12 @@ class ApiService {
       return (0,rxjs__WEBPACK_IMPORTED_MODULE_2__.of)(error.error); // Manejo de errores
     }));
   }
-  // ** Login (sin JWT) ** 
-  login(password, username) {
+
+  login(username, password) {
     const body = {
-      password,
-      username
-    };
+      username,
+      password
+    }; // Asegúrate de que la API reciba estos campos correctamente
     return this.http.post(`${this.baseUrl}/auth/login`, body, {
       withCredentials: true
     });
