@@ -1,6 +1,8 @@
 package com.tmpro.controller;
 
 import com.tmpro.model.Player;
+import com.tmpro.model.PlayerDTO;
+import com.tmpro.model.Team;
 import com.tmpro.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +20,26 @@ public class PlayerController {
 
     // Crear un nuevo jugador
     @PostMapping
-    public ResponseEntity<Player> createPlayer(@RequestBody Player player) {
-        Player newPlayer = playerService.createPlayer(player);
+    public ResponseEntity<Player> createPlayer(@RequestBody PlayerDTO playerDTO) {
+
+        Player newPlayer = playerService.createPlayer(converter(playerDTO));
         return ResponseEntity.ok(newPlayer);  // Devuelve el jugador creado
     }
+
+    private Player converter(PlayerDTO playerDTO){
+
+        Player player = new Player();
+
+        player.setName(playerDTO.getName());
+        player.setDorsal(playerDTO.getDorsal());
+        player.setPosition(playerDTO.getPosition());
+        Team team = new Team();
+        team.setId((long)playerDTO.getTeam());
+        player.setTeam(team);
+
+        return player;
+    };
+
 
     // Obtener todos los jugadores (opcional)
     @GetMapping
