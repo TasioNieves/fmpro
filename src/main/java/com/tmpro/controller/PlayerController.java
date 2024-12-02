@@ -38,6 +38,7 @@ public class PlayerController {
             errorResponse.put("message", "Error al crear el jugador");  // Mensaje claro para el usuario
             errorResponse.put("error", e.getMessage());  // Detalles técnicos para el desarrollador
             errorResponse.put("timestamp", LocalDateTime.now());  // Marca temporal del error
+            errorResponse.put("objeto", playerDTO);  // Marca temporal del error
 
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
