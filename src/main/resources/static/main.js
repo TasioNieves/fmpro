@@ -944,9 +944,7 @@ class ApiService {
   }
   // ** Equipos **
   getTeams() {
-    return this.http.get(`${this.baseUrl}/teams`, {
-      withCredentials: true
-    }).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_0__.map)(response => Array.isArray(response) ? response : []), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(error => {
+    return this.http.get(`${this.baseUrl}/teams`).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_0__.map)(response => Array.isArray(response) ? response : []), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(error => {
       console.error('Error al obtener equipos:', error);
       return (0,rxjs__WEBPACK_IMPORTED_MODULE_2__.of)([]); // Retorna un array vacío en caso de error
     }));
@@ -960,64 +958,44 @@ class ApiService {
   }
   // Obtener las estadísticas de los jugadores
   getStatistics() {
-    return this.http.get(`${this.baseUrl}/statistics`, {
-      withCredentials: true
-    }).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(error => {
+    return this.http.get(`${this.baseUrl}/statistics`).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(error => {
       console.error('Error al obtener estadísticas:', error);
       return (0,rxjs__WEBPACK_IMPORTED_MODULE_2__.of)([]); // Retorna un array vacío en caso de error
     }));
   }
   // Agregar una nueva estadística
   addStatistic(statistic) {
-    return this.http.post(`${this.baseUrl}/statistics`, statistic, {
-      withCredentials: true
-    });
+    return this.http.post(`${this.baseUrl}/statistics`, statistic);
   }
   // Eliminar una estadística
   deleteStatistic(statisticId) {
-    return this.http.delete(`${this.baseUrl}/statistics/${statisticId}`, {
-      withCredentials: true
-    });
+    return this.http.delete(`${this.baseUrl}/statistics/${statisticId}`);
   }
   createTeam(team) {
-    return this.http.post(`${this.baseUrl}/teams`, team, {
-      withCredentials: true
-    });
+    return this.http.post(`${this.baseUrl}/teams`, team);
   }
   updateTeam(id, team) {
-    return this.http.put(`${this.baseUrl}/teams/${id}`, team, {
-      withCredentials: true
-    });
+    return this.http.put(`${this.baseUrl}/teams/${id}`, team);
   }
   deleteTeam(id) {
-    return this.http.delete(`${this.baseUrl}/teams/${id}`, {
-      withCredentials: true
-    });
+    return this.http.delete(`${this.baseUrl}/teams/${id}`);
   }
   // ** Jugadores **
   getPlayers() {
-    return this.http.get(`${this.baseUrl}/players`, {
-      withCredentials: true
-    }).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_0__.map)(response => Array.isArray(response) ? response : []), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(error => {
+    return this.http.get(`${this.baseUrl}/players`).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_0__.map)(response => Array.isArray(response) ? response : []), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(error => {
       console.error('Error al obtener jugadores:', error);
       return (0,rxjs__WEBPACK_IMPORTED_MODULE_2__.of)([]); // Retorna un array vacío en caso de error
     }));
   }
 
   createPlayer(player) {
-    return this.http.post(`${this.baseUrl}/players`, player, {
-      withCredentials: true
-    });
+    return this.http.post(`${this.baseUrl}/players`, player);
   }
   updatePlayer(id, player) {
-    return this.http.put(`${this.baseUrl}/players/${id}`, player, {
-      withCredentials: true
-    });
+    return this.http.put(`${this.baseUrl}/players/${id}`, player);
   }
   deletePlayer(id) {
-    return this.http.delete(`${this.baseUrl}/players/${id}`, {
-      withCredentials: true
-    });
+    return this.http.delete(`${this.baseUrl}/players/${id}`);
   }
   registerUser(user) {
     return this.http.post(`${this.baseUrl}/auth/register`, user).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(error => {
@@ -1031,9 +1009,7 @@ class ApiService {
       username,
       password
     };
-    return this.http.post(`${this.baseUrl}/auth/login`, body, {
-      withCredentials: true
-    }).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_0__.map)(response => {
+    return this.http.post(`${this.baseUrl}/auth/login`, body).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_0__.map)(response => {
       console.log('Respuesta del servidor:', response); // Debug para verificar la respuesta
       return response;
     }), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(error => {
@@ -1043,9 +1019,7 @@ class ApiService {
   }
   // ** Logout **
   logout() {
-    return this.http.post(`${this.baseUrl}/auth/logout`, {}, {
-      withCredentials: true
-    });
+    return this.http.post(`${this.baseUrl}/auth/logout`, {});
   }
   static {
     this.ɵfac = function ApiService_Factory(t) {
