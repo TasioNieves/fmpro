@@ -179,6 +179,9 @@ class AppModule {
         path: 'team',
         component: _team_team_component__WEBPACK_IMPORTED_MODULE_1__.TeamComponent
       }, {
+        path: 'statistic',
+        component: _statistics_statistics_component__WEBPACK_IMPORTED_MODULE_7__.StatisticsComponent
+      }, {
         path: 'player',
         component: _player_player_component__WEBPACK_IMPORTED_MODULE_2__.PlayerComponent
       }, {
