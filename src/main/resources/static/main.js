@@ -1357,7 +1357,7 @@ class TeamComponent {
     });
   }
   onSubmit() {
-    if (this.selectedTeam && this.selectedTeam.id !== undefined) {
+    if (this.selectedTeam) {
       this.apiService.updateTeam(this.selectedTeam.id, this.newTeam).subscribe(() => {
         this.loadTeams();
         this.clearForm();
