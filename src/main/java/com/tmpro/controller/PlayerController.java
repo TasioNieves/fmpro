@@ -112,7 +112,7 @@ public class PlayerController {
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<Optional<Player>> updatePlayer(@PathVariable Long id, @RequestBody Player player) {
+    public ResponseEntity<Object> updatePlayer(@PathVariable Long id, @RequestBody Player player) {
         Optional<Player> updatedPlayer = playerService.updatePlayer(id, player);
         if (updatedPlayer != null) {
             return ResponseEntity.ok(updatedPlayer);
