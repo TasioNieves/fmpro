@@ -634,7 +634,7 @@ class PlayerComponent {
     });
   }
   onSubmit() {
-    if (this.selectedPlayer) {
+    if (this.selectedPlayer && this.selectedPlayer.id !== undefined) {
       this.apiService.updatePlayer(this.selectedPlayer.id, this.newPlayer).subscribe(() => {
         this.loadPlayers();
         this.clearForm();
