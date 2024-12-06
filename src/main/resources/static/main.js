@@ -1013,6 +1013,7 @@ class ApiService {
     return this.http.post(`${this.baseUrl}/players`, player);
   }
   updatePlayer(id, player) {
+    console.log('Datos enviados para crear jugador:', player); // Verifica los datos antes de enviarlos
     return this.http.put(`${this.baseUrl}/players/${id}`, player);
   }
   deletePlayer(id) {
@@ -1080,7 +1081,7 @@ function StatisticsComponent_option_13_Template(rf, ctx) {
     const player_r2 = ctx.$implicit;
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("value", player_r2.id);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](player_r2.username);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](player_r2.name);
   }
 }
 function StatisticsComponent_tr_44_Template(rf, ctx) {
