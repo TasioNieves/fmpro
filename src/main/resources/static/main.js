@@ -556,7 +556,7 @@ function PlayerComponent_div_29_li_4_Template(rf, ctx) {
       const restoredCtx = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵrestoreView"](_r8);
       const player_r6 = restoredCtx.$implicit;
       const ctx_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"](2);
-      return _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵresetView"](ctx_r7.editPlayer(player_r6));
+      return _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵresetView"](ctx_r7.updatePlayer(player_r6));
     });
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](21, " Editar ");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
@@ -640,7 +640,7 @@ class PlayerComponent {
       });
     }
   }
-  editPlayer(player) {
+  updatePlayer(player) {
     if (player.id !== undefined) {
       // Verificación de que el id existe
       player = this.selectedPlayer;
@@ -1294,7 +1294,7 @@ function TeamComponent_div_20_li_4_Template(rf, ctx) {
       const restoredCtx = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵrestoreView"](_r6);
       const team_r4 = restoredCtx.$implicit;
       const ctx_r5 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"](2);
-      return _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵresetView"](ctx_r5.editTeam(team_r4));
+      return _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵresetView"](ctx_r5.updateTeam(team_r4));
     });
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](4, "Editar");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
@@ -1365,7 +1365,7 @@ class TeamComponent {
       });
     }
   }
-  editTeam(team) {
+  updateTeam(team) {
     if (team.id !== undefined) {
       // Verificación de que el id existe
       this.selectedTeam = team;
