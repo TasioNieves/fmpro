@@ -553,10 +553,9 @@ function PlayerComponent_div_29_li_4_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](19, "div", 29)(20, "button", 30);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function PlayerComponent_div_29_li_4_Template_button_click_20_listener() {
-      const restoredCtx = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵrestoreView"](_r8);
-      const player_r6 = restoredCtx.$implicit;
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵrestoreView"](_r8);
       const ctx_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"](2);
-      return _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵresetView"](ctx_r7.updatePlayer(player_r6));
+      return _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵresetView"](ctx_r7.updatePlayer());
     });
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](21, " Editar ");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
@@ -628,7 +627,7 @@ class PlayerComponent {
     });
   }
   onSubmit() {
-    if (this.selectedPlayer && this.selectedPlayer.id !== undefined) {
+    if (this.selectedPlayer) {
       this.apiService.updatePlayer(this.selectedPlayer.id, this.newPlayer).subscribe(() => {
         this.loadPlayers();
         this.clearForm();
@@ -640,16 +639,14 @@ class PlayerComponent {
       });
     }
   }
-  updatePlayer(player) {
-    if (player.id !== undefined) {
-      // Verificación de que el id existe
-      player = this.selectedPlayer;
-      this.newPlayer = {
-        ...player
-      };
-    }
-    console.log('Jugador actualizado:', player);
-    // Aquí se enviaría el jugador actualizado al backend.
+  updatePlayer() {
+    const updatedPlayer = this.editForm.value;
+    this.apiService.updatePlayer(updatedPlayer.id, updatedPlayer).subscribe(response => {
+      if (response) {
+        this.loadPlayers(); // Recargar la lista de jugadores tras la edición
+        this.selectedPlayer = null; // Limpiar la selección
+      }
+    });
   }
 
   deletePlayer(id) {
@@ -1294,7 +1291,7 @@ function TeamComponent_div_20_li_4_Template(rf, ctx) {
       const restoredCtx = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵrestoreView"](_r6);
       const team_r4 = restoredCtx.$implicit;
       const ctx_r5 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"](2);
-      return _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵresetView"](ctx_r5.updateTeam(team_r4));
+      return _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵresetView"](ctx_r5.editTeam(team_r4));
     });
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](4, "Editar");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
@@ -1365,7 +1362,7 @@ class TeamComponent {
       });
     }
   }
-  updateTeam(team) {
+  editTeam(team) {
     if (team.id !== undefined) {
       // Verificación de que el id existe
       this.selectedTeam = team;
