@@ -1023,7 +1023,7 @@ class ApiService {
     return this.http.post(`${this.baseUrl}/players`, player);
   }
   updatePlayer(id, player) {
-    return this.http.put(`${this.baseUrl}/players/${id}/editPlayer`, player);
+    return this.http.put(`${this.baseUrl}/players/${id}`, player);
   }
   deletePlayer(id) {
     return this.http.delete(`${this.baseUrl}/players/${id}`);

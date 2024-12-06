@@ -110,7 +110,7 @@ public class PlayerController {
         return ResponseEntity.notFound().build();  // El jugador no se encontró
     }
 
-    @PutMapping("/{id}/editPlayer")
+    @PutMapping("/{id}")
     public ResponseEntity<Object> updatePlayer(@PathVariable Long id, @RequestBody PlayerDTO playerDTO) {
         try {
             // Busca el jugador por ID (asegúrate de manejar el caso de que no exista)
