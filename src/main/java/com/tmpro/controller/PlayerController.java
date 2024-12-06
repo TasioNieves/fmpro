@@ -111,10 +111,10 @@ public class PlayerController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updatePlayer(@PathVariable Long id, @RequestBody PlayerDTO playerDTO) {
+    public ResponseEntity<Object> updatePlayer(@PathVariable Long id, @RequestBody Player player) {
         try {
             // Busca el jugador por ID (asegúrate de manejar el caso de que no exista)
-            Optional<Player> existingPlayer = playerService.findById(id);
+           Optional<Player> existingPlayer = playerService.findById(id);
 
             if (existingPlayer == null) {
                 Map<String, Object> errorResponse = new HashMap<>();
@@ -125,7 +125,7 @@ public class PlayerController {
             }
 
             // Actualiza el jugador con los nuevos datos
-            Optional<Player> updatedPlayer = playerService.updatePlayer(id, converter(playerDTO));
+            Optional<Player> updatedPlayer = playerService.updatePlayer(id, player);
             return ResponseEntity.ok(updatedPlayer);  // Devuelve el jugador actualizado
         } catch (Exception e) {
             // Loguea la excepción para depuración
@@ -136,7 +136,7 @@ public class PlayerController {
             errorResponse.put("message", "Error al actualizar el jugador");
             errorResponse.put("error", e.getMessage());
             errorResponse.put("timestamp", LocalDateTime.now());
-            errorResponse.put("objeto", playerDTO);
+            errorResponse.put("objeto", player);
 
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
