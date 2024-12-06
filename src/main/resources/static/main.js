@@ -547,7 +547,7 @@ function PlayerComponent_div_29_li_4_div_3_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](12);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](13, "br");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](14, "strong");
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](15, "Edad:");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](15, "Dorsal:");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](16);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
@@ -574,34 +574,30 @@ function PlayerComponent_div_29_li_4_div_3_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](4);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](player_r8.name);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](4);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"](" ", player_r8.teamName || "Sin equipo", "");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"](" ", player_r8.team_id || "Sin equipo", "");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](4);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"](" ", player_r8.position || "No asignada", "");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](4);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"](" ", player_r8.age || "N/A", " ");
-  }
-}
-function PlayerComponent_div_29_li_4_div_4_Template(rf, ctx) {
-  if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 34);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](1, " No hay jugadores registrados. ");
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"](" ", player_r8.dorsal || "N/A", " ");
   }
 }
 function PlayerComponent_div_29_li_4_Template(rf, ctx) {
   if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "li", 22)(1, "div", 23)(2, "div", 24);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](3, PlayerComponent_div_29_li_4_div_3_Template, 22, 4, "div", 25);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](4, PlayerComponent_div_29_li_4_div_4_Template, 2, 0, "div", 26);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "li", 23)(1, "div", 24)(2, "div", 25);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](3, PlayerComponent_div_29_li_4_div_3_Template, 22, 4, "div", 26);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()();
   }
   if (rf & 2) {
     const ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](3);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngForOf", ctx_r4.players);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ctx_r4.players.length === 0);
+  }
+}
+function PlayerComponent_div_29_div_5_Template(rf, ctx) {
+  if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 34);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](1, " No hay jugadores registrados. ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
   }
 }
 function PlayerComponent_div_29_Template(rf, ctx) {
@@ -610,13 +606,16 @@ function PlayerComponent_div_29_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](2, "Jugadores Registrados");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](3, "ul", 20);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](4, PlayerComponent_div_29_li_4_Template, 5, 2, "li", 21);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](4, PlayerComponent_div_29_li_4_Template, 4, 1, "li", 21);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](5, PlayerComponent_div_29_div_5_Template, 2, 0, "div", 22);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
   }
   if (rf & 2) {
     const ctx_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](4);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngForOf", ctx_r2.players);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ctx_r2.players.length === 0);
   }
 }
 class PlayerComponent {
@@ -685,7 +684,7 @@ class PlayerComponent {
       selectors: [["app-player"]],
       decls: 30,
       vars: 7,
-      consts: [[1, "container"], [1, "text-center", "my-4"], [1, "card", "mb-4"], [1, "card-header"], [1, "card-body"], [3, "ngSubmit"], ["playerForm", "ngForm"], [1, "mb-3"], ["for", "dorsal", 1, "form-label"], ["type", "text", "id", "dorsal", "name", "dorsal", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "playerName", 1, "form-label"], ["type", "text", "id", "playerName", "name", "name", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "position", 1, "form-label"], ["type", "text", "id", "position", "name", "position", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "team", 1, "form-label"], ["id", "team", "name", "team_id", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], [3, "value", 4, "ngFor", "ngForOf"], ["type", "submit", 1, "btn", "btn-primary", 3, "disabled"], [4, "ngIf"], [3, "value"], [1, "list-group"], ["class", "list-group-item d-flex justify-content-between align-items-center", 4, "ngFor", "ngForOf"], [1, "list-group-item", "d-flex", "justify-content-between", "align-items-center"], [1, "container", "mt-4"], [1, "row"], ["class", "col-md-4", 4, "ngFor", "ngForOf"], ["class", "alert alert-info mt-4", 4, "ngIf"], [1, "col-md-4"], [1, "card", "mb-4", "shadow-sm"], [1, "card-title", "text-center"], [1, "card-text"], [1, "d-flex", "justify-content-between"], [1, "btn", "btn-primary", "btn-sm", 3, "click"], [1, "btn", "btn-danger", "btn-sm", 3, "click"], [1, "alert", "alert-info", "mt-4"]],
+      consts: [[1, "container"], [1, "text-center", "my-4"], [1, "card", "mb-4"], [1, "card-header"], [1, "card-body"], [3, "ngSubmit"], ["playerForm", "ngForm"], [1, "mb-3"], ["for", "dorsal", 1, "form-label"], ["type", "text", "id", "dorsal", "name", "dorsal", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "playerName", 1, "form-label"], ["type", "text", "id", "playerName", "name", "name", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "position", 1, "form-label"], ["type", "text", "id", "position", "name", "position", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "team", 1, "form-label"], ["id", "team", "name", "team_id", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], [3, "value", 4, "ngFor", "ngForOf"], ["type", "submit", 1, "btn", "btn-primary", 3, "disabled"], [4, "ngIf"], [3, "value"], [1, "list-group"], ["class", "list-group-item d-flex justify-content-between align-items-center", 4, "ngFor", "ngForOf"], ["class", "alert alert-info mt-4", 4, "ngIf"], [1, "list-group-item", "d-flex", "justify-content-between", "align-items-center"], [1, "container", "mt-4"], [1, "row"], ["class", "col-md-4", 4, "ngFor", "ngForOf"], [1, "col-md-4"], [1, "card", "mb-4", "shadow-sm"], [1, "card-title", "text-center"], [1, "card-text"], [1, "d-flex", "justify-content-between"], [1, "btn", "btn-primary", "btn-sm", 3, "click"], [1, "btn", "btn-danger", "btn-sm", 3, "click"], [1, "alert", "alert-info", "mt-4"]],
       template: function PlayerComponent_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 0)(1, "h2", 1);
@@ -734,7 +733,7 @@ class PlayerComponent {
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](27, "button", 17);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](28, "Guardar");
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()()();
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](29, PlayerComponent_div_29_Template, 5, 1, "div", 18);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](29, PlayerComponent_div_29_Template, 6, 2, "div", 18);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
         }
         if (rf & 2) {
