@@ -553,10 +553,9 @@ function PlayerComponent_div_29_li_4_div_3_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](17, "div", 31)(18, "button", 32);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function PlayerComponent_div_29_li_4_div_3_Template_button_click_18_listener() {
-      const restoredCtx = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵrestoreView"](_r10);
-      const player_r8 = restoredCtx.$implicit;
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵrestoreView"](_r10);
       const ctx_r9 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"](3);
-      return _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵresetView"](ctx_r9.editPlayer(player_r8));
+      return _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵresetView"](ctx_r9.updatePlayer());
     });
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](19, " Editar ");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
@@ -656,12 +655,16 @@ class PlayerComponent {
       });
     }
   }
-  editPlayer(player) {
-    this.selectedPlayer = player;
-    this.newPlayer = {
-      ...player
-    };
+  updatePlayer() {
+    const updatedPlayer = this.editForm.value;
+    this.apiService.updatePlayer(updatedPlayer.id, updatedPlayer).subscribe(response => {
+      if (response) {
+        this.loadPlayers(); // Recargar la lista de jugadores tras la edición
+        this.selectedPlayer = null; // Limpiar la selección
+      }
+    });
   }
+
   deletePlayer(id) {
     this.apiService.deletePlayer(id).subscribe(() => {
       this.loadPlayers();
