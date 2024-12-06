@@ -1345,7 +1345,7 @@ class TeamComponent {
   }
   loadTeams() {
     this.apiService.getTeams().subscribe(teams => {
-      console.log('Roles obtenidos:', teams); // Verifica qué datos devuelve la API
+      console.log('Equipos obtenidos:', teams); // Verifica qué datos devuelve la API
       this.teams = teams;
     });
   }
