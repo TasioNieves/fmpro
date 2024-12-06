@@ -109,37 +109,14 @@ public class PlayerController {
         }
         return ResponseEntity.notFound().build();  // El jugador no se encontró
     }
-
+    // Actualizar los detalles de un equipo
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updatePlayer(@PathVariable Long id, @RequestBody PlayerDTO playerDTO) {
-        try {
-            // Busca el jugador por ID (asegúrate de manejar el caso de que no exista)
-           Optional<Player> existingPlayer = playerService.findById(id);
-
-            if (existingPlayer == null) {
-                Map<String, Object> errorResponse = new HashMap<>();
-                errorResponse.put("message", "Jugador no encontrado");
-                errorResponse.put("timestamp", LocalDateTime.now());
-                errorResponse.put("id", id);
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
-            }
-
-            // Actualiza el jugador con los nuevos datos
-            Optional<Player> updatedPlayer = playerService.updatePlayer(id, converter(playerDTO));
-            return ResponseEntity.ok(updatedPlayer);  // Devuelve el jugador actualizado
-        } catch (Exception e) {
-            // Loguea la excepción para depuración
-            e.printStackTrace();
-
-            // Construye una respuesta personalizada con el error
-            Map<String, Object> errorResponse = new HashMap<>();
-            errorResponse.put("message", "Error al actualizar el jugador");
-            errorResponse.put("error", e.getMessage());
-            errorResponse.put("timestamp", LocalDateTime.now());
-            errorResponse.put("objeto", playerDTO);
-
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+    public ResponseEntity<Optional<Player>> updatePlayer(@PathVariable Long id, @RequestBody PlayerDTO playerDTO) {
+        Optional<Player> updatedPlayer = playerService.updatePlayer(id, converter(playerDTO));
+        if (updatedPlayer != null) {
+            return ResponseEntity.ok(updatedPlayer);
         }
+        return ResponseEntity.notFound().build(); // Retorna 404 si no se encuentra el equipo
     }
 
 }
