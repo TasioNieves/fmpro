@@ -647,16 +647,14 @@ class PlayerComponent {
     }
   }
   updatePlayer(player) {
-    if (!this.registerForm.get('name') || !this.registerForm.get('teamId')) {
-      console.error('Controles del formulario no encontrados');
-      return;
+    if (player.id !== undefined) {
+      // Verificación de que el id existe
+      this.selectedPlayer = player;
+      this.newPlayer = {
+        ...player
+      };
     }
-    const updatedPlayer = {
-      id: player.id,
-      name: this.registerForm.get('name').value,
-      teamId: this.registerForm.get('teamId').value
-    };
-    console.log('Jugador actualizado:', updatedPlayer);
+    console.log('Jugador actualizado:', player);
     // Aquí se enviaría el jugador actualizado al backend.
   }
 
