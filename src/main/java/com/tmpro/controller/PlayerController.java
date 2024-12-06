@@ -23,101 +23,112 @@ public class PlayerController {
     @PostMapping
     public ResponseEntity<Object> createPlayer(@RequestBody PlayerDTO playerDTO) {
         try {
-            // Intenta crear el jugador y devolverlo
             Player newPlayer = playerService.createPlayer(converter(playerDTO));
-            return ResponseEntity.ok(newPlayer);  // Devuelve el jugador creado
+            return ResponseEntity.ok(newPlayer);
         } catch (Exception e) {
-            // Loguea la excepción para depuración
             e.printStackTrace();
-
-            // Construye una respuesta personalizada con el error
             Map<String, Object> errorResponse = new HashMap<>();
-            errorResponse.put("message", "Error al crear el jugador");  // Mensaje claro para el usuario
-            errorResponse.put("error", e.getMessage());  // Detalles técnicos para el desarrollador
-            errorResponse.put("timestamp", LocalDateTime.now());  // Marca temporal del error
-            errorResponse.put("objeto", playerDTO);  // Marca temporal del error
-
+            errorResponse.put("message", "Error al crear el jugador");
+            errorResponse.put("error", e.getMessage());
+            errorResponse.put("timestamp", LocalDateTime.now());
+            errorResponse.put("objeto", playerDTO);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 
+    // Obtener todos los jugadores
+    @GetMapping
+    public ResponseEntity<Object> getAllPlayers() {
+        try {
+            List<Player> players = playerService.getAllPlayers();
+            return ResponseEntity.ok(ConvertirLista(players));
+        } catch (Exception e) {
+            e.printStackTrace();
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("message", "Error al obtener los jugadores");
+            errorResponse.put("error", e.getMessage());
+            errorResponse.put("timestamp", LocalDateTime.now());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+        }
+    }
 
+    // Obtener un jugador por su ID
+    @GetMapping("/{id}")
+    public ResponseEntity<Player> getPlayerById(@PathVariable Long id) {
+        try {
+            Optional<Player> player = playerService.findById(id);
+            return player.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        } catch (Exception e) {
+            e.printStackTrace();
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("message", "Error al obtener el jugador");
+            errorResponse.put("error", e.getMessage());
+            errorResponse.put("timestamp", LocalDateTime.now());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body((Player) errorResponse);
+        }
+    }
 
-    private Player converter(PlayerDTO playerDTO){
+    // Eliminar un jugador por su ID
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deletePlayer(@PathVariable Long id) {
+        try {
+            if (playerService.deletePlayer(id)) {
+                return ResponseEntity.noContent().build();
+            }
+            return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("message", "Error al eliminar el jugador");
+            errorResponse.put("error", e.getMessage());
+            errorResponse.put("timestamp", LocalDateTime.now());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+        }
+    }
 
+    // Actualizar un jugador por su ID
+    @PutMapping("/{id}")
+    public ResponseEntity<Player> updatePlayer(@PathVariable Long id, @RequestBody PlayerDTO playerDTO) {
+        try {
+            Optional<Player> updatedPlayer = playerService.updatePlayer(id, converter(playerDTO));
+            return updatedPlayer.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        } catch (Exception e) {
+            e.printStackTrace();
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("message", "Error al actualizar el jugador");
+            errorResponse.put("error", e.getMessage());
+            errorResponse.put("timestamp", LocalDateTime.now());
+            errorResponse.put("objeto", playerDTO);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body((Player) errorResponse);
+        }
+    }
+
+    private Player converter(PlayerDTO playerDTO) {
         Player player = new Player();
-
         player.setName(playerDTO.getName());
         player.setDorsal(playerDTO.getDorsal());
         player.setPosition(playerDTO.getPosition());
         Team team = new Team();
         team.setId(Long.parseLong(playerDTO.getTeam_id()));
         player.setTeam(team);
-
         return player;
-    };
+    }
 
-    private PlayerDTO disconverter(Player player){
-
+    private PlayerDTO disconverter(Player player) {
         PlayerDTO playerDTO = new PlayerDTO();
-
         playerDTO.setName(player.getName());
         playerDTO.setDorsal(player.getDorsal());
         playerDTO.setPosition(player.getPosition());
-        playerDTO.setTeam_id(player.getTeam().getId()+"");
-
+        playerDTO.setTeam_id(player.getTeam().getId() + "");
         return playerDTO;
-    };
+    }
 
-    private List<PlayerDTO> ConvertirLista (List<Player> players){
-
+    private List<PlayerDTO> ConvertirLista(List<Player> players) {
         List<PlayerDTO> listPlayer = new ArrayList<>();
-
         players.forEach(player -> {
-
             PlayerDTO playerDTO = disconverter(player);
             listPlayer.add(playerDTO);
-
-
         });
-
         return listPlayer;
-
     }
-
-    // Obtener todos los jugadores (opcional)
-    @GetMapping
-    public ResponseEntity<List<PlayerDTO>> getAllPlayers() {
-
-        List<Player> players = playerService.getAllPlayers();
-
-        return ResponseEntity.ok(ConvertirLista(players));  // Devuelve la lista de jugadores
-    }
-
-    // Obtener un jugador por su ID (opcional)
-    @GetMapping("/{id}")
-    public ResponseEntity<Player> getPlayerById(@PathVariable Long id) {
-        Optional<Player> player = playerService.findById(id);
-        return player.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
-    // Eliminar un jugador por su ID (opcional)
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePlayer(@PathVariable Long id) {
-        if (playerService.deletePlayer(id)) {
-            return ResponseEntity.noContent().build();  // El jugador se eliminó correctamente
-        }
-        return ResponseEntity.notFound().build();  // El jugador no se encontró
-    }
-
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Object> updatePlayer(@PathVariable Long id, @RequestBody Player player) {
-        Optional<Player> updatedPlayer = playerService.updatePlayer(id, player);
-        if (updatedPlayer != null) {
-            return ResponseEntity.ok(updatedPlayer);
-        }
-        return ResponseEntity.notFound().build(); // Retorna 404 si no se encuentra el equipo
-    }
-
 }
