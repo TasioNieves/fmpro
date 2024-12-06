@@ -984,7 +984,7 @@ class ApiService {
     }));
   }
   // Agregar una nueva estadística
-  addStatistic(statistic) {
+  createStatistic(statistic) {
     return this.http.post(`${this.baseUrl}/statistics`, statistic);
   }
   // Eliminar una estadística
@@ -1159,7 +1159,7 @@ class StatisticsComponent {
   addStatistic() {
     if (this.statisticsForm.valid) {
       const newStatistic = this.statisticsForm.value;
-      this.apiService.addStatistic(newStatistic).subscribe(data => {
+      this.apiService.createStatistic(newStatistic).subscribe(data => {
         this.statistics.push(data); // Agregar la nueva estadística a la lista
         this.statisticsForm.reset(); // Limpiar el formulario
       }, error => {
