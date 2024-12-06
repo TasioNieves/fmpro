@@ -94,12 +94,7 @@ public class PlayerController {
         return ResponseEntity.ok(ConvertirLista(players));  // Devuelve la lista de jugadores
     }
 
-    // Obtener un jugador por su ID (opcional)
-    @GetMapping("/{id}")
-    public ResponseEntity<Player> getPlayerById(@PathVariable Long id) {
-        Optional<Player> player = playerService.findById(id);
-        return player.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
+
 
     // Eliminar un jugador por su ID (opcional)
     @DeleteMapping("/{id}")
@@ -111,8 +106,8 @@ public class PlayerController {
     }
     // Actualizar los detalles de un equipo
     @PutMapping("/{id}")
-    public ResponseEntity<Optional<Player>> updatePlayer(@PathVariable Long id, @RequestBody PlayerDTO playerDTO) {
-        Optional<Player> updatedPlayer = playerService.updatePlayer(id, converter(playerDTO));
+    public ResponseEntity<Optional<Player>> updatePlayer(@PathVariable Long id, @RequestBody Player player) {
+        Optional<Player> updatedPlayer = playerService.updatePlayer(id, player);
         if (updatedPlayer != null) {
             return ResponseEntity.ok(updatedPlayer);
         }
