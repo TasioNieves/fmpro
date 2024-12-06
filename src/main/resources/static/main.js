@@ -643,7 +643,7 @@ class PlayerComponent {
   editPlayer(player) {
     if (player.id !== undefined) {
       // Verificación de que el id existe
-      this.player = player;
+      this.selectedPlayer = player;
       this.newPlayer = {
         ...player
       };
