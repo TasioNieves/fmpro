@@ -304,7 +304,7 @@ class DashboardComponent {
     this.loadPlayers();
   }
   loadTeams() {
-    this.apiService.getTeams().subscribe(teams => {
+    this.apiService.getAllTeams().subscribe(teams => {
       this.teams = teams;
     });
   }
@@ -622,7 +622,7 @@ class PlayerComponent {
     });
   }
   loadTeams() {
-    this.apiService.getTeams().subscribe(teams => {
+    this.apiService.getAllTeams().subscribe(teams => {
       this.teams = teams;
     });
   }
@@ -963,7 +963,7 @@ class ApiService {
     this.baseUrl = 'https://tmpro-5265168c0988.herokuapp.com/api';
   }
   // ** Equipos **
-  getTeams() {
+  getAllTeams() {
     return this.http.get(`${this.baseUrl}/teams`).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_0__.map)(response => Array.isArray(response) ? response : []), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(error => {
       console.error('Error al obtener equipos:', error);
       return (0,rxjs__WEBPACK_IMPORTED_MODULE_2__.of)([]); // Retorna un array vacío en caso de error
@@ -1351,7 +1351,7 @@ class TeamComponent {
     this.loadTeams();
   }
   loadTeams() {
-    this.apiService.getTeams().subscribe(teams => {
+    this.apiService.getAllTeams().subscribe(teams => {
       console.log('Equipos obtenidos:', teams); // Verifica qué datos devuelve la API
       this.teams = teams;
     });
