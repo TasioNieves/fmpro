@@ -1265,7 +1265,9 @@ class StatisticsComponent {
     // Rellenar el formulario con los datos de la estadística seleccionada
     this.selectedStatistic = statisticToEdit;
     this.statisticForm.patchValue({
-      player: statisticToEdit.player.id,
+      player: {
+        id: statisticToEdit.id
+      },
       match: statisticToEdit.match,
       goals: statisticToEdit.goals,
       assists: statisticToEdit.assists,
