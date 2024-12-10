@@ -56,7 +56,7 @@ public class ReportService {
 
             // Agregar datos de estadísticas a la tabla
             for (Statistic stat : statistics) {
-                table.addCell(String.valueOf(stat.getMatch().getId())); // ID del partido
+                table.addCell(String.valueOf(stat.getMatch())); // ID del partido
                 table.addCell(String.valueOf(stat.getGoals()));         // Goles
                 table.addCell(String.valueOf(stat.getAssists()));       // Asistencias
                 table.addCell(String.valueOf(stat.getMinutesPlayed())); // Minutos jugados
