@@ -1174,6 +1174,7 @@ class StatisticsComponent {
   onSubmit() {
     if (this.statisticForm.valid) {
       const statistic = this.statisticForm.value;
+      console.log(statistic);
       this.apiService.createStatistic(statistic).subscribe(response => {
         console.log('Statistic creada con éxito:', response);
         this.statistics.push(response); // Agrega la estadística creada a la lista
