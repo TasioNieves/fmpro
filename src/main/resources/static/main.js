@@ -1197,11 +1197,12 @@ class StatisticsComponent {
         assists: formData.assists,
         minutesPlayed: formData.minutesPlayed
       };
-      console.log(statisticData);
       // Enviar el formulario al backend
       this.apiService.createStatistic(statisticData).subscribe(response => {
         console.log('Estadística guardada con éxito', response);
-        // Aquí puedes actualizar la lista de estadísticas si es necesario
+        // Recargar las estadísticas después de agregar una nueva
+        this.getStatistics();
+        this.clearForm(); // Limpiar el formulario
       }, error => {
         console.error('Error al guardar la estadística', error);
       });
@@ -1233,7 +1234,9 @@ class StatisticsComponent {
       console.error('Formulario inválido');
       return;
     }
-    this.apiService.updateStatistic(id, this.statisticForm.value).subscribe(statistic => {
+    // Solo actualizar los campos modificados
+    const updatedStatisticData = this.statisticForm.value;
+    this.apiService.updateStatistic(id, updatedStatisticData).subscribe(statistic => {
       const index = this.statistics.findIndex(stat => stat.id === id);
       if (index !== -1) {
         this.statistics[index] = statistic; // Actualizar la estadística
