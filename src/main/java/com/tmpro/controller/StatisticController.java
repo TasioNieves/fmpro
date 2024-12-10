@@ -25,7 +25,7 @@ public class StatisticController {
     public ResponseEntity<Statistic> createStatistic(@RequestBody Statistic statistic) {
         // Solo extraemos el id del jugador, no el objeto completo
         Player player = new Player();
-        player.setId(statistic.getPlayer().getId());  // Solo el id del jugador
+        player.setName(statistic.getPlayer().getName());  // Solo el id del jugador
         statistic.setPlayer(player);
 
         Statistic createdStatistic = statisticService.createStatistic(statistic);
