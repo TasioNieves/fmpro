@@ -1196,20 +1196,19 @@ class StatisticsComponent {
     });
   }
   createStatistic() {
-    if (!this.newStatistic.playerId) {
-      console.error('Debe seleccionar un jugador');
-      return;
+    if (this.statisticForm.valid) {
+      // Obtén los valores del formulario
+      const statistic = this.statisticForm.value;
+      this.apiService.createStatistic(statistic).subscribe(response => {
+        console.log('Statistic creada con éxito:', response);
+        this.statistics.push(response); // Agrega la estadística creada a la lista
+        this.statisticForm.reset(); // Limpia el formulario después de enviar
+      }, error => {
+        console.error('Error al crear la estadística:', error);
+      });
+    } else {
+      console.error('Formulario inválido. Asegúrate de completar todos los campos correctamente.');
     }
-    this.apiService.createStatistic(this.newStatistic).subscribe(statistic => {
-      this.statistics.push(statistic);
-      this.newStatistic = {
-        playerId: '',
-        goals: 0,
-        assists: 0
-      }; // Limpiar formulario
-    }, error => {
-      console.error('Error al crear estadística:', error);
-    });
   }
   deleteStatisticById(id) {
     this.apiService.deleteStatistic(id).subscribe(() => {
