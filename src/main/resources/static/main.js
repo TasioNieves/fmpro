@@ -1151,15 +1151,10 @@ class StatisticsComponent {
     this.fb = fb;
     this.players = []; // Lista de jugadores
     this.statistics = []; // Lista de estadísticas
-    this.statisticForm = this.fb.group({
-      player: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
-      match: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
-      goals: [0, [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.min(0)]],
-      assists: [0, [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.min(0)]],
-      minutesPlayed: [0, [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.min(0)]]
-    });
   }
+
   ngOnInit() {
+    this.createForm();
     this.getPlayers(); // Cargar jugadores al inicio
     this.getStatistics(); // Cargar estadísticas al inicio
   }
@@ -1185,6 +1180,15 @@ class StatisticsComponent {
     } else {
       console.error('Formulario inválido');
     }
+  }
+  createForm() {
+    this.statisticForm = this.fb.group({
+      player: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
+      match: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
+      goals: [0, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
+      assists: [0, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
+      minutesPlayed: [0, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required]
+    });
   }
   getStatistics() {
     this.apiService.getStatistics().subscribe(data => {
