@@ -1089,7 +1089,7 @@ function StatisticsComponent_option_10_Template(rf, ctx) {
   }
   if (rf & 2) {
     const player_r3 = ctx.$implicit;
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngValue", player_r3);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngValue", player_r3.id);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](player_r3.name);
   }
@@ -1200,7 +1200,7 @@ class StatisticsComponent {
     }
     // Preparar el payload con playerId y otros datos del formulario
     const payload = {
-      player: selectedPlayer.id,
+      playerId: selectedPlayer.id,
       match: formValue.match,
       goals: formValue.goals,
       assists: formValue.assists,
