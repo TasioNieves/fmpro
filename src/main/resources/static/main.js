@@ -1168,7 +1168,7 @@ class StatisticsComponent {
   // Inicializa el formulario con las validaciones
   initForm() {
     this.statisticForm = this.fb.group({
-      player: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
+      playerId: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
       match: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
       goals: [0, [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.min(0)]],
       assists: [0, [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.min(0)]],
