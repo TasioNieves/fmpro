@@ -1178,34 +1178,47 @@ class StatisticsComponent {
   // Cargar jugadores desde el API
   getPlayers() {
     this.apiService.getPlayers().subscribe(data => {
-      this.players = data; // Se asume que los datos incluyen id y name
+      this.players = data;
     }, error => {
       console.error('Error al obtener jugadores:', error);
     });
   }
+  // Método llamado cuando se cambia de jugador
+  onPlayerChange(event) {
+    const value = event.target.value;
+    console.log('Jugador seleccionado:', value);
+    console.log('Lista de jugadores:', this.players);
+  }
   // Enviar el formulario para crear una nueva estadística
   onSubmit() {
-    if (this.statisticForm.invalid) {
-      console.error('Formulario inválido');
+    const formValue = this.statisticForm.value;
+    // Buscar el jugador seleccionado por nombre (o usar el ID directamente)
+    const selectedPlayer = this.players.find(player => player.name === formValue.player);
+    if (!selectedPlayer) {
+      console.error('Jugador no encontrado');
       return;
     }
-    const formValue = this.statisticForm.value;
+    // Preparar el payload con playerId y otros datos del formulario
     const payload = {
-      playerId: formValue.player,
+      playerId: selectedPlayer.id,
       match: formValue.match,
       goals: formValue.goals,
       assists: formValue.assists,
-      minutesPlayed: formValue.minutesPlayed
+      minutesPlayed: formValue.minutesPlayed // Minutos jugados
     };
+
     console.log('Payload enviado:', payload);
-    this.apiService.createStatistic(payload).subscribe({
+    // Enviar el payload al backend
+    this.apiService.createPlayer(payload).subscribe({
       next: response => {
         console.log('Estadística guardada correctamente', response);
-        this.getStatistics(); // Actualizar lista de estadísticas
-        this.clearForm(); // Limpiar formulario después de guardar
+        this.getStatistics(); // Recargar las estadísticas después de guardar
+        this.clearForm(); // Limpiar el formulario
       },
 
-      error: err => console.error('Error al guardar estadística', err)
+      error: err => {
+        console.error('Error al guardar estadística', err);
+      }
     });
   }
   // Cargar estadísticas desde el API
@@ -1234,6 +1247,7 @@ class StatisticsComponent {
       console.error('Formulario inválido');
       return;
     }
+    // Solo actualizar los campos modificados
     const updatedStatisticData = this.statisticForm.value;
     this.apiService.updateStatistic(id, updatedStatisticData).subscribe(statistic => {
       const index = this.statistics.findIndex(stat => stat.id === id);
