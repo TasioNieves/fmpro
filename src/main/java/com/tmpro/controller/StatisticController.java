@@ -21,12 +21,17 @@ public class StatisticController {
         this.statisticService = statisticService;
     }
 
-    // Crear una nueva estadística
     @PostMapping
     public ResponseEntity<Statistic> createStatistic(@RequestBody Statistic statistic) {
+        // Solo extraemos el id del jugador, no el objeto completo
+        Player player = new Player();
+        player.setId(statistic.getPlayer().getId());  // Solo el id del jugador
+        statistic.setPlayer(player);
+
         Statistic createdStatistic = statisticService.createStatistic(statistic);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdStatistic);
     }
+
 
     // Obtener estadísticas
     @GetMapping

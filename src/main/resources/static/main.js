@@ -1197,6 +1197,7 @@ class StatisticsComponent {
         assists: formData.assists,
         minutesPlayed: formData.minutesPlayed
       };
+      console.log(statisticData);
       // Enviar el formulario al backend
       this.apiService.createStatistic(statisticData).subscribe(response => {
         console.log('Estadística guardada con éxito', response);
