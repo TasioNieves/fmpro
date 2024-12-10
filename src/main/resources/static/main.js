@@ -1191,6 +1191,7 @@ class StatisticsComponent {
   onSubmit() {
     if (this.statisticForm.valid) {
       const formData = this.statisticForm.value;
+      console.log('Lista de jugadores:', this.players);
       // Asegúrate de que el player tiene solo el id
       const statisticData = {
         player: formData.player,
