@@ -1176,6 +1176,8 @@ class StatisticsComponent {
       const statistic = this.statisticForm.value;
       this.apiService.createStatistic(statistic).subscribe(response => {
         console.log('Statistic creada con éxito:', response);
+        this.statistics.push(response); // Agrega la estadística creada a la lista
+        this.statisticForm.reset(); // Limpia el formulario después de enviar
       }, error => {
         console.error('Error al crear statistic:', error);
       });
@@ -1190,21 +1192,6 @@ class StatisticsComponent {
       console.error('Error al obtener estadísticas:', error);
     });
   }
-  createStatistic() {
-    if (this.statisticForm.valid) {
-      // Obtén los valores del formulario
-      const statistic = this.statisticForm.value;
-      this.apiService.createStatistic(statistic).subscribe(response => {
-        console.log('Statistic creada con éxito:', response);
-        this.statistics.push(response); // Agrega la estadística creada a la lista
-        this.statisticForm.reset(); // Limpia el formulario después de enviar
-      }, error => {
-        console.error('Error al crear la estadística:', error);
-      });
-    } else {
-      console.error('Formulario inválido. Asegúrate de completar todos los campos correctamente.');
-    }
-  }
   deleteStatisticById(id) {
     this.apiService.deleteStatistic(id).subscribe(() => {
       this.statistics = this.statistics.filter(stat => stat.id !== id);
@@ -1213,11 +1200,11 @@ class StatisticsComponent {
     });
   }
   updateStatisticById(id) {
-    if (!this.newStatistic.playerId) {
+    if (!this.statisticForm.value.player) {
       console.error('Debe seleccionar un jugador para actualizar');
       return;
     }
-    this.apiService.updateStatistic(id, this.newStatistic).subscribe(statistic => {
+    this.apiService.updateStatistic(id, this.statisticForm.value).subscribe(statistic => {
       const index = this.statistics.findIndex(stat => stat.id === id);
       if (index !== -1) {
         this.statistics[index] = statistic; // Actualizar la estadística
