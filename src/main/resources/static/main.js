@@ -1183,6 +1183,10 @@ class StatisticsComponent {
       console.error('Error al obtener jugadores:', error);
     });
   }
+  onPlayerChange(event) {
+    const value = event.target.value;
+    console.log('Jugador seleccionado:', value);
+  }
   // Enviar el formulario para crear una nueva estadística
   onSubmit() {
     if (this.statisticForm.valid) {
@@ -1257,7 +1261,7 @@ class StatisticsComponent {
       selectors: [["app-statistics"]],
       decls: 49,
       vars: 5,
-      consts: [[1, "mt-4"], [3, "formGroup", "ngSubmit"], [1, "form-group"], ["for", "player"], ["id", "player", "formControlName", "player", 1, "form-control"], ["value", ""], [3, "value", 4, "ngFor", "ngForOf"], ["class", "text-danger", 4, "ngIf"], ["for", "match"], ["id", "match", "type", "text", "formControlName", "match", "placeholder", "Ingrese detalles del partido", 1, "form-control"], ["for", "goals"], ["id", "goals", "type", "number", "formControlName", "goals", "placeholder", "Ingrese el n\u00FAmero de goles", 1, "form-control"], ["for", "assists"], ["id", "assists", "type", "number", "formControlName", "assists", "placeholder", "Ingrese el n\u00FAmero de asistencias", 1, "form-control"], ["for", "minutesPlayed"], ["id", "minutesPlayed", "type", "number", "formControlName", "minutesPlayed", "placeholder", "Ingrese los minutos jugados", 1, "form-control"], ["type", "submit", 1, "btn", "btn-primary", "mt-3", 3, "disabled"], [1, "container", "mt-4"], [1, "table-responsive"], [1, "table", "table-bordered", "table-striped"], [1, "thead-dark"], [4, "ngFor", "ngForOf"], [3, "value"], [1, "text-danger"], [1, "btn", "btn-warning", "btn-sm", 3, "click"], [1, "btn", "btn-danger", "btn-sm", 3, "click"]],
+      consts: [[1, "mt-4"], [3, "formGroup", "ngSubmit"], [1, "form-group"], ["for", "player"], ["id", "player", "formControlName", "player", 1, "form-control", 3, "change"], ["value", ""], [3, "value", 4, "ngFor", "ngForOf"], ["class", "text-danger", 4, "ngIf"], ["for", "match"], ["id", "match", "type", "text", "formControlName", "match", "placeholder", "Ingrese detalles del partido", 1, "form-control"], ["for", "goals"], ["id", "goals", "type", "number", "formControlName", "goals", "placeholder", "Ingrese el n\u00FAmero de goles", 1, "form-control"], ["for", "assists"], ["id", "assists", "type", "number", "formControlName", "assists", "placeholder", "Ingrese el n\u00FAmero de asistencias", 1, "form-control"], ["for", "minutesPlayed"], ["id", "minutesPlayed", "type", "number", "formControlName", "minutesPlayed", "placeholder", "Ingrese los minutos jugados", 1, "form-control"], ["type", "submit", 1, "btn", "btn-primary", "mt-3", 3, "disabled"], [1, "container", "mt-4"], [1, "table-responsive"], [1, "table", "table-bordered", "table-striped"], [1, "thead-dark"], [4, "ngFor", "ngForOf"], [3, "value"], [1, "text-danger"], [1, "btn", "btn-warning", "btn-sm", 3, "click"], [1, "btn", "btn-danger", "btn-sm", 3, "click"]],
       template: function StatisticsComponent_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 0)(1, "h3");
@@ -1270,7 +1274,11 @@ class StatisticsComponent {
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](4, "div", 2)(5, "label", 3);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](6, "Jugador:");
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](7, "select", 4)(8, "option", 5);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](7, "select", 4);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("change", function StatisticsComponent_Template_select_change_7_listener($event) {
+            return ctx.onPlayerChange($event);
+          });
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](8, "option", 5);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](9, "Seleccione un jugador");
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](10, StatisticsComponent_option_10_Template, 2, 2, "option", 6);
