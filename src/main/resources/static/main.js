@@ -1209,7 +1209,7 @@ class StatisticsComponent {
 
     console.log('Payload enviado:', payload);
     // Enviar el payload al backend
-    this.apiService.createPlayer(payload).subscribe({
+    this.apiService.createStatistic(payload).subscribe({
       next: response => {
         console.log('Estadística guardada correctamente', response);
         this.getStatistics(); // Recargar las estadísticas después de guardar
