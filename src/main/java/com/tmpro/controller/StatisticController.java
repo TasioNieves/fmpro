@@ -4,6 +4,7 @@ import com.tmpro.model.Player;
 import com.tmpro.model.PlayerDTO;
 import com.tmpro.model.Statistic;
 import com.tmpro.service.StatisticService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +25,7 @@ public class StatisticController {
     @PostMapping
     public ResponseEntity<Statistic> createStatistic(@RequestBody Statistic statistic) {
         Statistic createdStatistic = statisticService.createStatistic(statistic);
-        return ResponseEntity.ok(createdStatistic);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdStatistic);
     }
 
     // Obtener estadísticas
