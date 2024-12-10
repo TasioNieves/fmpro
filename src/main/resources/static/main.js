@@ -1191,6 +1191,7 @@ class StatisticsComponent {
       newStatistic.player = {
         id: newStatistic.player
       }; // Asignar solo el id del jugador
+      console.log(newStatistic);
       this.apiService.createStatistic(newStatistic).subscribe(response => {
         console.log('Estadística creada con éxito:', response);
         this.getStatistics(); // Recargar estadísticas
