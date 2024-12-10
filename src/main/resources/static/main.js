@@ -1072,10 +1072,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   StatisticsComponent: () => (/* binding */ StatisticsComponent)
 /* harmony export */ });
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ 4456);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 7580);
 /* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../services/api.service */ 3366);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ 4456);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ 316);
+
 
 
 
@@ -1157,15 +1158,24 @@ class StatisticsComponent {
     this.fb = fb;
     this.players = []; // Lista de jugadores
     this.statistics = []; // Lista de estadísticas
-    this.newStatistic = {}; // Nueva estadística
-    this.selectedStatistic = null; // Nueva estadística
   }
 
   ngOnInit() {
     this.getPlayers(); // Cargar jugadores al inicio
     this.getStatistics(); // Cargar estadísticas al inicio
+    this.initForm(); // Inicializar el formulario reactivo
   }
-
+  // Inicializa el formulario con las validaciones
+  initForm() {
+    this.statisticForm = this.fb.group({
+      player: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
+      match: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
+      goals: [0, [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.min(0)]],
+      assists: [0, [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.min(0)]],
+      minutesPlayed: [0, [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.min(0)]] // Minutos jugados (mínimo 0)
+    });
+  }
+  // Cargar jugadores desde el API
   getPlayers() {
     this.apiService.getPlayers().subscribe(data => {
       this.players = data;
@@ -1173,20 +1183,22 @@ class StatisticsComponent {
       console.error('Error al obtener jugadores:', error);
     });
   }
+  // Enviar el formulario para crear una nueva estadística
   onSubmit() {
-    if (this.selectedStatistic) {
-      this.apiService.createStatistic(this.newStatistic).subscribe(response => {
-        console.log(this.newStatistic);
-        console.log('Statistic creada con éxito:', response);
-        this.getStatistics();
-        this.clearForm();
+    if (this.statisticForm.valid) {
+      const newStatistic = this.statisticForm.value; // Obtener los valores del formulario
+      this.apiService.createStatistic(newStatistic).subscribe(response => {
+        console.log('Estadística creada con éxito:', response);
+        this.getStatistics(); // Recargar estadísticas
+        this.clearForm(); // Limpiar el formulario
       }, error => {
-        console.error('Error al crear statistic:', error);
+        console.error('Error al crear estadística:', error);
       });
     } else {
       console.error('Formulario inválido');
     }
   }
+  // Cargar estadísticas desde el API
   getStatistics() {
     this.apiService.getStatistics().subscribe(data => {
       this.statistics = data;
@@ -1194,10 +1206,11 @@ class StatisticsComponent {
       console.error('Error al obtener estadísticas:', error);
     });
   }
+  // Limpiar el formulario
   clearForm() {
-    this.newStatistic = {};
-    this.selectedStatistic = null;
+    this.statisticForm.reset();
   }
+  // Eliminar una estadística por ID
   deleteStatisticById(id) {
     this.apiService.deleteStatistic(id).subscribe(() => {
       this.statistics = this.statistics.filter(stat => stat.id !== id);
@@ -1205,9 +1218,10 @@ class StatisticsComponent {
       console.error('Error al eliminar estadística:', error);
     });
   }
+  // Actualizar una estadística por ID
   updateStatisticById(id) {
-    if (!this.statisticForm.value.player) {
-      console.error('Debe seleccionar un jugador para actualizar');
+    if (this.statisticForm.invalid) {
+      console.error('Formulario inválido');
       return;
     }
     this.apiService.updateStatistic(id, this.statisticForm.value).subscribe(statistic => {
