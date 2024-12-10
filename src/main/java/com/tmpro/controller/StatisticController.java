@@ -1,5 +1,7 @@
 package com.tmpro.controller;
 
+import com.tmpro.model.Player;
+import com.tmpro.model.PlayerDTO;
 import com.tmpro.model.Statistic;
 import com.tmpro.service.StatisticService;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,15 @@ public class StatisticController {
     public ResponseEntity<Statistic> createStatistic(@RequestBody Statistic statistic) {
         Statistic createdStatistic = statisticService.createStatistic(statistic);
         return ResponseEntity.ok(createdStatistic);
+    }
+
+    // Obtener estadísticas
+    @GetMapping
+    public ResponseEntity<List<Statistic>> getAllPlayers() {
+
+        List<Statistic> statistic = statisticService.getAllStatistic();
+
+        return ResponseEntity.ok(statistic);  // Devuelve la lista de jugadores
     }
 
     // Obtener estadística por ID

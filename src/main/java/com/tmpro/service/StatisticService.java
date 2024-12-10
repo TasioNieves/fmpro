@@ -1,5 +1,6 @@
 package com.tmpro.service;
 
+import com.tmpro.model.Player;
 import com.tmpro.model.Statistic;
 import com.tmpro.repository.StatisticRepository;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,10 @@ public class StatisticService {
     // Obtener todas las estadísticas de un jugador
     public List<Statistic> getStatisticsByPlayerId(Long playerId) {
         return statisticRepository.findByPlayerId(playerId);
+    }
+    // Obtener todos los jugadores
+    public List<Statistic> getAllStatistic() {
+        return statisticRepository.findAll();
     }
 
     // Actualizar una estadística
