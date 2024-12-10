@@ -1088,10 +1088,10 @@ function StatisticsComponent_option_10_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
   }
   if (rf & 2) {
-    const player2_r3 = ctx.$implicit;
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("value", player2_r3.id);
+    const player_r3 = ctx.$implicit;
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("value", player_r3.id);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](player2_r3.name);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](player_r3.name);
   }
 }
 function StatisticsComponent_div_11_Template(rf, ctx) {
@@ -1186,17 +1186,24 @@ class StatisticsComponent {
   // Enviar el formulario para crear una nueva estadística
   onSubmit() {
     if (this.statisticForm.valid) {
-      const newStatistic = this.statisticForm.value; // Obtener los valores del formulario
-      console.log(newStatistic);
-      this.apiService.createStatistic(newStatistic).subscribe(response => {
-        console.log('Estadística creada con éxito:', response);
-        this.getStatistics(); // Recargar estadísticas
-        this.clearForm(); // Limpiar el formulario
+      const formData = this.statisticForm.value;
+      // Asegúrate de que el player tiene solo el id
+      const statisticData = {
+        player: {
+          id: formData.player
+        },
+        match: formData.match,
+        goals: formData.goals,
+        assists: formData.assists,
+        minutesPlayed: formData.minutesPlayed
+      };
+      // Enviar el formulario al backend
+      this.apiService.createStatistic(statisticData).subscribe(response => {
+        console.log('Estadística guardada con éxito', response);
+        // Aquí puedes actualizar la lista de estadísticas si es necesario
       }, error => {
-        console.error('Error al crear estadística:', error);
+        console.error('Error al guardar la estadística', error);
       });
-    } else {
-      console.error('Formulario inválido');
     }
   }
   // Cargar estadísticas desde el API
