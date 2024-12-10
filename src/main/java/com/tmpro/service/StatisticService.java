@@ -1,8 +1,10 @@
 package com.tmpro.service;
 
-import com.tmpro.model.Player;
 import com.tmpro.model.Statistic;
+import com.tmpro.model.Player;
 import com.tmpro.repository.StatisticRepository;
+import com.tmpro.repository.PlayerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,15 +13,27 @@ import java.util.Optional;
 @Service
 public class StatisticService {
 
-    private final StatisticRepository statisticRepository;
+    @Autowired
+    private StatisticRepository statisticRepository;
 
-    public StatisticService(StatisticRepository statisticRepository) {
-        this.statisticRepository = statisticRepository;
-    }
+    @Autowired
+    private PlayerRepository playerRepository;
 
     // Crear una nueva estadística
     public Statistic createStatistic(Statistic statistic) {
+        // Buscar al jugador usando el ID proporcionado
+        Player player = playerRepository.findById(statistic.getPlayer().getId())
+                .orElseThrow(() -> new RuntimeException("Jugador no encontrado"));
+
+        // Asignar el jugador a la estadística
+        statistic.setPlayer(player);
+
         return statisticRepository.save(statistic);
+    }
+
+    // Obtener todas las estadísticas
+    public List<Statistic> getAllStatistic() {
+        return statisticRepository.findAll();
     }
 
     // Obtener estadística por ID
@@ -31,21 +45,18 @@ public class StatisticService {
     public List<Statistic> getStatisticsByPlayerId(Long playerId) {
         return statisticRepository.findByPlayerId(playerId);
     }
-    // Obtener todos los jugadores
-    public List<Statistic> getAllStatistic() {
-        return statisticRepository.findAll();
-    }
 
     // Actualizar una estadística
     public Statistic updateStatistic(Long id, Statistic updatedStatistic) {
-        return statisticRepository.findById(id).map(statistic -> {
-            statistic.setPlayer(updatedStatistic.getPlayer());
-            statistic.setMatch(updatedStatistic.getMatch());
-            statistic.setGoals(updatedStatistic.getGoals());
-            statistic.setAssists(updatedStatistic.getAssists());
-            statistic.setMinutesPlayed(updatedStatistic.getMinutesPlayed());
-            return statisticRepository.save(statistic);
-        }).orElseThrow(() -> new RuntimeException("Estadística no encontrada con ID: " + id));
+        // Verificar si la estadística existe
+        return statisticRepository.findById(id)
+                .map(statistic -> {
+                    statistic.setGoals(updatedStatistic.getGoals());
+                    statistic.setAssists(updatedStatistic.getAssists());
+                    statistic.setMinutesPlayed(updatedStatistic.getMinutesPlayed());
+                    statistic.setMatch(updatedStatistic.getMatch());
+                    return statisticRepository.save(statistic);
+                }).orElseThrow(() -> new RuntimeException("Estadística no encontrada"));
     }
 
     // Eliminar una estadística
