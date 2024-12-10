@@ -1199,7 +1199,16 @@ class StatisticsComponent {
     console.log('Lista de jugadores:', this.players);
   }
   // Enviar el formulario para crear una nueva estadística
+  // Para distinguir si es una nueva estadística o una actualización
   onSubmit() {
+    if (this.selectedStatistic) {
+      this.onUpdateSubmit(); // Si hay una estadística seleccionada, actualizarla
+    } else {
+      this.createStatistic(); // Si no, crear una nueva estadística
+    }
+  }
+  // Crear una nueva estadística
+  createStatistic() {
     const formValue = this.statisticForm.value;
     // Buscar el jugador seleccionado por ID
     const selectedPlayer = this.players.find(player => player.id === formValue.player);
