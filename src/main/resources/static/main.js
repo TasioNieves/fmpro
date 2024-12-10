@@ -1189,12 +1189,15 @@ class StatisticsComponent {
       const formData = this.statisticForm.value;
       // Asegúrate de que el player tiene solo el id
       const statisticData = {
-        player: formData.player,
+        player: {
+          id: formData.player
+        },
         match: formData.match,
         goals: formData.goals,
         assists: formData.assists,
         minutesPlayed: formData.minutesPlayed
       };
+      console.log('Valor del formulario:', this.statisticForm.value);
       // Enviar el formulario al backend
       this.apiService.createStatistic(statisticData).subscribe(response => {
         console.log('Estadística guardada con éxito', response);
