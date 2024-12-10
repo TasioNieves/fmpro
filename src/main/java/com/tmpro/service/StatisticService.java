@@ -22,10 +22,8 @@ public class StatisticService {
     // Crear una nueva estadística
     public Statistic createStatistic(Statistic statistic) {
         // Buscar al jugador usando el ID proporcionado
-        Player player = playerRepository.findByName(statistic.getPlayer().getName())
+        Player player = playerRepository.findById(statistic.getPlayer().getId())
                 .orElseThrow(() -> new RuntimeException("Jugador no encontrado"));
-        statistic.setPlayer(player);
-
 
         // Asignar el jugador a la estadística
         statistic.setPlayer(player);
