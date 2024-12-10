@@ -34,21 +34,52 @@ public class Statistic {
     }
 
     // Getters y setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
 
-    public Player getPlayer() { return player; }
-    public void setPlayer(Player player) { this.player = player; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getMatch() { return match; }
-    public void setMatch(String match) { this.match = match; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public int getGoals() { return goals; }
-    public void setGoals(int goals) { this.goals = goals; }
+    public Player getPlayer() {
+        return player;
+    }
 
-    public int getAssists() { return assists; }
-    public void setAssists(int assists) { this.assists = assists; }
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
 
-    public int getMinutesPlayed() { return minutesPlayed; }
-    public void setMinutesPlayed(int minutesPlayed) { this.minutesPlayed = minutesPlayed; }
+    public int getGoals() {
+        return goals;
+    }
+
+    public void setGoals(int goals) {
+        this.goals = goals;
+    }
+
+    public int getAssists() {
+        return assists;
+    }
+
+    public void setAssists(int assists) {
+        this.assists = assists;
+    }
+
+    public int getMinutesPlayed() {
+        return minutesPlayed;
+    }
+
+    public void setMinutesPlayed(int minutesPlayed) {
+        this.minutesPlayed = minutesPlayed;
+    }
+
+    public String getMatch() {
+        return match;
+    }
+
+    public void setMatch(String match) {
+        this.match = match;
+    }
 }
