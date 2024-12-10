@@ -19,8 +19,7 @@ public class Player {
     @JoinColumn(name = "team_id", nullable = false)  // Clave foránea que referencia a la tabla Team
     private Team team;
 
-    @OneToMany(mappedBy = "player")
-    private List<Statistic> statistics; // Relación con Statistic
+
 
     // Getters y Setters
 
@@ -65,11 +64,5 @@ public class Player {
         this.team = team;
     }
 
-    public List<Statistic> getStatistics() {
-        return statistics;
-    }
 
-    public void setStatistics(List<Statistic> statistics) {
-        this.statistics = statistics;
-    }
 }
