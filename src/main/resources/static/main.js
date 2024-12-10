@@ -1192,15 +1192,17 @@ class StatisticsComponent {
   // Enviar el formulario para crear una nueva estadística
   onSubmit() {
     const formValue = this.statisticForm.value;
-    // Buscar el jugador seleccionado por nombre (o usar el ID directamente)
+    // Buscar el jugador seleccionado por ID
     const selectedPlayer = this.players.find(player => player.id === formValue.player);
     if (!selectedPlayer) {
       console.error('Jugador no encontrado');
       return;
     }
-    // Preparar el payload con playerId y otros datos del formulario
+    // Preparar el payload con el formato adecuado
     const payload = {
-      playerId: selectedPlayer.id,
+      player: {
+        id: selectedPlayer.id
+      },
       match: formValue.match,
       goals: formValue.goals,
       assists: formValue.assists,
