@@ -1300,12 +1300,12 @@ class StatisticsComponent {
       type: StatisticsComponent,
       selectors: [["app-statistics"]],
       decls: 51,
-      vars: 5,
+      vars: 7,
       consts: [[1, "mt-4"], [3, "formGroup", "ngSubmit"], [1, "form-group"], ["for", "player"], ["id", "player", "formControlName", "player", 1, "form-control", 3, "change"], ["value", ""], [3, "ngValue", 4, "ngFor", "ngForOf"], ["class", "text-danger", 4, "ngIf"], ["for", "match"], ["id", "match", "type", "text", "formControlName", "match", "placeholder", "Ingrese detalles del partido", 1, "form-control"], ["for", "goals"], ["id", "goals", "type", "number", "formControlName", "goals", "placeholder", "Ingrese el n\u00FAmero de goles", 1, "form-control"], ["for", "assists"], ["id", "assists", "type", "number", "formControlName", "assists", "placeholder", "Ingrese el n\u00FAmero de asistencias", 1, "form-control"], ["for", "minutesPlayed"], ["id", "minutesPlayed", "type", "number", "formControlName", "minutesPlayed", "placeholder", "Ingrese los minutos jugados", 1, "form-control"], ["type", "submit", 1, "btn", "btn-primary", "mt-3", 3, "disabled"], [1, "container", "mt-4"], [1, "table-responsive"], [1, "table", "table-bordered", "table-striped"], [1, "thead-dark"], [4, "ngFor", "ngForOf"], [3, "ngValue"], [1, "text-danger"], [1, "btn", "btn-warning", "btn-sm", 3, "click"], [1, "btn", "btn-danger", "btn-sm", 3, "click"]],
       template: function StatisticsComponent_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 0)(1, "h3");
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](2, "Agregar Nueva Estad\u00EDstica");
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](2);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](3, "form", 1);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("ngSubmit", function StatisticsComponent_Template_form_ngSubmit_3_listener() {
@@ -1346,7 +1346,7 @@ class StatisticsComponent {
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](27, "input", 15);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](28, "button", 16);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](29, " Guardar Estad\u00EDstica ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](29);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()();
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](30, "div", 17)(31, "h2");
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](32, "Estad\u00EDsticas del Jugador");
@@ -1374,16 +1374,20 @@ class StatisticsComponent {
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()()();
         }
         if (rf & 2) {
-          let tmp_2_0;
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](3);
+          let tmp_3_0;
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](2);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](ctx.selectedStatistic ? "Actualizar Estad\u00EDstica" : "Agregar Nueva Estad\u00EDstica");
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("formGroup", ctx.statisticForm);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](7);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngForOf", ctx.players);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ((tmp_2_0 = ctx.statisticForm.get("player")) == null ? null : tmp_2_0.touched) && ((tmp_2_0 = ctx.statisticForm.get("player")) == null ? null : tmp_2_0.invalid));
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ((tmp_3_0 = ctx.statisticForm.get("player")) == null ? null : tmp_3_0.touched) && ((tmp_3_0 = ctx.statisticForm.get("player")) == null ? null : tmp_3_0.invalid));
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](17);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("disabled", ctx.statisticForm.invalid);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](22);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"](" ", ctx.selectedStatistic ? "Actualizar Estad\u00EDstica" : "Guardar Estad\u00EDstica", " ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](21);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngForOf", ctx.statistics);
         }
       },
