@@ -1186,6 +1186,7 @@ class StatisticsComponent {
   onPlayerChange(event) {
     const value = event.target.value;
     console.log('Jugador seleccionado:', value);
+    console.log('Lista de jugadores:', this.players);
   }
   // Enviar el formulario para crear una nueva estadística
   onSubmit() {
