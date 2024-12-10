@@ -1187,10 +1187,6 @@ class StatisticsComponent {
   onSubmit() {
     if (this.statisticForm.valid) {
       const newStatistic = this.statisticForm.value; // Obtener los valores del formulario
-      // Aquí asignamos solo el id del jugador al campo player
-      newStatistic.player = {
-        id: newStatistic.player
-      }; // Asignar solo el id del jugador
       console.log(newStatistic);
       this.apiService.createStatistic(newStatistic).subscribe(response => {
         console.log('Estadística creada con éxito:', response);
