@@ -1,18 +1,24 @@
 package com.tmpro.model;
 
-import com.tmpro.model.Statistic;
-
 public class StatisticDTO {
-
     private Long id;
-    private Long playerId;
+    private PlayerDTO player;
     private String match;
     private int goals;
     private int assists;
     private int minutesPlayed;
 
-    // Getters y setters
+    // Constructor que acepta un objeto Statistic
+    public StatisticDTO(Statistic statistic) {
+        this.id = statistic.getId();
+        this.player = new PlayerDTO(statistic.getPlayer());  // Convertir Player a PlayerDTO
+        this.match = statistic.getMatch();
+        this.goals = statistic.getGoals();
+        this.assists = statistic.getAssists();
+        this.minutesPlayed = statistic.getMinutesPlayed();
+    }
 
+    // Getters y setters
     public Long getId() {
         return id;
     }
@@ -21,12 +27,12 @@ public class StatisticDTO {
         this.id = id;
     }
 
-    public Long getPlayerId() {
-        return playerId;
+    public PlayerDTO getPlayer() {
+        return player;
     }
 
-    public void setPlayerId(Long playerId) {
-        this.playerId = playerId;
+    public void setPlayer(PlayerDTO player) {
+        this.player = player;
     }
 
     public String getMatch() {
@@ -59,14 +65,5 @@ public class StatisticDTO {
 
     public void setMinutesPlayed(int minutesPlayed) {
         this.minutesPlayed = minutesPlayed;
-    }
-
-    public StatisticDTO(Statistic statistic) {
-        this.id = statistic.getId();
-        this.playerId = statistic.getPlayer().getId(); // Solo el ID del jugador
-        this.match = statistic.getMatch();
-        this.goals = statistic.getGoals();
-        this.assists = statistic.getAssists();
-        this.minutesPlayed = statistic.getMinutesPlayed();
     }
 }

@@ -6,7 +6,7 @@ import java.util.List;
 
 public class PlayerDTO {
 
-
+    private Long id;
 
     private String name;  // Clave primaria
 
@@ -19,7 +19,15 @@ public class PlayerDTO {
     private String team_id;
 
 
+    // Constructor sin argumentos
+    public PlayerDTO() {}
 
+    // Constructor que acepta un objeto Player
+    public PlayerDTO(Player player) {
+        this.id = player.getId();
+        this.name = player.getName();
+        this.position = player.getPosition();
+    }
     // Getters y Setters
 
 
