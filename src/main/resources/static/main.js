@@ -1151,11 +1151,6 @@ class StatisticsComponent {
     this.fb = fb;
     this.players = []; // Lista de jugadores
     this.statistics = []; // Lista de estadísticas
-    this.newStatistic = {
-      playerId: '',
-      goals: 0,
-      assists: 0
-    }; // Nueva estadística
     this.statisticForm = this.fb.group({
       player: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],
       match: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required],

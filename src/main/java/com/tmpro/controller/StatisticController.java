@@ -33,7 +33,7 @@ public class StatisticController {
 
         List<Statistic> statistic = statisticService.getAllStatistic();
 
-        return ResponseEntity.ok(statistic);  // Devuelve la lista de jugadores
+        return ResponseEntity.ok(statistic);
     }
 
     // Obtener estadística por ID
