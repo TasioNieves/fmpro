@@ -1116,9 +1116,8 @@ function StatisticsComponent_tr_18_Template(rf, ctx) {
   }
   if (rf & 2) {
     const stat_r2 = ctx.$implicit;
-    const ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](ctx_r0.player.id);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](stat_r2.id);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](stat_r2.match);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](2);
@@ -1170,6 +1169,7 @@ class StatisticsComponent {
   createStatistic() {
     this.ApiService.createStatistic(this.newStatistic).subscribe(statistic => {
       this.statistics.push(statistic); // Agregar la nueva estadística al array
+      console.log(statistic);
       this.newStatistic = {
         playerId: '',
         goals: 0,
