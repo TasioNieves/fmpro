@@ -1203,6 +1203,7 @@ class StatisticsComponent {
   getStatistics() {
     this.apiService.getStatistics().subscribe(data => {
       this.statistics = data;
+      this.filteredStatistics = data;
     }, error => {
       console.error('Error al obtener estadísticas:', error);
     });
