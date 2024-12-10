@@ -1189,9 +1189,7 @@ class StatisticsComponent {
       const formData = this.statisticForm.value;
       // Asegúrate de que el player tiene solo el id
       const statisticData = {
-        player: {
-          id: formData.player
-        },
+        player: formData.player,
         match: formData.match,
         goals: formData.goals,
         assists: formData.assists,
