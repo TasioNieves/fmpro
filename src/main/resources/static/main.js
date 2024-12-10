@@ -1145,8 +1145,10 @@ class StatisticsComponent {
     this.players = []; // Array para almacenar jugadores
     this.statistics = []; // Array para almacenar estadísticas
     this.newStatistic = {}; // Nueva estadística
+    this.player = {
+      name: ''
+    };
   }
-
   ngOnInit() {
     this.getPlayers(); // Obtener jugadores al inicializar el componente
     this.getStatistics(); // Obtener estadísticas al inicializar el componente
