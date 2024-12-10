@@ -1,6 +1,7 @@
 package com.tmpro.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 
@@ -13,6 +14,7 @@ public class Statistic {
 
     @ManyToOne
     @JoinColumn(name = "player_id", nullable = false)
+    @JsonIgnoreProperties({"team", "position", "dorsal"})
     private Player player;
 
 
