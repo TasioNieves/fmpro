@@ -1134,7 +1134,7 @@ function StatisticsComponent_option_27_Template(rf, ctx) {
   }
   if (rf & 2) {
     const player_r6 = ctx.$implicit;
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("value", player_r6.id);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("value", player_r6.name);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](player_r6.name);
   }
@@ -1207,7 +1207,7 @@ class StatisticsComponent {
       selectors: [["app-statistics"]],
       decls: 42,
       vars: 6,
-      consts: [[1, "container", "mt-4"], [1, "table-responsive"], [1, "table", "table-bordered", "table-striped"], [1, "thead-dark"], [4, "ngFor", "ngForOf"], [1, "mt-4"], [3, "ngSubmit"], [1, "mb-3"], ["for", "player", 1, "form-label"], ["id", "player", "name", "player_id", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], [3, "value", 4, "ngFor", "ngForOf"], [1, "form-group"], ["for", "match"], ["id", "match", "name", "match", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "goals"], ["id", "goals", "name", "goals", "type", "number", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "assists"], ["id", "assists", "name", "assists", "type", "number", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "submit", 1, "btn", "btn-primary", "mt-3"], [1, "btn", "btn-warning", "btn-sm", 3, "click"], [1, "btn", "btn-danger", "btn-sm", 3, "click"], [3, "value"]],
+      consts: [[1, "container", "mt-4"], [1, "table-responsive"], [1, "table", "table-bordered", "table-striped"], [1, "thead-dark"], [4, "ngFor", "ngForOf"], [1, "mt-4"], [3, "ngSubmit"], [1, "mb-3"], ["for", "player", 1, "form-label"], ["id", "player", "name", "name", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], [3, "value", 4, "ngFor", "ngForOf"], [1, "form-group"], ["for", "match"], ["id", "match", "name", "match", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "goals"], ["id", "goals", "name", "goals", "type", "number", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "assists"], ["id", "assists", "name", "assists", "type", "number", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "submit", 1, "btn", "btn-primary", "mt-3"], [1, "btn", "btn-warning", "btn-sm", 3, "click"], [1, "btn", "btn-danger", "btn-sm", 3, "click"], [3, "value"]],
       template: function StatisticsComponent_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 0)(1, "h2");
@@ -1243,7 +1243,7 @@ class StatisticsComponent {
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](26, "select", 9);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("ngModelChange", function StatisticsComponent_Template_select_ngModelChange_26_listener($event) {
-            return ctx.player.id = $event;
+            return ctx.player.name = $event;
           });
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](27, StatisticsComponent_option_27_Template, 2, 2, "option", 10);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
@@ -1279,7 +1279,7 @@ class StatisticsComponent {
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](18);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngForOf", ctx.statistics);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](8);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngModel", ctx.player.id);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngModel", ctx.player.name);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngForOf", ctx.players);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](4);
