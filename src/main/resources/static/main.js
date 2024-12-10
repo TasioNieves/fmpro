@@ -1194,7 +1194,7 @@ class StatisticsComponent {
       const formData = this.statisticForm.value;
       console.log('Lista de jugadores:', this.players);
       // Asegúrate de que el player tiene solo el id
-      const statisticData = {
+      const statistic = {
         player: formData.player,
         match: formData.match,
         goals: formData.goals,
@@ -1203,7 +1203,7 @@ class StatisticsComponent {
       };
       console.log('Valor del formulario:', this.statisticForm.value);
       // Enviar el formulario al backend
-      this.apiService.createStatistic(statisticData).subscribe(response => {
+      this.apiService.createStatistic(statistic).subscribe(response => {
         console.log('Estadística guardada con éxito', response);
         // Recargar las estadísticas después de agregar una nueva
         this.getStatistics();
