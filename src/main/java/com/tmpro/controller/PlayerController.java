@@ -104,10 +104,10 @@ public class PlayerController {
         }
         return ResponseEntity.notFound().build();  // El jugador no se encontró
     }
-    // Actualizar los detalles de un equipo
+    // Actualizar los detalles de un JUGADOR
     @PutMapping("/{id}")
-    public ResponseEntity<Optional<Player>> updatePlayer(@PathVariable Long id, @RequestBody Player player) {
-        Optional<Player> updatedPlayer = playerService.updatePlayer(id, player);
+    public ResponseEntity<Optional<Player>> updatePlayer(@PathVariable Long id, @RequestBody PlayerDTO playerDTO) {
+        Optional<Player> updatedPlayer = playerService.updatePlayer(id, converter( playerDTO));
         if (updatedPlayer != null) {
             return ResponseEntity.ok(updatedPlayer);
         }
