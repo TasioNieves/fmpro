@@ -1151,6 +1151,7 @@ class StatisticsComponent {
     this.players = []; // Lista de jugadores
     this.statistics = []; // Lista de estadísticas
     this.newStatistic = {}; // Nueva estadística
+    this.selectedStatistic = null; // Nueva estadística
   }
 
   ngOnInit() {
@@ -1166,13 +1167,12 @@ class StatisticsComponent {
     });
   }
   onSubmit() {
-    if (this.statisticForm.valid) {
-      const newStatistic = this.statisticForm.value;
-      console.log(newStatistic);
+    if (this.selectedStatistic) {
       this.apiService.createStatistic(this.newStatistic).subscribe(response => {
+        console.log(this.newStatistic);
         console.log('Statistic creada con éxito:', response);
-        this.newStatistic.push(response); // Agrega la estadística creada a la lista
-        this.statisticForm.reset(); // Limpia el formulario después de enviar
+        this.getStatistics();
+        this.clearForm();
       }, error => {
         console.error('Error al crear statistic:', error);
       });
@@ -1186,6 +1186,10 @@ class StatisticsComponent {
     }, error => {
       console.error('Error al obtener estadísticas:', error);
     });
+  }
+  clearForm() {
+    this.newStatistic = {};
+    this.selectedStatistic = null;
   }
   deleteStatisticById(id) {
     this.apiService.deleteStatistic(id).subscribe(() => {
