@@ -1151,6 +1151,7 @@ class StatisticsComponent {
     this.fb = fb;
     this.players = []; // Lista de jugadores
     this.statistics = []; // Lista de estadísticas
+    this.newStatistic = {}; // Nueva estadística
   }
 
   ngOnInit() {
@@ -1228,8 +1229,8 @@ class StatisticsComponent {
       type: StatisticsComponent,
       selectors: [["app-statistics"]],
       decls: 48,
-      vars: 3,
-      consts: [[1, "mt-4"], [3, "formGroup", "ngSubmit"], [1, "form-group"], ["for", "player"], ["id", "player", "formControlName", "player", 1, "form-control"], ["value", ""], [3, "value", 4, "ngFor", "ngForOf"], ["for", "match"], ["id", "match", "formControlName", "match", "type", "text", "placeholder", "Ingrese detalles del partido", 1, "form-control"], ["for", "goals"], ["id", "goals", "formControlName", "goals", "type", "number", "placeholder", "Ingrese el n\u00FAmero de goles", 1, "form-control"], ["for", "assists"], ["id", "assists", "formControlName", "assists", "type", "number", "placeholder", "Ingrese el n\u00FAmero de asistencias", 1, "form-control"], ["for", "minutesPlayed"], ["id", "minutesPlayed", "formControlName", "minutesPlayed", "type", "number", "placeholder", "Ingrese los minutos jugados", 1, "form-control"], ["type", "submit", 1, "btn", "btn-primary", "mt-3"], [1, "container", "mt-4"], [1, "table-responsive"], [1, "table", "table-bordered", "table-striped"], [1, "thead-dark"], [4, "ngFor", "ngForOf"], [3, "value"], [1, "btn", "btn-warning", "btn-sm", 3, "click"], [1, "btn", "btn-danger", "btn-sm", 3, "click"]],
+      vars: 8,
+      consts: [[1, "mt-4"], [3, "formGroup", "ngSubmit"], [1, "form-group"], ["for", "player"], ["id", "player", "name", "player", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["value", ""], [3, "value", 4, "ngFor", "ngForOf"], ["for", "match"], ["id", "match", "type", "text", "name", "match", "placeholder", "Ingrese detalles del partido", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "goals"], ["id", "goals", "type", "number", "name", "goals", "placeholder", "Ingrese el n\u00FAmero de goles", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "assists"], ["id", "assists", "type", "number", "name", "assists", "placeholder", "Ingrese el n\u00FAmero de asistencias", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "minutesPlayed"], ["id", "minutesPlayed", "type", "number", "name", "minutesPlayed", "placeholder", "Ingrese los minutos jugados", 1, "form-control", 3, "ngModel", "ngModelChange"], ["type", "submit", 1, "btn", "btn-primary", "mt-3"], [1, "container", "mt-4"], [1, "table-responsive"], [1, "table", "table-bordered", "table-striped"], [1, "thead-dark"], [4, "ngFor", "ngForOf"], [3, "value"], [1, "btn", "btn-warning", "btn-sm", 3, "click"], [1, "btn", "btn-danger", "btn-sm", 3, "click"]],
       template: function StatisticsComponent_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 0)(1, "h3");
@@ -1242,7 +1243,11 @@ class StatisticsComponent {
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](4, "div", 2)(5, "label", 3);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](6, "Jugador:");
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](7, "select", 4)(8, "option", 5);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](7, "select", 4);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("ngModelChange", function StatisticsComponent_Template_select_ngModelChange_7_listener($event) {
+            return ctx.newStatistic.name = $event;
+          });
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](8, "option", 5);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](9, "Seleccione un jugador");
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](10, StatisticsComponent_option_10_Template, 2, 2, "option", 6);
@@ -1250,23 +1255,35 @@ class StatisticsComponent {
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](11, "div", 2)(12, "label", 7);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](13, "Partido:");
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](14, "input", 8);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](14, "input", 8);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("ngModelChange", function StatisticsComponent_Template_input_ngModelChange_14_listener($event) {
+            return ctx.newStatistic.match = $event;
+          });
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](15, "div", 2)(16, "label", 9);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](17, "Goles:");
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](18, "input", 10);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](18, "input", 10);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("ngModelChange", function StatisticsComponent_Template_input_ngModelChange_18_listener($event) {
+            return ctx.newStatistic.goals = $event;
+          });
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](19, "div", 2)(20, "label", 11);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](21, "Asistencias:");
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](22, "input", 12);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](22, "input", 12);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("ngModelChange", function StatisticsComponent_Template_input_ngModelChange_22_listener($event) {
+            return ctx.newStatistic.assists = $event;
+          });
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](23, "div", 2)(24, "label", 13);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](25, "Minutos Jugados:");
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](26, "input", 14);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](26, "input", 14);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("ngModelChange", function StatisticsComponent_Template_input_ngModelChange_26_listener($event) {
+            return ctx.newStatistic.minutesPlayed = $event;
+          });
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](27, "button", 15);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](28, "Guardar Estad\u00EDstica");
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()();
@@ -1295,13 +1312,23 @@ class StatisticsComponent {
         if (rf & 2) {
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](3);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("formGroup", ctx.statisticForm);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](7);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](4);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngModel", ctx.newStatistic.name);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](3);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngForOf", ctx.players);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](37);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](4);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngModel", ctx.newStatistic.match);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](4);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngModel", ctx.newStatistic.goals);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](4);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngModel", ctx.newStatistic.assists);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](4);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngModel", ctx.newStatistic.minutesPlayed);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](21);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngForOf", ctx.statistics);
         }
       },
-      dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_3__.NgForOf, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ɵNgNoValidate"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgSelectOption, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ɵNgSelectMultipleOption"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NumberValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.SelectControlValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormGroupDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControlName],
+      dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_3__.NgForOf, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ɵNgNoValidate"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgSelectOption, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ɵNgSelectMultipleOption"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NumberValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.SelectControlValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.RequiredValidator, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormGroupDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgModel],
       styles: ["/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsInNvdXJjZVJvb3QiOiIifQ== */"]
     });
   }
