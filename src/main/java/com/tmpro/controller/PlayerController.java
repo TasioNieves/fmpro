@@ -60,7 +60,7 @@ public class PlayerController {
     private PlayerDTO disconverter(Player player){
 
         PlayerDTO playerDTO = new PlayerDTO();
-
+        playerDTO.setId(player.getId());
         playerDTO.setName(player.getName());
         playerDTO.setDorsal(player.getDorsal());
         playerDTO.setPosition(player.getPosition());
