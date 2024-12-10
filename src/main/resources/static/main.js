@@ -1101,7 +1101,7 @@ function StatisticsComponent_div_11_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
   }
 }
-function StatisticsComponent_tr_48_Template(rf, ctx) {
+function StatisticsComponent_tr_50_Template(rf, ctx) {
   if (rf & 1) {
     const _r6 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "tr")(1, "td");
@@ -1120,7 +1120,7 @@ function StatisticsComponent_tr_48_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](10);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](11, "td")(12, "button", 24);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function StatisticsComponent_tr_48_Template_button_click_12_listener() {
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function StatisticsComponent_tr_50_Template_button_click_12_listener() {
       const restoredCtx = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵrestoreView"](_r6);
       const stat_r4 = restoredCtx.$implicit;
       const ctx_r5 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"]();
@@ -1129,7 +1129,7 @@ function StatisticsComponent_tr_48_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](13, " Actualizar ");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](14, "button", 25);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function StatisticsComponent_tr_48_Template_button_click_14_listener() {
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function StatisticsComponent_tr_50_Template_button_click_14_listener() {
       const restoredCtx = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵrestoreView"](_r6);
       const stat_r4 = restoredCtx.$implicit;
       const ctx_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"]();
@@ -1158,6 +1158,7 @@ class StatisticsComponent {
     this.fb = fb;
     this.players = []; // Lista de jugadores
     this.statistics = []; // Lista de estadísticas
+    this.selectedStatistic = null; // Para almacenar la estadística seleccionada para editar
   }
 
   ngOnInit() {
@@ -1181,6 +1182,14 @@ class StatisticsComponent {
       this.players = data;
     }, error => {
       console.error('Error al obtener jugadores:', error);
+    });
+  }
+  // Cargar estadísticas desde el API
+  getStatistics() {
+    this.apiService.getStatistics().subscribe(data => {
+      this.statistics = data;
+    }, error => {
+      console.error('Error al obtener estadísticas:', error);
     });
   }
   // Método llamado cuando se cambia de jugador
@@ -1223,17 +1232,10 @@ class StatisticsComponent {
       }
     });
   }
-  // Cargar estadísticas desde el API
-  getStatistics() {
-    this.apiService.getStatistics().subscribe(data => {
-      this.statistics = data;
-    }, error => {
-      console.error('Error al obtener estadísticas:', error);
-    });
-  }
   // Limpiar el formulario
   clearForm() {
     this.statisticForm.reset();
+    this.selectedStatistic = null; // Resetear la estadística seleccionada
   }
   // Eliminar una estadística por ID
   deleteStatisticById(id) {
@@ -1245,16 +1247,35 @@ class StatisticsComponent {
   }
   // Actualizar una estadística por ID
   updateStatisticById(id) {
+    // Buscar la estadística por ID
+    const statisticToEdit = this.statistics.find(stat => stat.id === id);
+    if (!statisticToEdit) {
+      console.error('Estadística no encontrada');
+      return;
+    }
+    // Rellenar el formulario con los datos de la estadística seleccionada
+    this.selectedStatistic = statisticToEdit;
+    this.statisticForm.patchValue({
+      player: statisticToEdit.player.id,
+      match: statisticToEdit.match,
+      goals: statisticToEdit.goals,
+      assists: statisticToEdit.assists,
+      minutesPlayed: statisticToEdit.minutesPlayed
+    });
+  }
+  // Enviar el formulario para actualizar la estadística seleccionada
+  onUpdateSubmit() {
     if (this.statisticForm.invalid) {
       console.error('Formulario inválido');
       return;
     }
     // Solo actualizar los campos modificados
     const updatedStatisticData = this.statisticForm.value;
-    this.apiService.updateStatistic(id, updatedStatisticData).subscribe(statistic => {
-      const index = this.statistics.findIndex(stat => stat.id === id);
+    this.apiService.updateStatistic(this.selectedStatistic.id, updatedStatisticData).subscribe(updatedStat => {
+      const index = this.statistics.findIndex(stat => stat.id === this.selectedStatistic.id);
       if (index !== -1) {
-        this.statistics[index] = statistic; // Actualizar la estadística
+        this.statistics[index] = updatedStat; // Actualizar la estadística en la lista
+        this.clearForm(); // Limpiar el formulario después de la actualización
       }
     }, error => {
       console.error('Error al actualizar estadística:', error);
@@ -1269,7 +1290,7 @@ class StatisticsComponent {
     this.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({
       type: StatisticsComponent,
       selectors: [["app-statistics"]],
-      decls: 49,
+      decls: 51,
       vars: 5,
       consts: [[1, "mt-4"], [3, "formGroup", "ngSubmit"], [1, "form-group"], ["for", "player"], ["id", "player", "formControlName", "player", 1, "form-control", 3, "change"], ["value", ""], [3, "ngValue", 4, "ngFor", "ngForOf"], ["class", "text-danger", 4, "ngIf"], ["for", "match"], ["id", "match", "type", "text", "formControlName", "match", "placeholder", "Ingrese detalles del partido", 1, "form-control"], ["for", "goals"], ["id", "goals", "type", "number", "formControlName", "goals", "placeholder", "Ingrese el n\u00FAmero de goles", 1, "form-control"], ["for", "assists"], ["id", "assists", "type", "number", "formControlName", "assists", "placeholder", "Ingrese el n\u00FAmero de asistencias", 1, "form-control"], ["for", "minutesPlayed"], ["id", "minutesPlayed", "type", "number", "formControlName", "minutesPlayed", "placeholder", "Ingrese los minutos jugados", 1, "form-control"], ["type", "submit", 1, "btn", "btn-primary", "mt-3", 3, "disabled"], [1, "container", "mt-4"], [1, "table-responsive"], [1, "table", "table-bordered", "table-striped"], [1, "thead-dark"], [4, "ngFor", "ngForOf"], [3, "ngValue"], [1, "text-danger"], [1, "btn", "btn-warning", "btn-sm", 3, "click"], [1, "btn", "btn-danger", "btn-sm", 3, "click"]],
       template: function StatisticsComponent_Template(rf, ctx) {
@@ -1335,9 +1356,12 @@ class StatisticsComponent {
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](45, "th");
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](46, "Minutos jugados");
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](47, "th");
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](48, "Acciones");
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()();
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](47, "tbody");
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](48, StatisticsComponent_tr_48_Template, 16, 5, "tr", 21);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](49, "tbody");
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](50, StatisticsComponent_tr_50_Template, 16, 5, "tr", 21);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()()();
         }
         if (rf & 2) {
@@ -1350,7 +1374,7 @@ class StatisticsComponent {
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ((tmp_2_0 = ctx.statisticForm.get("player")) == null ? null : tmp_2_0.touched) && ((tmp_2_0 = ctx.statisticForm.get("player")) == null ? null : tmp_2_0.invalid));
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](17);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("disabled", ctx.statisticForm.invalid);
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](20);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](22);
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngForOf", ctx.statistics);
         }
       },
