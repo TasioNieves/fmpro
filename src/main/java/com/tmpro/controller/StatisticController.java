@@ -4,7 +4,6 @@ import com.tmpro.model.Player;
 import com.tmpro.model.PlayerDTO;
 import com.tmpro.model.Statistic;
 import com.tmpro.service.StatisticService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,17 +20,12 @@ public class StatisticController {
         this.statisticService = statisticService;
     }
 
+    // Crear una nueva estadística
     @PostMapping
     public ResponseEntity<Statistic> createStatistic(@RequestBody Statistic statistic) {
-        // Solo extraemos el id del jugador, no el objeto completo
-        Player player = new Player();
-        player.setId(statistic.getPlayer().getId());  // Solo el id del jugador
-        statistic.setPlayer(player);
-
         Statistic createdStatistic = statisticService.createStatistic(statistic);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdStatistic);
+        return ResponseEntity.ok(createdStatistic);
     }
-
 
     // Obtener estadísticas
     @GetMapping
@@ -39,7 +33,7 @@ public class StatisticController {
 
         List<Statistic> statistic = statisticService.getAllStatistic();
 
-        return ResponseEntity.ok(statistic);
+        return ResponseEntity.ok(statistic);  // Devuelve la lista de jugadores
     }
 
     // Obtener estadística por ID

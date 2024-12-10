@@ -21,15 +21,17 @@ public class StatisticService {
 
     // Crear una nueva estadística
     public Statistic createStatistic(Statistic statistic) {
-        // Buscar al jugador usando el ID proporcionado
+        if (statistic.getPlayer() == null || statistic.getPlayer().getId() == null) {
+            throw new IllegalArgumentException("El jugador o su ID no pueden ser nulos");
+        }
+
         Player player = playerRepository.findById(statistic.getPlayer().getId())
                 .orElseThrow(() -> new RuntimeException("Jugador no encontrado"));
 
-        // Asignar el jugador a la estadística
         statistic.setPlayer(player);
-
         return statisticRepository.save(statistic);
     }
+
 
     // Obtener todas las estadísticas
     public List<Statistic> getAllStatistic() {
