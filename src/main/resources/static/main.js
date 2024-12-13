@@ -650,8 +650,19 @@ class PlayerComponent {
     }
   }
   deletePlayer(id) {
-    this.apiService.deletePlayer(id).subscribe(() => {
-      this.loadPlayers();
+    this.apiService.deletePlayer(id).subscribe({
+      next: () => {
+        // Operación exitosa: Recargar la lista de jugadores
+        this.loadPlayers();
+      },
+      error: error => {
+        // Manejo de errores
+        if (error.status === 500) {
+          window.alert("No se pueden borrar jugadores asociados a estadísticas o equipos.");
+        } else {
+          window.alert("Ocurrió un error al intentar borrar el jugador.");
+        }
+      }
     });
   }
   clearForm() {
