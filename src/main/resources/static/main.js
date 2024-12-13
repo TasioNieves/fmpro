@@ -1266,6 +1266,7 @@ class StatisticsComponent {
   deleteStatisticById(id) {
     this.apiService.deleteStatistic(id).subscribe(() => {
       this.statistics = this.statistics.filter(stat => stat.id !== id);
+      this.filteredStatistics = this.statistics;
     }, error => {
       console.error('Error al eliminar estadística:', error);
     });
