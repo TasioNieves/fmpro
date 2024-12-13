@@ -1554,8 +1554,19 @@ class TeamComponent {
   deleteTeam(id) {
     if (id !== undefined) {
       // Verificación de que el id existe
-      this.apiService.deleteTeam(id).subscribe(() => {
-        this.loadTeams();
+      this.apiService.deleteTeam(id).subscribe({
+        next: () => {
+          // Operación exitosa: Recargar la lista de equipos
+          this.loadTeams();
+        },
+        error: error => {
+          // Manejo de errores
+          if (error.status === 500) {
+            window.alert("No se pueden borrar equipos con jugadores creados");
+          } else {
+            window.alert("Ocurrió un error al intentar borrar el equipo");
+          }
+        }
       });
     }
   }
