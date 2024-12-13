@@ -15,9 +15,10 @@ public class Player {
     private String position;
     private String dorsal;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "team_id", nullable = false)  // Clave foránea que referencia a la tabla Team
     private Team team;
+
 
 
 
