@@ -16,7 +16,7 @@ public class Team {
     private String name;
     private String coach; // Nombre del entrenador
 
-    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Player> players;
 
     // Getters y Setters
