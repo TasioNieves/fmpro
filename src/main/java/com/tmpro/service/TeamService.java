@@ -1,6 +1,7 @@
 package com.tmpro.service;
 
 import com.tmpro.model.Team;
+import com.tmpro.model.TeamDTO;
 import com.tmpro.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +16,8 @@ public class TeamService {
     private TeamRepository teamRepository;
 
     // Obtener todos los equipos
-    public List<Team> getAllTeams() {
-        return teamRepository.findAll();
+    public List<TeamDTO> getAllTeams() {
+        return teamRepository.findAllAsDTO();
     }
 
     // Obtener un equipo por ID

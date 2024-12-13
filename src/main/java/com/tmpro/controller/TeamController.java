@@ -1,6 +1,7 @@
 package com.tmpro.controller;
 
 import com.tmpro.model.Team;
+import com.tmpro.model.TeamDTO;
 import com.tmpro.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +18,8 @@ public class TeamController {
 
     // Obtener la lista de todos los equipos
     @GetMapping
-    public ResponseEntity<List<Team>> getAllTeams() {
-        List<Team> teams = teamService.getAllTeams();
+    public ResponseEntity<List<TeamDTO>> getAllTeams() {
+        List<TeamDTO> teams = teamService.getAllTeams();
         return ResponseEntity.ok(teams);
     }
 
