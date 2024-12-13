@@ -14,8 +14,11 @@ public class TeamDTO {
     private String name;
     private String coach; // Nombre del entrenador
 
-
-
+    public TeamDTO(Long id, String name, String coach) {
+        this.id = id;
+        this.name = name;
+        this.coach = coach;
+    }
 
     // Getters y Setters
     public Long getId() {
